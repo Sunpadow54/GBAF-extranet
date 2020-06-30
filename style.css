@@ -43,6 +43,7 @@ header{
 }
 .header-profil label{
     display:inline-block;
+    text-align: right;
     width: 100%;
     cursor: pointer;
     margin-bottom: 1em;
@@ -107,6 +108,7 @@ footer p{
 main{
     max-width: 80%;
     margin:auto;
+    margin-top:80px;;
 }
 section{
     padding-top:5.6em;

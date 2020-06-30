@@ -40,8 +40,9 @@ header{
     display:inline-block;
     position: absolute;
     visibility: visible;
-
-    right: 0;
+    width: 2em;
+    height: 2em;
+    right:0;
     bottom:0;
 }
 .header-profil > input:checked ~.header-profil_overlay{
@@ -75,6 +76,7 @@ header{
 
 main{
     max-width: 90%;
+    margin-top:7.3em;
 }
 section{
     padding-top:30px;

@@ -4,7 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <title> GBAF extranet</title>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" media="all and (min-device-width : 320px) and (max-device-width : 480px)" href="style-mobile.css">
+    <link rel="stylesheet" media="all and (max-device-width: 1280px ) and (min-device-width: 481px)" href="style-tablette.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">  </head>
     
@@ -16,7 +19,7 @@
       <section class="GBAF">
         <h1>GBAF (Groupement Banque Assurance Français)</h1>
         <div class="texte">
-          <p><strong>Le Groupement Banque Assurance Français (GBAF)</strong>​ est une fédération  représentant les 6 grands groupes français : </p>
+          <p><strong>Le Groupement Banque Assurance Français (GBAF)</strong>​ est une fédération  représentant les 6 grands groupes français :
           <ul>
             <li>BNP Paribas</li>
             <li>BPCE</li>
@@ -25,6 +28,7 @@
             <li>Société Générale</li>
             <li>La Banque Postale</li>
           </ul>
+          </p>
           <p>Même s’il existe une forte concurrence entre ces entités, elles vont toutes travailler de la même façon pour gérer près de 80 millions de comptes sur le territoire national.
             <br>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous  les axes de la réglementation financière française. Sa mission est de promouvoir l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics. </p>
           <br>
@@ -41,7 +45,7 @@
 
       <section class="list-acteurs">
         <h2>Acteurs et partenaires du système bancaire français </h2>
-        <p></p>        
+        <p class="texte-acteurs"> texte acteurs et partenaires</p>        
         <article class="acteurs">
           <ul>
             <li>
@@ -69,9 +73,7 @@ Nous les accompagnons pour voir plus grand et plus loin et proposons des solutio
               <a href=""></a>
             </li>
           </ul>
-
         </article>
-
       </section>
     
     </main>

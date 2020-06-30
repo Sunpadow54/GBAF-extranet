@@ -48,12 +48,10 @@ header{
     margin-bottom: 1em;
 }
 .header-profil label::after{
-    content:"x";
+    content:"";
+    background: url(../images/icone-close.png) center/contain no-repeat;
     display:none;
-    color:white;
     vertical-align: sub;
-    padding: 1em;
-    background-color: rgb(10, 10, 10);
     opacity: 0;
 } 
 

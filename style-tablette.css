@@ -12,9 +12,11 @@
 }
 .header-profil label::after{
     display:inline-block;
+    width: 1.5em;
+    height: 1.5em;
     position: absolute;
-    right: 6.5em;
-    bottom:-1.5em;
+    right: 7.5em;
+    bottom:0;
 } 
 
 /* ----------------------- MAIN */

@@ -1,0 +1,243 @@
+body, a{
+    font-size:16px; margin:0; padding:0; text-decoration:none; list-style:none; box-sizing: border-box;font-family: 'Roboto', sans-serif;
+}
+img{
+    max-width: 100%;
+}
+p, a, span, div, img, li{
+    color:black; box-sizing: border-box; font-family: 'Roboto', sans-serif; hyphens: auto;
+}
+h1{font-size:3em;}
+h2{font-size: 2em;}
+h3{font-size: 1.3em;}
+p{font-size: 1em;}
+
+
+/* ----------------------- HEADER */
+
+header{
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    top:0;
+    margin:auto;
+    max-height: 80px;
+    padding:10px 50px 10px 0;
+    background-color: white;
+    border-bottom: 1px solid black;
+    z-index: 2;
+}
+.header-logo{
+    width: 80px;
+    margin-left: 10%;
+}
+
+/* PROFIL*/
+
+.header-profil{
+    align-self: flex-start;
+    width: 180px;
+}
+.header-profil span{
+    display:inline-block;
+    margin-bottom:10px;
+}
+.header-profil span::before{
+    content:"";
+    display:inline-block;
+    vertical-align: sub;
+    height: 30px;
+    width: 30px;
+    margin-right:8px;
+    background:url(../images/profil.png) center/contain no-repeat;
+}
+.header-profil_overlay{
+    display:flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    position: absolute;
+    opacity: 0;
+    background-color:black;
+    width: 180px;
+    height: 90px;
+}
+.header-profil:hover .header-profil_overlay{
+    opacity: 1;
+    transition: 0.5s ease-out;
+}
+.header-profil_overlay a{
+    color:white;
+    font-size: 0.9em;
+    font-weight: 300;
+    margin-left:20px;
+}
+.header-profil_overlay a:hover{
+    color:#ff0000;
+}
+
+/*Header - Mobile */
+@media all and (max-device-width: 480px) {
+    body{
+        font-size: 20px;
+    }
+    p, li, span{
+        font-size: 1.2em;
+    }
+    header{
+        flex-direction: column;
+        padding: 0;
+        max-height: 250px;
+        padding-bottom: 1em;
+        border-bottom: 0.1em solid black;
+    }
+    .header-logo{
+        margin:0;
+/*         width: 150px;*/
+    }
+    .header-profil{
+        align-self: center;
+        width: auto;
+    }
+    .header-profil span::before{
+        height:50px;
+        width: 50px;
+    }
+
+}
+
+
+
+/* ----------------------- FOOTER */
+footer{
+    background-color: black;
+}
+footer p{
+    margin: auto;
+    font-weight: 100;
+    color:white;
+    text-align: center;
+    line-height: 50px;
+}
+
+/* ----------------------- MAIN */
+main{
+    max-width: 80%;
+    margin:auto;
+}
+section{
+    padding:90px 0 0 0;
+}
+@media all and (max-device-width: 480px) {
+    main{
+        max-width: 100%;
+        margin:auto;
+        padding:20px
+    }
+    section{
+        padding: 0;
+        min-height: 100vh;
+    }
+}
+
+/* ----------------------- MAIN page accueil */
+
+/* GBAF présentation */
+.GBAF{
+    margin-bottom:80px;
+}
+.GBAF-illustration{
+    margin-top:80px;
+    position: relative;
+    width: 100%;
+    height:400px;
+    background:url(../images/illustration.jpg) center / cover no-repeat;
+}
+.GBAF-illustration img{
+    position: absolute;
+    right:20px;
+    bottom:20px;
+    width: 80px;
+}
+/* Mobile GBAF présentation  */
+@media all and (max-device-width: 480px) {
+    .GBAF{
+        margin-bottom:80px;
+    }
+    .texte{
+        margin:auto;
+        width: 77%;
+        hyphens: auto;
+    }
+
+}
+
+
+ /* Liste acteurs et partenaires */
+.acteurs{
+    border:1px solid rgba(0, 0, 0, 0.09);
+    padding:30px;
+}
+.acteurs ul{
+    margin:0;
+    padding: 0;
+}
+.acteurs ul li{
+    display: grid;
+    grid-template-columns: 350px 2fr 150px ;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "logo nom ."
+                "logo infos ." 
+                "logo . button";
+    column-gap: 20px;
+    align-items:center;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 7px 3px rgba(0,0,0,0.12);
+}
+.acteurs ul li img{
+    height: auto;
+    margin:8px;
+    grid-area: logo;
+}
+.acteurs ul li h3{
+    grid-area: nom;
+}
+.acteurs ul li p{
+    grid-area: infos;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.acteurs ul li a{
+    grid-area: button;
+    justify-self:end;
+    align-self: start;
+    border:0.8px solid black;
+    border-radius:5px;
+    padding: 8px;
+    margin-right:30px;
+}
+.acteurs ul li a:hover{
+    background-color:black;
+    color:white;
+}
+
+/* Mobile acteurs liste  */
+@media all and (max-device-width: 480px) {
+    .acteurs ul li{
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
+    }
+    .acteurs{
+        border:none;
+        padding: 0;
+        width: 100%;
+    }
+    .acteurs ul li img{
+        margin:0;
+
+    }
+
+}
+

@@ -1,0 +1,41 @@
+/* ----------------------- HEADER */
+
+/* HEADER -- PROFIL*/
+
+.header-profil > input:checked ~.header-profil_overlay{
+    opacity: 1;
+    transition: 0.5s ease;
+}
+#profil-checkbox:checked + label::after{
+    opacity: 1;
+    transition: 0.5s ease;
+}
+.header-profil label::after{
+    display:inline-block;
+    position: absolute;
+    right: 6.5em;
+    bottom:-1.5em;
+} 
+
+/* ----------------------- MAIN */
+
+main{
+    max-width: 80%;
+}
+section{
+    padding-top:30px;
+}
+
+/* GBAF présentation */
+
+.texte{
+    max-width: 85%;
+    margin: auto;
+}
+
+ /* Liste acteurs et partenaires */
+
+ .texte-acteurs{
+    max-width: 85%;
+    margin: auto;
+ }

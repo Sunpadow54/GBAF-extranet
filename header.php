@@ -1,14 +1,28 @@
-<header>
-    <a class="header-logo" href="accueil.php">
-        <img src="../images/GBAF.png" alt="Logo GBAF">
-    </a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> GBAF extranet</title>
 
-    <div class="header-profil">
-        <input type="checkbox" id="profil-checkbox" >
-        <label for="profil-checkbox">Nom Prénom</label>
-        <div class="header-profil_overlay">
-            <a href="#">Modifier mon profil</a>
-            <a href="#">Se déconnecter</a>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" media="all and (min-device-width : 320px) and (max-device-width : 480px)" href="style-mobile.css">
+        <link rel="stylesheet" media="all and (max-device-width: 1280px ) and (min-device-width: 481px)" href="style-tablette.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">  
+    </head>
+    
+  <body>
+    <header>
+        <a class="header-logo" href="accueil.php">
+            <img src="../images/GBAF.png" alt="Logo GBAF">
+        </a>
+
+        <div class="header-profil">
+            <input type="checkbox" id="profil-checkbox" >
+            <label for="profil-checkbox">Nom Prénom</label>
+            <div class="header-profil_overlay">
+                <a href="#">Modifier mon profil</a>
+                <a href="#">Se déconnecter</a>
+            </div>
         </div>
-    </div>
-</header>
+    </header>

@@ -12,17 +12,20 @@
     </head>
     
   <body>
-    <header>
-        <a class="header-logo" href="index.php">
-            <img src="../images/GBAF.png" alt="Logo GBAF">
-        </a>
+    <fieldset class="connexion">
 
-        <div class="header-profil">
-            <input type="checkbox" id="profil-checkbox" >
-            <label for="profil-checkbox">Nom Prénom</label>
-            <div class="header-profil_overlay">
-                <a href="#">Modifier mon profil</a>
-                <a href="#">Se déconnecter</a>
-            </div>
-        </div>
-    </header>
+      <form method="post"action="connexion.php">
+        <img src="../images/GBAF.png" alt="Logo GBAF">
+        <p>
+            <label for="pseudo">Identifiant :</label>
+            <input type="text" id="pseudo" name="identifiant">
+
+            <label for="mp">Mot de passe :</label>
+            <input type="text" id="mp" name="mot-de-passe">
+
+            <input type="submit" value="Connexion">
+        </p>
+      </form>
+    </fieldset>
+  </body>
+</html>

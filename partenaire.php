@@ -53,7 +53,7 @@ Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et prés
   </section>
 
   <aside class="retour-accueil">
-      <a href="accueil.php">retour à la page d'accueil</a>
+      <a href="index.php">retour à la page d'accueil</a>
   </aside>
 
 </main>

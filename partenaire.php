@@ -1,10 +1,10 @@
 <?php include("header.php"); ?>
 
-<main>
+<main class="main-partenaire">
   <section class="partenaire">
     <img src="../images/CDE.png" alt="CDE">
     <h2>CDE (Chambre Des Entrepreneurs)</h2>
-    <a href="https://www.CDE.chose">site internet CDE</a>
+    <a href="https://www.CDE.chose">voir le site internet de CDE</a>
     <p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
 Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.</p>
   </section>
@@ -24,13 +24,11 @@ Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et prés
 
         <form class="commentaires-likes" method="post" action="#">
             <p>
-                x
-                <input type="radio" name="likes" value="like">
-                <label for="like"> </label>
-
-                <input type="radio" name="likes" id="dislike">
-                <label for="dislike"> </label>
-                x
+                <input type="radio" name="avis" id="like" value="like">
+                <label class="likes" for="like"> x </label>
+                
+                <input type="radio" name="avis" id="dislike" value="dislike">
+                <label class="dislikes" for="dislike"> x </label>
             </p>
         </form>
     </div>
@@ -54,7 +52,7 @@ Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et prés
     </ul>
   </section>
 
-  <aside>
+  <aside class="retour-accueil">
       <a href="accueil.php">retour à la page d'accueil</a>
   </aside>
 

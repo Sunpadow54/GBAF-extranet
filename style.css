@@ -114,7 +114,9 @@ section{
     padding-top:5.6em;
 }
 
-/* ----------------------- MAIN page accueil */
+
+
+/* ------------------------------ MAIN page accueil */
 
 /* GBAF présentation */
 
@@ -189,4 +191,119 @@ section{
 .acteurs ul li a:hover{
     background-color:black;
     color:white;
+}
+
+
+/* ------------------------------ MAIN page Partenaire */
+
+.main-partenaire{
+    width: 70%;
+}
+/* SECTION PARTENAIRE */
+.partenaire{
+    padding:2em;
+}
+.partenaire > img{
+    width: 30em;
+    display: block;
+    margin: auto;
+}
+.partenaire > a{
+    font-size: 0.85em;
+    text-decoration: underline;
+}
+
+/* SECTION Commentaires */
+
+.commentaires{
+    background-color:rgba(0, 0, 0, 0.03);
+    padding: 2em;
+}
+.commentaires-formulaires{
+    display:grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 2em; 
+    align-items: center;
+    margin-bottom: 1em;
+}
+.commentaires-formulaires > p{
+    font-size: 1.5em;
+}
+.commentaires-new{
+}
+.commentaires-new label{
+    border:0.1em solid black;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    margin:auto;
+    background-color: white;
+}
+.commentaires-new label:hover{
+    background-color: black;
+    color:white;
+}
+.commentaires-new > div{
+    display: none; 
+}
+.commentaires-new label:checked{
+}
+
+/* Like / dislike*/
+.commentaires-likes > p{
+    display:flex;
+    justify-content: center;
+    border:0.1em solid black;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: white;
+}
+.likes::after , .dislikes::before{
+    content: "";
+    display: inline-block;
+    vertical-align: sub;
+    width: 1.25em;
+    height: 1.25em; 
+    cursor: pointer;
+}
+.likes::after{
+    background: url(../images/icone-like.png) center / cover no-repeat;
+    margin-right: 0.3em;
+}
+.dislikes::before{
+    background: url(../images/icone-dislike.png) center / cover no-repeat;
+}
+.commentaires-likes input{
+display: none;
+}
+.commentaires-likes input:checked + label::after{
+    background: url(../images/icone-like-active.png) center / cover no-repeat;  
+}
+.commentaires-likes input:checked + label::before{
+    background: url(../images/icone-dislike-active.png) center / cover no-repeat;  
+}
+
+/* liste commentaires*/
+.commentaires-liste {
+    padding:0;
+    margin: 0;
+}
+.commentaires-liste li{
+    border:0.1em solid black;
+    border-radius: 0.5em;
+    padding:1em;
+    margin-bottom: 1em;
+    list-style:none;
+    background-color: white;
+}
+
+
+
+.retour-accueil a{
+    display: block;
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    text-align: right; 
+    font-size: 0.85em;
+    text-decoration: underline;
 }

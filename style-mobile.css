@@ -119,3 +119,41 @@ section{
 .acteurs ul li :nth-child(4):hover{
     display: none;
 }
+
+/* ------------------------------ MAIN page Partenaire */
+/* SECTION PARTENAIRE */
+
+.main-partenaire{
+    min-width: 100%;
+}
+
+/* SECTION Commentaires */
+
+.commentaires-formulaires{
+    grid-template-columns: 1fr 9em;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 1em ; row-gap: 1em;
+}
+.commentaires-formulaires p{
+    grid-column: 1 / span 2;
+    grid-row: 1/2;
+    margin: 0;
+}
+.commentaires-new{
+    grid-column: 1 /2;
+    grid-row: 2/3;
+    font-size: 1.2em;
+}
+.commentaires-likes{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+.commentaires-likes > p{
+    font-size: 1.5em;
+    border: 0.09em solid;
+    padding:0.2em;
+}
+.likes::after , .dislikes::before{
+
+ 
+}

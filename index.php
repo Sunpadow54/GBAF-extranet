@@ -32,32 +32,34 @@
         <h2>Acteurs et partenaires du système bancaire français </h2>
         <p class="texte-acteurs"> texte acteurs et partenaires</p>        
         <article class="acteurs">
-          <ul>
-            <li>
-              <img src="../images/CDE.png" alt="CDE">
-              <h3>CDE (Chambre Des Entrepreneurs)</h3>
-              <p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
-Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.</p>
-              <a href="partenaire.php">Lire la suite</a>
-            </li>
+          <nav>
+            <ul>
+              <li>
+                <img src="../images/CDE.png" alt="CDE">
+                <h3>CDE (Chambre Des Entrepreneurs)</h3>
+                <p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
+  Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.</p>
+                <a href="partenaire.php">Lire la suite</a>
+              </li>
 
-            <li>              
-              <img src="../images/Dsa_france.png" alt="DSA France">
-              <h3>Dsa France</h3>
-              <p>Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales.
-Nous accompagnons les entreprises dans les étapes clés de leur évolution.
-Notre philosophie : s’adapter à chaque entreprise.
-Nous les accompagnons pour voir plus grand et plus loin et proposons des solutions de financement adaptées à chaque étape de la vie des entreprises </p>
-              <a href="partenaire.php">Lire la suite</a>
-            </li>
+              <li>              
+                <img src="../images/Dsa_france.png" alt="DSA France">
+                <h3>Dsa France</h3>
+                <p>Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales.
+  Nous accompagnons les entreprises dans les étapes clés de leur évolution.
+  Notre philosophie : s’adapter à chaque entreprise.
+  Nous les accompagnons pour voir plus grand et plus loin et proposons des solutions de financement adaptées à chaque étape de la vie des entreprises </p>
+                <a href="partenaire.php">Lire la suite</a>
+              </li>
 
-            <li>
-              <img src="" alt="">
-              <h3></h3>
-              <p></p>
-              <a href=""></a>
-            </li>
-          </ul>
+              <li>
+                <img src="" alt="">
+                <h3></h3>
+                <p></p>
+                <a href=""></a>
+              </li>
+            </ul>
+          </nav>
         </article>
       </section>
     

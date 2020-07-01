@@ -1,23 +1,23 @@
+/* annule les :hover*/
+.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover{
+    display:none;
+}
+
 /* ----------------------- HEADER */
 
 /* HEADER -- PROFIL*/
 
+header{
+    height: 86px;
+}
+
 .header-profil > input:checked ~.header-profil_overlay{
     opacity: 1;
-    transition: 0.5s ease;
+    transition: 0.5s ease-in;
 }
-#profil-checkbox:checked + label::after{
-    opacity: 1;
-    transition: 0.5s ease;
+.header-profil > input:checked + label{
+opacity: 0.8;
 }
-.header-profil label::after{
-    display:inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    position: absolute;
-    right: 7.5em;
-    bottom:0;
-} 
 
 /* ----------------------- MAIN */
 

@@ -20,9 +20,8 @@
         <div class="header-profil">
             <input type="checkbox" id="profil-checkbox" >
             <label for="profil-checkbox">Nom Prénom</label>
-            <div class="header-profil_overlay">
-                <a href="#">Modifier mon profil</a>
-                <a href="#">Se déconnecter</a>
-            </div>
+            <a href="#">Se déconnecter</a>
+            <a class="header-profil_overlay" href="#">Modifier mon profil</a>
+
         </div>
     </header>

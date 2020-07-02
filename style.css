@@ -139,6 +139,7 @@ section{
 .main-accueil{
     margin-top:6.6em; 
 }
+
 /* GBAF présentation */
 
 .GBAF{
@@ -217,8 +218,12 @@ section{
 /* ------------------------------ MAIN page Partenaire */
 
 .main-partenaire{
+        margin-top:6.6em; 
+}
+.main-partenaire section{
     width: 70%;
 }
+
 /* SECTION PARTENAIRE */
 .partenaire{
     padding:2em;
@@ -236,7 +241,7 @@ section{
 /* SECTION Commentaires */
 
 .commentaires{
-    background-color:rgba(0, 0, 0, 0.03);
+    background-color:rgba(0, 0, 0, 0.05);
     padding: 2em;
 }
 .commentaires-formulaires{

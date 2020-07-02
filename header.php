@@ -13,15 +13,16 @@
     
   <body>
     <header>
-        <a class="header-logo" href="index.php">
-            <img src="../images/GBAF.png" alt="Logo GBAF">
-        </a>
+        <div class="header-contain">
+            <a class="header-logo" href="index.php">
+                <img src="../images/GBAF.png" alt="Logo GBAF">
+            </a>
 
-        <div class="header-profil">
-            <input type="checkbox" id="profil-checkbox" >
-            <label for="profil-checkbox">Nom Prénom</label>
-            <a href="#">Se déconnecter</a>
-            <a class="header-profil_overlay" href="#">Modifier mon profil</a>
-
+            <div class="header-profil">
+                <input type="checkbox" id="profil-checkbox" >
+                <label for="profil-checkbox">Nom Prénom</label>
+                <a href="#">Se déconnecter</a>
+                <a class="header-profil_overlay" href="#">Modifier mon profil</a>
+            </div>
         </div>
     </header>

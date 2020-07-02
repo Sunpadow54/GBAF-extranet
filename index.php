@@ -1,6 +1,6 @@
     <?php include("header.php"); ?>
 
-    <main>
+    <main class="main-accueil">
       <section class="GBAF">
         <h1>GBAF (Groupement Banque Assurance Français)</h1>
         <div class="texte">

@@ -12,20 +12,27 @@
     </head>
     
   <body>
-    <fieldset class="connexion">
+    <main class="connexion">
 
-      <form method="post"action="connexion.php">
+      <fieldset>
+        <legend>Connexion :</legend>
         <img src="../images/GBAF.png" alt="Logo GBAF">
-        <p>
-            <label for="pseudo">Identifiant :</label>
-            <input type="text" id="pseudo" name="identifiant">
+        <form method="post"action="connexion.php">
+          <p>
+              <label for="pseudo">Identifiant :</label>
+              <input type="text" id="pseudo" name="username" required>
 
-            <label for="mp">Mot de passe :</label>
-            <input type="text" id="mp" name="mot-de-passe">
+              <label for="mp">Mot de passe :</label>
+              <input type="password" id="mp" name="password"required>
 
-            <input type="submit" value="Connexion">
-        </p>
-      </form>
-    </fieldset>
+              <input type="submit" value="Connexion">
+          </p>
+        </form>
+
+        <a href=""> mot de passe oublié ?</a>
+        <a href="profil.php">Se créer un compte</a>
+      </fieldset>
+
+    </main>
   </body>
 </html>

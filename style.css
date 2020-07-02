@@ -1,12 +1,18 @@
 html {
     height: 100%;
     margin:0;
-  }
+    padding: 0;
+}
 body, a{
-     margin:0; padding:0; text-decoration:none; list-style:none; box-sizing: border-box; font-family: 'Roboto', sans-serif; color:black;
+     margin:0; 
+     padding:0; 
+     text-decoration:none; 
+     list-style:none;
+     box-sizing: border-box; 
+     font-family: 'Roboto', sans-serif; 
+     color:black;
 }
 body{font-size:16px;
-min-width: 900px;
 height: 100%;
 width: 100%;
 margin:0 auto;}
@@ -23,26 +29,29 @@ p{font-size: 1em; hyphens: auto; -moz-hyphens: auto;}
 
 header{
     position: fixed;
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
     top:0;
     width: 100%;
-    height: 80px;
-    padding:10px 50px 10px 0;
+    height: 6.6em;
     background-color: white;
     z-index: 2;
 }
+.header-contain{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    max-width: 80%;
+    min-width: 850px;
+    margin:auto;
+}
 .header-logo{
     width: 80px;
-    margin-left: 10%;
+    height: auto;
 }
 
 /* HEADER -- PROFIL*/
 
 .header-profil{
     width: 8.5em;
-    margin-right: 10%;
     text-align: right;
     position: relative;
 }
@@ -117,20 +126,19 @@ footer p{
     line-height: 3em;
 }
 
-/* ----------------------- MAIN */
+/* ----------------------- SECTIONS */
 
-main{
-    max-width: 80%;
-    margin:auto;
-    margin-top:80px;;
-}
 section{
+    max-width: 80%;
+    min-width: 850px;
     padding-top:5.6em;
+    margin:auto;
 }
-
 
 /* ------------------------------ MAIN page accueil */
-
+.main-accueil{
+    margin-top:6.6em; 
+}
 /* GBAF présentation */
 
 .GBAF{
@@ -330,17 +338,28 @@ display: none;
     align-items: center;
     justify-content: center;
 }
-.connexion > form{
-    text-align: center;
+.connexion > fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:rgba(255, 255, 255, 0.9);
     width: 20em;
-    height: 15em;
+}
+.connexion > fieldset ~ img{
+    height: 15%;
+    margin:0;
+    background-color: lightgreen;
+}
+.connexion > fieldset > form{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+/*     width: 20em;
+    height: 15em; */
     margin:0;
     padding: 1em;
-    background-color:rgba(255, 255, 255, 0.9);
-}
-.connexion > form > img{
-    height: 35%;
-    margin:0;
+    background-color: lightcoral;
 }
 .connexion > form > p{
     margin:0;

@@ -7,10 +7,6 @@
 
 /* HEADER -- PROFIL*/
 
-header{
-    height: 86px;
-}
-
 .header-profil > input:checked ~.header-profil_overlay{
     opacity: 1;
     transition: 0.5s ease-in;
@@ -19,11 +15,8 @@ header{
 opacity: 0.8;
 }
 
-/* ----------------------- MAIN */
+/* ----------------------- SECTIONS */
 
-main{
-    max-width: 80%;
-}
 section{
     padding-top:30px;
 }

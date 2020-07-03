@@ -12,7 +12,7 @@
     </head>
     
   <body>
-    <main class="connexion">
+    <main class="inscription-connexion">
 
       <fieldset>
         <legend>Se connecter :</legend>
@@ -30,7 +30,7 @@
         </form>
 
         <a href=""> mot de passe oublié ?</a>
-        <a href="profil.php">Se créer un compte</a>
+        <a href="profil.php">créer un compte</a>
       </fieldset>
 
     </main>

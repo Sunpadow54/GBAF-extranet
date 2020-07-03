@@ -6,7 +6,7 @@ img, blockquote, textarea, input, li{
 }
 
 /* annule les :hover*/
- .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .connexion > fieldset > a:hover{
+ .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
 }
 
@@ -165,40 +165,33 @@ section{
     padding:0.2em;
 }
 
-/* ------------------------------ Page Connexion */
+/* ------------------------------ Pages Connexion & Inscription */
 
-.connexion{
+.inscription-connexion{
     background-color: #ebebeb;
 }
-.connexion > fieldset{
-    width: 100%;
-    justify-content: space-around;
-    height: 60%;
+.inscription-connexion > fieldset{
+    width: 80%;
     margin:0;
-    padding: 0;
+    padding:1em 2em 1em 2em;
+    border:2px solid rgba(0, 0, 0, 0.3);
 }
-.connexion > fieldset > legend{
-    position:absolute;
-    top:0; left:0;
-    padding:1em;
-    margin: 0;
+.inscription-connexion > fieldset > legend{
+    padding:0.4em; 
+    margin:0; 
     font-size: 1.5em;
 }
-.connexion > fieldset > form > p{
-    border:none;
-    height: auto;
+.inscription-connexion > fieldset > form > p{
     font-size: 1.5em;
 }
-.connexion > fieldset > form > p  input{
+.inscription-connexion form > p :nth-child(even){
     font-size: 1.5em;
 }
-.connexion-button{
-    font-size: 1.3em!important;
+.inscription-connexion form > p > :last-child{
+    font-size: 1.2em;
 }
-.connexion p > label{
-    font-size: 1em;
-}
-.connexion > fieldset > a{
-    font-size: 1.3em;
+.inscription-connexion > fieldset > a{
     text-decoration: underline;
+    font-size: 1.3em;
+    margin-bottom: 1em;
 }

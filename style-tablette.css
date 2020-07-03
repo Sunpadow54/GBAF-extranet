@@ -1,5 +1,5 @@
 /* annule les :hover*/
-.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover,.connexion > fieldset > a:hover{
+.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
 }
 
@@ -37,27 +37,21 @@ section{
     margin: auto;
  }
 
- /* ------------------------------ Page Connexion */
+/* ------------------------------ Pages Connexion & Inscription */
 
-.connexion > fieldset{
-     width: 60%;
-     height: 50%;
- }
-.connexion > fieldset > form > p{
-    height: auto;
+@media all and (orientation : portrait){
+    .inscription-connexion > fieldset > form > p{
+        font-size: 1.3em;
+    }
+    .inscription-connexion form > p :nth-child(even){
+        font-size: 1.3em;
+    }
+    .inscription-connexion form > p > :last-child{
+        font-size: 1em;
+    }
+    .inscription-connexion > fieldset > a{
+        text-decoration: underline;
+        font-size: 1.1em;
+        margin-bottom: 1em;
+    }
 }
-.connexion > fieldset > form > p  input{
-    font-size: 1.5em;
-}
-.connexion p > label{
-    font-size: 1em;
-}
-.connexion-button{
-    font-size: 1.3em!important;
-}
-.connexion > fieldset > a{
-    font-size: 1em;
-    text-decoration: underline;
-    margin:0.5em;
-}
-

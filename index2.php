@@ -15,7 +15,7 @@
     <main class="connexion">
 
       <fieldset>
-        <legend>Connexion :</legend>
+        <legend>Se connecter :</legend>
         <img src="../images/GBAF.png" alt="Logo GBAF">
         <form method="post"action="connexion.php">
           <p>
@@ -25,7 +25,7 @@
               <label for="mp">Mot de passe :</label>
               <input type="password" id="mp" name="password"required>
 
-              <input type="submit" value="Connexion">
+              <input class="connexion-button" type="submit" value="Connexion">
           </p>
         </form>
 

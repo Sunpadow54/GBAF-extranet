@@ -6,7 +6,7 @@ img, blockquote, textarea, input, li{
 }
 
 /* annule les :hover*/
- .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover{
+ .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .connexion > fieldset > a:hover{
     display:none;
 }
 
@@ -79,7 +79,7 @@ section{
     padding-top:30px;
 }
 
-/* ------------------------------ MAIN page accueil */
+/* ------------------------------ Page Accueil */
 
 .main-accueil{
         margin:0; 
@@ -124,7 +124,8 @@ section{
     display: none;
 }
 
-/* ------------------------------ MAIN page Partenaire */
+/* ------------------------------ Page Partenaire */
+
 /* SECTION PARTENAIRE */
 
 .main-partenaire{
@@ -162,4 +163,42 @@ section{
     font-size: 1.5em;
     border: 0.09em solid;
     padding:0.2em;
+}
+
+/* ------------------------------ Page Connexion */
+
+.connexion{
+    background-color: #ebebeb;
+}
+.connexion > fieldset{
+    width: 100%;
+    justify-content: space-around;
+    height: 60%;
+    margin:0;
+    padding: 0;
+}
+.connexion > fieldset > legend{
+    position:absolute;
+    top:0; left:0;
+    padding:1em;
+    margin: 0;
+    font-size: 1.5em;
+}
+.connexion > fieldset > form > p{
+    border:none;
+    height: auto;
+    font-size: 1.5em;
+}
+.connexion > fieldset > form > p  input{
+    font-size: 1.5em;
+}
+.connexion-button{
+    font-size: 1.3em!important;
+}
+.connexion p > label{
+    font-size: 1em;
+}
+.connexion > fieldset > a{
+    font-size: 1.3em;
+    text-decoration: underline;
 }

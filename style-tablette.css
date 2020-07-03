@@ -1,5 +1,5 @@
 /* annule les :hover*/
-.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover{
+.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover,.connexion > fieldset > a:hover{
     display:none;
 }
 
@@ -21,6 +21,8 @@ section{
     padding-top:30px;
 }
 
+/* ------------------------------ Page Accueil */
+
 /* GBAF présentation */
 
 .texte{
@@ -30,7 +32,32 @@ section{
 
  /* Liste acteurs et partenaires */
 
- .texte-acteurs{
+.texte-acteurs{
     max-width: 85%;
     margin: auto;
  }
+
+ /* ------------------------------ Page Connexion */
+
+.connexion > fieldset{
+     width: 60%;
+     height: 50%;
+ }
+.connexion > fieldset > form > p{
+    height: auto;
+}
+.connexion > fieldset > form > p  input{
+    font-size: 1.5em;
+}
+.connexion p > label{
+    font-size: 1em;
+}
+.connexion-button{
+    font-size: 1.3em!important;
+}
+.connexion > fieldset > a{
+    font-size: 1em;
+    text-decoration: underline;
+    margin:0.5em;
+}
+

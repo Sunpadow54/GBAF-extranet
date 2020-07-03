@@ -135,7 +135,7 @@ section{
     margin:auto;
 }
 
-/* ------------------------------ MAIN page accueil */
+/* ------------------------------ Page Accueil */
 .main-accueil{
     margin-top:6.6em; 
 }
@@ -215,7 +215,7 @@ section{
     color:white;
 }
 
-/* ------------------------------ MAIN page Partenaire */
+/* ------------------------------ Page Partenaire */
 
 .main-partenaire{
         margin-top:6.6em; 
@@ -331,7 +331,7 @@ display: none;
     text-decoration: underline;
 }
 
-/* ------------------------------ MAIN page Connexion */
+/* ------------------------------ Page Connexion */
 
 .connexion{
     width: 100%;
@@ -348,28 +348,48 @@ display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:rgba(255, 255, 255, 0.9);
-    width: 20em;
+    background-color:#ebebeb;
+    width: 25em;
+    height: 30em;
+    border:none;
 }
-.connexion > fieldset ~ img{
-    height: 15%;
+.connexion > fieldset > legend{
+    background-color:#ebebeb;
+    padding:0.5em;
+    padding-right: 1em;
+    border-radius: 0.3em;
+    margin-left:-0.75em;
+}
+.connexion > fieldset > img{
+    height: 10em;
     margin:0;
-    background-color: lightgreen;
 }
 .connexion > fieldset > form{
+    margin-bottom: 1em;
+}
+.connexion > fieldset > form > p{
     display: flex;
     flex-direction: column;
-    text-align: center;
-/*     width: 20em;
-    height: 15em; */
+    justify-content: space-around;
+    width: 20em;
+    height: 10em;
     margin:0;
     padding: 1em;
-    background-color: lightcoral;
+    border: 1px solid rgba(0,0,0,0.12);
 }
-.connexion > form > p{
-    margin:0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 65%;
+.connexion > fieldset > form > p > label{
+    padding:0.3em;
+}
+.connexion-button{
+    margin-top: 1.5em;;
+    font-size: 1em;
+    padding:0.3em;
+}
+.connexion > fieldset > a{
+    margin:0.5em;
+    font-size: 0.8em;
+    font-style: italic;
+}
+.connexion > fieldset > a:hover{
+    text-decoration: underline;
 }

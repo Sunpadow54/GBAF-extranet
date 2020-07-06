@@ -1,3 +1,4 @@
+
     <?php include("header.php"); ?>
 
     <main class="main-accueil">
@@ -34,30 +35,27 @@
         <article class="acteurs">
           <nav>
             <ul>
-              <li>
-                <img src="../images/CDE.png" alt="CDE">
-                <h3>CDE (Chambre Des Entrepreneurs)</h3>
-                <p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
-  Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.</p>
-                <a href="partenaire.php">Lire la suite</a>
-              </li>
 
-              <li>              
-                <img src="../images/Dsa_france.png" alt="DSA France">
-                <h3>Dsa France</h3>
-                <p>Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales.
-  Nous accompagnons les entreprises dans les étapes clés de leur évolution.
-  Notre philosophie : s’adapter à chaque entreprise.
-  Nous les accompagnons pour voir plus grand et plus loin et proposons des solutions de financement adaptées à chaque étape de la vie des entreprises </p>
-                <a href="partenaire.php">Lire la suite</a>
+<!-- Recupération des acteurs dans la bdd-->
+            <?php
+                $reponse = $bdd->query('SELECT * FROM partenaires');
+                /*  Affichage des infos des acteurs */
+                while($donnees = $reponse->fetch())
+            {
+            ?>
+              <li class="acteur-seul">
+                <?php
+                echo $donnees['logo'];
+                echo '<h3>' . $donnees['acteur'] . '</h3>';
+                echo '<div class="acteur-seul_description">' . $donnees['description'] . '</div>';
+                echo ' <a href="partenaire.php?id_acteur=' . $donnees['id_acteur'] . ' ">Lire la suite</a> ';
+                ?>
               </li>
+            <?php
+            }
+              $reponse->closeCursor();
+            ?>
 
-              <li>
-                <img src="" alt="">
-                <h3></h3>
-                <p></p>
-                <a href=""></a>
-              </li>
             </ul>
           </nav>
         </article>

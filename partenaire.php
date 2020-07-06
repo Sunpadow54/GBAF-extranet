@@ -2,12 +2,24 @@
 
 <main class="main-partenaire">
   <section class="partenaire">
-    <img src="../images/CDE.png" alt="CDE">
-    <h2>CDE (Chambre Des Entrepreneurs)</h2>
-    <a href="https://www.CDE.chose">voir le site internet de CDE</a>
-    <p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
-Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.</p>
+
+<!-- Affichage des infos de l'acteur -->
+  <?php
+    $req = $bdd->prepare('SELECT * FROM partenaires WHERE id_acteur = ?');
+    $req->execute(array($_GET['id_acteur']));
+     /* ISSET? */
+    while ($donnees = $req->fetch())
+    {
+        echo $donnees['logo'];
+        echo '<h2>' . $donnees['acteur'] . '</h2>';
+        echo '<a href="' . $donnees['site'] . '">voir le site</a>';
+        echo '<p>' .$donnees['description'] . '</p>';
+    }
+    $req->closeCursor();
+  ?>
+
   </section>
+
 
   <section class="commentaires">
     <div class="commentaires-formulaires">

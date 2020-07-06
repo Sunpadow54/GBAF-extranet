@@ -169,14 +169,14 @@ section{
     padding:1.2em;
     min-width: 764px;
 }
-.acteurs ul{
+.acteurs > ul{
     margin:0;
     padding: 0;
 }
-.acteurs ul li{
+.acteur-seul{
     display: grid;
     grid-template-columns: 370px 2fr 150px ;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2em 1fr;
     grid-template-areas: "logo nom nom"
                 "logo infos ." 
                 "logo . button";
@@ -186,22 +186,30 @@ section{
     background-color: white;
     box-shadow: 1px 1px 4px 2px rgba(0,0,0,0.12);
 }
-.acteurs ul li img{
+.acteur-seul > img{
     height: auto;
     margin:0.5em;
     grid-area: logo;
 }
-.acteurs ul li h3{
+.acteur-seul > h3{
     grid-area: nom;
 }
-.acteurs ul li p{
+.acteur-seul_description {
     max-width: 100%;
     grid-area: infos;
+    overflow: hidden;
+
+}
+.acteur-seul_description > p:first-of-type{
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; 
 }
-.acteurs ul li a{
+.acteur-seul_description > ul, .acteur-seul_description > p ~ p{
+    display:none;
+} 
+
+.acteur-seul > a{
     grid-area: button;
     justify-self:end;
     align-self: start;
@@ -210,7 +218,7 @@ section{
     padding: 0.5em;
     margin-right:30px;
 }
-.acteurs ul li a:hover{
+.acteur-seul > a:hover{
     background-color:black;
     color:white;
 }
@@ -236,6 +244,9 @@ section{
 .partenaire > a{
     font-size: 0.85em;
     text-decoration: underline;
+}
+.partenaire > p{
+    white-space: pre-wrap;
 }
 
 /* SECTION Commentaires */

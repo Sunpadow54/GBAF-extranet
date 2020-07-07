@@ -1,6 +1,5 @@
-<!--     Insérer session -->
-<!-- Base de donnée connexion : -->
 <?php
+// Base de donnée connexion : 
     try
     {
         $bdd = new PDO(
@@ -40,8 +39,13 @@
 
             <div class="header-profil">
                 <input type="checkbox" id="profil-checkbox" >
-                <label for="profil-checkbox">Nom Prénom</label>
-                <a href="#">Se déconnecter</a>
+                <label for="profil-checkbox"> 
+                    <?php 
+                        echo '<p>' . htmlspecialchars($_SESSION['nom']) . '</p>'; 
+                        echo '<p>' . htmlspecialchars($_SESSION['prenom']) . '</p>'; 
+                    ?> 
+                </label>
+                <a href="deconnexion.php">Se déconnecter</a>
                 <a class="header-profil_overlay" href="#">Modifier mon profil</a>
             </div>
         </div>

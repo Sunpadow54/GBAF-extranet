@@ -352,11 +352,11 @@ display: none;
     height: 100%;
     background-color:rgba(0, 0, 0, 0.8);
 }
-.inscription-connexion  fieldset{
+.inscription-connexion fieldset{
     display: flex;
     flex-direction: column;
     padding: 1em 7em 1em 7em;
-    width: 40%;
+    /* max-width: 15% */; 
     background-color:#ebebeb;
     border:none;
     border-radius: 0.2em;
@@ -373,28 +373,46 @@ display: none;
     width: 7em;
     margin:0;
 }
+.inscription-connexion form > p > label::after{
+    content: "*";
+    display: inline;
+    line-height: 0.5em;
+    color:red;
+    vertical-align: top;
+}
 .inscription-connexion form > p{
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 .inscription-connexion form > p > label, input{
     margin:0.1em;
+}
+.inscription-connexion form > p > span{
+    align-self: center;
+    color:red;
+    font-size: 0.7em!important;
+    margin-top: 0.7em;
 }
 .inscription-connexion form > p :nth-child(even){
     margin-bottom: 0.5em;
     font-size: 1em;
     border-radius:1px;
 }
-.inscription-connexion form > p > :last-child{
-    margin-top: 1.2em;
+.inscription-connexion form > p > .button-envoyer{
+    margin-top: 0.5em;
     padding:0.2em;
+    align-self: stretch;
 }
 .inscription-connexion > fieldset > a{
-    margin:0.5em;
+    margin-bottom:1.5em;
     font-size: 0.8em;
     font-style: italic;
     text-align: center;
 }
 .inscription-connexion > fieldset > a:hover{
     text-decoration: underline;
+}
+#question, #reponse{
+    width: 20em;
 }

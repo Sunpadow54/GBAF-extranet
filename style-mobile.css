@@ -187,11 +187,14 @@ section{
 .inscription-connexion form > p :nth-child(even){
     font-size: 1.5em;
 }
-.inscription-connexion form > p > :last-child{
-    font-size: 1.2em;
+.inscription-connexion form > p > .button-envoyer{
+    font-size: 1em;
 }
 .inscription-connexion > fieldset > a{
     text-decoration: underline;
     font-size: 1.3em;
     margin-bottom: 1em;
+}
+#question, #reponse{
+    width: 100%;
 }

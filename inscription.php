@@ -19,28 +19,30 @@
           <img src="../images/GBAF.png" alt="Logo GBAF">
           <form method="post" action="">
             <p>
-                  <label for="pseudo">Identifiant :</label>
-                  <input type="text" id="pseudo" name="username" required>
+                  <label for="pseudo">Identifiant : </label>
+                  <input type="text" id="pseudo" name="username" size="20" required>
 
-                  <label for="mp">Mot de passe :</label>
-                  <input type="password" id="mp" name="password" required>
+                  <label for="mp">Mot de passe : </label>
+                  <input type="password" id="mp" name="password" size="20" required>
 
-                  <label for="nom">Nom :</label>
-                  <input type="text" id="nom" name="nom">
+                  <label for="nom">Nom : </label>
+                  <input type="text" id="nom" name="nom" size="30"required>
 
-                  <label for="prenom">Prénom :</label>
-                  <input type="text" id="prenom" name="prenom" required>
+                  <label for="prenom">Prénom : </label>
+                  <input type="text" id="prenom" name="prenom" size="30" required>
               
-                  <label for="question">Votre question secrète :</label>
+                  <label for="question">Votre question secrète : </label>
                   <input type="textarea" id="question" name="question" required>
 
-                  <label for="reponse">La réponse à votre question :</label>
+                  <label for="reponse">La réponse à votre question : </label>
                   <input type="textarea" id="reponse" name="reponse" required>
 
-                  <input type="submit" value="Envoyer">
+                  <input class="button-envoyer" type="submit" value="Envoyer">
+                  
+                  <span>Les champs indiqués par une * sont obligatoires</span>
+
             </p>
           </form>
-
           <a href="connexion.php">se connecter</a>
       </fieldset>
       

@@ -25,7 +25,8 @@
               <label for="mp">Mot de passe :</label>
               <input type="password" id="mp" name="password"required>
 
-              <input class="connexion-button" type="submit" value="Connexion">
+              <input class="button-envoyer" type="submit" value="Connexion">
+              <span>Les champs indiqués par une * sont obligatoires</span>
           </p>
         </form>
 

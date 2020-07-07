@@ -34,7 +34,7 @@
   <body>
     <header>
         <div class="header-contain">
-            <a class="header-logo" href="index.php">
+            <a class="header-logo" href="accueil.php">
                 <img src="../images/GBAF.png" alt="Logo GBAF">
             </a>
 

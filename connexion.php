@@ -26,16 +26,16 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $donnees = $req->fetch();
         if ($_POST['username'] == $donnees['username'] && $_POST['password'] == $donnees['password'])
         {
-            header('Location: index.php');
+            header('Location: accueil.php');
         }
         else
         {
-            header('Location: index2.php');
+            header('Location: index.php');
         }
     }
 else
 {
-    header('Location: index2.php');
+    header('Location: index.php');
 }
 
 ?>

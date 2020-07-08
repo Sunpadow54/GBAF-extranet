@@ -24,12 +24,12 @@ if (isset($_POST['username']) && isset($_POST['password']))
         //cherche et compare à la BDD
         $req = $bdd->prepare('SELECT * FROM account WHERE username= ?');
         $req->execute(array($_POST['username']));
-        $donnees = $req->fetch();
+        $dataAccount = $req->fetch();
 
-        if ($_POST['username'] == $donnees['username'] && $_POST['password'] == $donnees['password'])
+        if ($_POST['username'] == $dataAccount['username'] && $_POST['password'] == $dataAccount['password'])
         {  
-            $_SESSION['nom'] = $donnees['nom'];
-            $_SESSION['prenom'] = $donnees['prenom'];
+            $_SESSION['nom'] = $dataAccount['nom'];
+            $_SESSION['prenom'] = $dataAccount['prenom'];
             
             $req->closeCursor();
             

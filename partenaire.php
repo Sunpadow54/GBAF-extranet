@@ -16,12 +16,12 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
             $req = $bdd->prepare('SELECT * FROM partenaires WHERE id_acteur = ?');
             $req->execute(array($_GET['id_acteur']));
             /* ISSET? */
-            $donnees = $req->fetch();
+            $dataActeur = $req->fetch();
         
-                echo $donnees['logo'];
-                echo '<h2>' . $donnees['acteur'] . '</h2>';
-                echo '<a href="' . $donnees['site'] . '">voir le site</a>';
-                echo '<p>' .$donnees['description'] . '</p>';
+                echo $dataActeur['logo'];
+                echo '<h2>' . $dataActeur['acteur'] . '</h2>';
+                echo '<a href="' . $dataActeur['site'] . '">voir le site</a>';
+                echo '<p>' .$dataActeur['description'] . '</p>';
       
       ?>
 

@@ -46,15 +46,15 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
               <?php
                   $reponse = $bdd->query('SELECT * FROM partenaires');
                   /*  Affichage des infos des acteurs */
-                  while($donnees = $reponse->fetch())
+                  while($dataPartenaires = $reponse->fetch())
               {
               ?>
                 <li class="acteur-seul">
                   <?php
-                  echo $donnees['logo'];
-                  echo '<h3>' . $donnees['acteur'] . '</h3>';
-                  echo '<div class="acteur-seul_description">' . $donnees['description'] . '</div>';
-                  echo ' <a href="partenaire.php?id_acteur=' . $donnees['id_acteur'] . ' ">Lire la suite</a> ';
+                  echo $dataPartenaires['logo'];
+                  echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
+                  echo '<div class="acteur-seul_description">' . $dataPartenaires['description'] . '</div>';
+                  echo ' <a href="partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
                   ?>
                 </li>
               <?php

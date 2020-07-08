@@ -1,4 +1,5 @@
 html {
+    width: 100%;
     height: 100%;
     margin:0;
     padding: 0;
@@ -12,109 +13,120 @@ body, a{
      font-family: 'Roboto', sans-serif; 
      color:black;
 }
-body{font-size:16px;
-height: 100%;
-width: 100%;
-margin:0 auto;}
+body{
+    font-size:16px;
+    height: 100%;
+    margin:0 auto;
+}
 
 img{max-width: 100%;}
 
 h1{font-size:3em;}
 h2{font-size: 2em;}
 h3{font-size: 1.3em;}
-p{font-size: 1em; hyphens: auto; -moz-hyphens: auto;}
+p{
+    font-size: 1em;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
 
 
 /* ----------------------- HEADER */
-
 header{
     position: fixed;
     top:0;
-    width: 100%;
-    height: 6.6em;
-    background-color: white;
+    right: 0;
+    left:0;
     z-index: 2;
+    max-width: 100%;
+    min-width: 700px;
+    margin-right: 9em;
+    margin-left: 9em;
+   
+    padding-bottom: 0.8em;
+    background-color: white;
 }
 .header-contain{
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-    max-width: 80%;
-    min-width: 850px;
-    margin:auto;
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-template-rows: 6.6em;
+    grid-template-areas:" logo profil ";
 }
 .header-logo{
-    width: 80px;
+    grid-area: logo;
     height: auto;
 }
 
 /* HEADER -- PROFIL*/
 
 .header-profil{
-    width: 8.5em;
-    text-align: right;
-    position: relative;
+    grid-area: profil;
+    justify-self: end;
+    align-self: center;
+    display:flex;
+    flex-direction: column;
+    position: relative; 
+    margin:0;
+    width: auto;
 }
-.header-profil > input {
-    display: none;
-    width: 100%;
-    height: inherit;
-    position: absolute; 
-}
-.header-profil label{
-    display:inline-block;
-    text-align: right;
-    width: 100%;
+.header-profil_nom{
+    display:flex; 
     margin:0;
     cursor: pointer;
 }
-.header-profil label::after{
+.header-profil_nom::after{
     content:"";
     background: url(../images/icone-close.png) center/contain no-repeat;
     display:none;
     vertical-align: sub;
     opacity: 0;
 } 
-.header-profil label::before{
+.header-profil_nom::before{
     content:"";
     display:inline-block;
     vertical-align: sub;
     height: 1.8em;
     width: 1.8em;
-    margin-right:8px;
+    margin:0;
     background:url(../images/profil.png) center/contain no-repeat;
 }
-.header-profil a{
+.header-profil_nom > p{
+    margin:0; 
+    text-align: right;
+    font-size: 1.1em;
+    line-height: 1.8em;
+}
+.header-profil_nom > p::first-letter{
+    text-transform: uppercase;
+}
+.header-profil > a{
     font-size: 0.8em;
+    font-weight: 300;
     display: block;
     line-height: 2em;
-}
-.header-profil > label + a{
+    text-align: right;
     color:red;
 }
-.header-profil > label + a:hover{
+.header-profil_nom > a:hover{
     color: rgba(0, 0, 0, 0.8);
 }
 .header-profil_overlay{
     position: absolute;
+    bottom:-2em;
+    width: 100%;
     opacity: 0;
-    background-color:black;
-    color:white;
-    font-weight: 300;
-    width: inherit;
-    padding-right:0.8em;
 }
 .header-profil:hover .header-profil_overlay{
     opacity: 1;
     transition: 0.5s ease;
 }
-.header-profil_overlay:hover{
-    color:#ff0000;
-}
+
 
 /* ----------------------- FOOTER */
 
 footer{
+    width: 100%;
     background-color: black;
     height: 3em;
 }
@@ -127,16 +139,21 @@ footer p{
 }
 
 /* ----------------------- SECTIONS */
-
+main{
+    max-width: 100%;
+    min-width: 700px;
+    margin:0 auto;
+}
 section{
-    max-width: 80%;
-    min-width: 850px;
+    width: 100%;
     padding-top:5.6em;
     margin:auto;
 }
 
 /* ------------------------------ Page Accueil */
 .main-accueil{
+    padding-right: 9em;
+    padding-left: 9em;
     margin-top:6.6em; 
 }
 
@@ -169,7 +186,7 @@ section{
     padding:1.2em;
     min-width: 764px;
 }
-.acteurs > ul{
+.acteurs ul{
     margin:0;
     padding: 0;
 }
@@ -226,15 +243,14 @@ section{
 /* ------------------------------ Page Partenaire */
 
 .main-partenaire{
-        margin-top:6.6em; 
-}
-.main-partenaire section{
-    width: 70%;
+    padding-right: 9em;
+    padding-left: 9em;
+    margin-top:6.6em; 
 }
 
 /* SECTION PARTENAIRE */
 .partenaire{
-    padding:2em;
+    padding:2em 0 2em 0;
 }
 .partenaire > img{
     width: 30em;
@@ -252,6 +268,7 @@ section{
 /* SECTION Commentaires */
 
 .commentaires{
+    width: auto;
     background-color:rgba(0, 0, 0, 0.05);
     padding: 2em;
 }

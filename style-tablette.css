@@ -3,19 +3,34 @@
     display:none;
 }
 
+
 /* ----------------------- HEADER */
 
 /* HEADER -- PROFIL*/
 
-.header-profil > input:checked ~.header-profil_overlay{
-    opacity: 1;
-    transition: 0.5s ease-in;
-}
-.header-profil > input:checked + label{
-opacity: 0.8;
+header{
+    min-width: 300px;
+    margin-right: 5em;
+    margin-left: 5em;
 }
 
+/* HEADER -- PROFIL*/
+
+.header-profil_overlay{
+    opacity: 1;
+}
 /* ----------------------- SECTIONS */
+.main-accueil{
+    padding-right: 5em;
+    padding-left: 5em;
+}
+.main-partenaire{
+    padding-right: 5em;
+    padding-left: 5em;
+}
+main{
+    min-width: 100%;
+}
 
 section{
     padding-top:30px;

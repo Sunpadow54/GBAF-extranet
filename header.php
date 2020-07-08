@@ -18,7 +18,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <title> GBAF extranet</title>
@@ -34,16 +34,16 @@
     <header>
         <div class="header-contain">
             <a class="header-logo" href="accueil.php">
-                <img src="../images/GBAF.png" alt="Logo GBAF">
+                    <img src="../images/GBAF.png" alt="Logo GBAF">
             </a>
 
             <div class="header-profil">
-<!--                 <input type="checkbox" id="profil-checkbox" > -->
+    <!--                 <input type="checkbox" id="profil-checkbox" > -->
                 <div class="header-profil_nom"> 
-                    <?php 
-                        echo '<p>' . htmlspecialchars($_SESSION['nom']) . '</p>'; 
-                        echo '<p>' . htmlspecialchars($_SESSION['prenom']) . '</p>'; 
-                    ?> 
+                        <?php 
+                            echo '<p>' . htmlspecialchars($_SESSION['nom']) . '</p>'; 
+                            echo '<p>' . htmlspecialchars($_SESSION['prenom']) . '</p>'; 
+                        ?> 
                 </div>
                 <a href="deconnexion.php">Se déconnecter</a>
                 <a class="header-profil_overlay" href="#">Modifier mon profil</a>

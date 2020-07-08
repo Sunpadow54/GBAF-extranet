@@ -11,7 +11,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
         <section class="GBAF">
           <h1>GBAF (Groupement Banque Assurance Français)</h1>
           <div class="texte">
-            <p><strong>Le Groupement Banque Assurance Français (GBAF)</strong>​ est une fédération  représentant les 6 grands groupes français :
+            <p lang="fr"><strong>Le Groupement Banque Assurance Français (GBAF)</strong>​ est une fédération  représentant les 6 grands groupes français :
             <ul>
               <li>BNP Paribas</li>
               <li>BPCE</li>
@@ -21,7 +21,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
               <li>La Banque Postale</li>
             </ul>
             </p>
-            <p>Même s’il existe une forte concurrence entre ces entités, elles vont toutes travailler de la même façon pour gérer près de 80 millions de comptes sur le territoire national.
+            <p lang="fr">Même s’il existe une forte concurrence entre ces entités, elles vont toutes travailler de la même façon pour gérer près de 80 millions de comptes sur le territoire national.
               <br>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous  les axes de la réglementation financière française. Sa mission est de promouvoir l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics. </p>
             <br>
             <p>Les produits et services bancaires sont nombreux et très variés. Afin de renseigner au mieux les clients, les salariés des 340 agences des banques et assurances en France (agents, chargés de clientèle, conseillers financiers, etc.) recherchent sur Internet des informations portant sur des produits bancaires et des financeurs, entre autres.

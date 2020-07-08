@@ -1,38 +1,41 @@
-body{width: auto; font-size: 25px;}
+body{ font-size: 25px; min-width: 100%;}
 img, blockquote, textarea, input, li{
     max-width: 100%;
     margin:0;
     padding:0;
 }
 
+
 /* annule les :hover*/
  .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
 }
-
+h1{font-size:2.2em;}
 /* ----------------------- HEADER */
 
 header{
     position: static;
-    height: auto;
+    padding: 0;
+    margin:0;
 }
 .header-contain{
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
     height: auto;
     max-width: 100%;
     min-width: 100%;
 }
-.header-contain:after{
+header:after{
     content: "";
-    display: inline-block;
-    margin:auto;
-    width: 90%;
-    height: 0.15em;
+    display: block;
+    margin:0 auto;
+    width: 85%;
+    height: 0.20em;
+    margin-top:0.5em;
     background-color:rgba(0, 0, 0, 0.1) 
 }
 .header-logo{
-    width: 5em;
+    width: 4em;
     margin: 0;
     align-self: center;
 }
@@ -40,26 +43,22 @@ header{
 /* HEADER -- PROFIL*/
 
 .header-profil{
-    min-width: 100%;
-    text-align: center;
+    justify-content: center;
+    width: 100%;
     position: initial;
 }
-.header-profil > label{
-    font-size: 1.3em;
-    text-align: center;
-    margin-bottom: 0.5em;
+.header-profil_nom{
+    align-self: center;
+    font-size: 1em;
 }
-.header-profil > label + a{
+.header-profil_nom + a{
     position: absolute;
     top:0;
     right:0;
-    margin: 0;
     visibility: hidden;
 }
-.header-profil > label + a:before{
+.header-profil_nom + a:after{
     content: "";
-    position: absolute;
-    right: 0;
     margin:1em;
     display:inline-block;
     background:url(../images/icone-deconnexion.png) center / cover no-repeat;
@@ -67,14 +66,13 @@ header{
     height: 3em;
     visibility: visible;
 }
-.header-profil > input:checked ~.header-profil_overlay{
-    opacity: 1;
-    width: 100%;
-    font-size: 1.5em;
+.header-profil_overlay{
+    bottom:auto;
+    opacity: 0;
 }
 
 /* ----------------------- SECTIONS */
-   
+
 section{
     padding-top:30px;
 }
@@ -83,6 +81,7 @@ section{
 
 .main-accueil{
         margin:0; 
+        padding: 0 1.5em 0 1.5em;
 }
 
 /* GBAF présentation */
@@ -130,15 +129,14 @@ section{
 
 .main-partenaire{
     margin:0; 
-}
-.main-partenaire section{
-    width: 100%;
+    padding: 0 1.5em 0 1.5em;
 }
 
 /* SECTION Commentaires */
 
 .commentaires{
     border-radius: 0.9em;
+    paddin:0;
 }
 .commentaires-formulaires{
     grid-template-columns: 1fr 9em;
@@ -168,6 +166,8 @@ section{
 /* ------------------------------ Pages Connexion & Inscription */
 
 .inscription-connexion{
+    height: 100%;
+    width: 100%;
     background-color: #ebebeb;
 }
 .inscription-connexion > fieldset{

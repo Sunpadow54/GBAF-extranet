@@ -38,13 +38,13 @@
             </a>
 
             <div class="header-profil">
-                <input type="checkbox" id="profil-checkbox" >
-                <label for="profil-checkbox"> 
+<!--                 <input type="checkbox" id="profil-checkbox" > -->
+                <div class="header-profil_nom"> 
                     <?php 
                         echo '<p>' . htmlspecialchars($_SESSION['nom']) . '</p>'; 
                         echo '<p>' . htmlspecialchars($_SESSION['prenom']) . '</p>'; 
                     ?> 
-                </label>
+                </div>
                 <a href="deconnexion.php">Se déconnecter</a>
                 <a class="header-profil_overlay" href="#">Modifier mon profil</a>
             </div>

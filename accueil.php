@@ -69,12 +69,9 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
       
       </main>
 
-      <?php include("footer.php"); ?>
+<?php 
 
-    </body>
-  </html>
-
-<?php
+  include("footer.php"); 
 
 }
 else

@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+/* Base de donnée connexion :*/
+
+try
+{
+    $bdd = new PDO(
+      'mysql:host=localhost;
+      dbname=gbaf-extranet;
+      charset=utf8',
+      'root',
+      '',
+      array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+    );
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+?>
+
+<!-- FORMULAIRE D'INSCRIPTION -->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +41,8 @@
       <fieldset>
           <legend>Créer un compte :</legend>
           <img src="../images/GBAF.png" alt="Logo GBAF">
-          <form method="post" action="">
+
+          <form method="post" action="inscription">
             <p>
                   <label for="pseudo">Identifiant : </label>
                   <input type="text" id="pseudo" name="username" size="20" required>
@@ -40,12 +65,64 @@
                   <input class="button-envoyer" type="submit" value="Envoyer">
                   
                   <span>Les champs indiqués par une * sont obligatoires</span>
-
             </p>
           </form>
+
           <a href="connexion.php">se connecter</a>
       </fieldset>
       
     </main>
   </body>
 </html>
+
+
+<!-- VERIFICATION & AJOUT NOUVEL UTILISATEUR -->
+
+<?php
+
+if (isset($_POST))
+{
+  // Verification que tous les champs sont remplis
+  if (!empty($_POST['nom']) && !empty($_POST['prenom']) 
+  && !empty($_POST['username']) && !empty($_POST['password']) 
+  && !empty($_POST['question']) && !empty($_POST['reponse'])) 
+  {
+
+    // Verification que l'identifiant n'existe pas
+    $req = $bdd->prepare('SELECT username FROM account WHERE username = ?');
+    $req->execute(array($_POST['username']));
+    $dataAccount = $req->fetch();
+    if ( $dataAccount )
+    {
+      // Identifiant existe déjà
+      $req->closeCursor();
+      echo 'Cet identifiant existe déjà';
+    }
+
+    else
+    {
+      $req->closeCursor();
+      // Insère le nouvel Utilisateur dans la BDD
+      $req2 = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
+      $req2->execute(array(
+        'nom' => htmlspecialchars($_POST['nom']),
+        'prenom' => htmlspecialchars($_POST['prenom']),
+        'username' => htmlspecialchars($_POST['username']),
+        'password' => htmlspecialchars($_POST['password']),
+        'question' => htmlspecialchars($_POST['question']),
+        'reponse' => htmlspecialchars($_POST['reponse'])
+      ));
+      $req2->closeCursor();
+
+      header('Location: index.php');
+    }
+  
+  }
+
+  else
+  {
+  echo 'il vous manque un champ à remplir';
+  }
+}
+
+?>

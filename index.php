@@ -77,7 +77,7 @@ else
               </form>
       
               <a href=""> mot de passe oublié ?</a>
-              <a href="profil.php">créer un compte</a>
+              <a href="inscription.php">créer un compte</a>
             </fieldset>
       
           </main>

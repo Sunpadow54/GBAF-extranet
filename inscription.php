@@ -44,21 +44,29 @@ if (isset($_POST['dataPosted']))
     && !empty($_POST['username']) && !empty($_POST['password']) 
     && !empty($_POST['question']) && !empty($_POST['reponse'])) 
     {
-      $req->closeCursor();
-      // Hashage du mot de passe
-      $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      // Insère le nouvel Utilisateur dans la BDD
-      $req2 = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
-      $req2->execute(array(
-        'nom' => htmlspecialchars($_POST['nom']),
-        'prenom' => htmlspecialchars($_POST['prenom']),
-        'username' => htmlspecialchars($_POST['username']),
-        'password' => $passwordHashed,
-        'question' => htmlspecialchars($_POST['question']),
-        'reponse' => htmlspecialchars($_POST['reponse'])
-      ));
-      $req2->closeCursor();
-      header('Location: index.php');
+      // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
+      if (preg_match("#[a-z][A-Z][0-9][._-]?#", $_POST['password']))
+      {
+        $req->closeCursor();
+        // Hashage du mot de passe
+        $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // Insère le nouvel Utilisateur dans la BDD
+        $req2 = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
+        $req2->execute(array(
+          'nom' => htmlspecialchars($_POST['nom']),
+          'prenom' => htmlspecialchars($_POST['prenom']),
+          'username' => htmlspecialchars($_POST['username']),
+          'password' => $passwordHashed,
+          'question' => htmlspecialchars($_POST['question']),
+          'reponse' => htmlspecialchars($_POST['reponse'])
+        ));
+        $req2->closeCursor();
+        header('Location: index.php');
+      }
+      else
+      {
+        $erreur ="le mot de passe doit comprendre au moins une lettre, une majuscule et un chiffre";
+      }
     }
     else
     {

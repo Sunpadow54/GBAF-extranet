@@ -24,21 +24,22 @@ catch (Exception $e)
 <!-- VERIFICATION & AJOUT NOUVEL UTILISATEUR -->
 
 <?php
-
+// Verifie si les variables ont été crées
 if (isset($_POST['dataPosted']))
 {
+  // Verifie si le Username n'existe pas déjà
   $req = $bdd->prepare('SELECT username FROM account WHERE username = ?');
   $req->execute(array($_POST['username']));
   $dataAccount = $req->fetch();
   if ($dataAccount)
   {
-    // Identifiant existe déjà
+    // Username existe déjà
     $req->closeCursor();
-    echo '<span class="message"> Cet identifiant existe déjà </span>';
+    $erreur = " Ce nom d'utilisateur existe déjà ";
   }
   else
   {
-    // Verification que tous les champs sont remplis
+    // Verification que tous les champs ne sont pas vide
     if (!empty($_POST['nom']) && !empty($_POST['prenom']) 
     && !empty($_POST['username']) && !empty($_POST['password']) 
     && !empty($_POST['question']) && !empty($_POST['reponse'])) 
@@ -61,7 +62,7 @@ if (isset($_POST['dataPosted']))
     }
     else
     {
-      echo '<span class="message"> il vous manque un champ à remplir </span>';
+      $erreur =" Veuillez remplir tous les champs";
     }
   }
 }
@@ -86,26 +87,68 @@ if (isset($_POST['dataPosted']))
       <fieldset>
           <legend>Créer un compte :</legend>
           <img src="../images/GBAF.png" alt="Logo GBAF">
-
+                    
+          <?php // message d'erreur
+          if (isset($erreur))
+          {
+            echo '<span class="message-erreur">' . $erreur .' </span>'; 
+          }
+          ?>
+          <!-- Formulaire avec 'value' préenregistrées -->  
           <form method="post" action="inscription">
             <p>
                   <label for="pseudo">Identifiant : </label>
-                  <input type="text" id="pseudo" name="username" size="20">
+                  <input type="text" id="pseudo" name="username" size="20" 
+                    <?php
+                    if (isset($_POST['username']))
+                    {
+                      echo 'value = "' .htmlspecialchars($_POST['username']). '"' ;
+                    }
+                    ?>
+                  >
 
                   <label for="mp">Mot de passe : </label>
                   <input type="password" id="mp" name="password" size="20">
 
                   <label for="nom">Nom : </label>
-                  <input type="text" id="nom" name="nom" size="30" value="">
+                  <input type="text" id="nom" name="nom" size="30"
+                    <?php
+                    if (isset($_POST['nom']))
+                    {
+                      echo 'value = "' .htmlspecialchars($_POST['nom']). '"' ;
+                    }
+                    ?>
+                  >
 
                   <label for="prenom">Prénom : </label>
-                  <input type="text" id="prenom" name="prenom" size="30">
+                  <input type="text" id="prenom" name="prenom" size="30"
+                    <?php
+                    if (isset($_POST['prenom']))
+                    {
+                      echo 'value = "' .htmlspecialchars($_POST['prenom']). '"' ;
+                    }
+                    ?>
+                  >
               
                   <label for="question">Votre question secrète : </label>
-                  <input type="textarea" id="question" name="question">
+                  <input type="textarea" id="question" name="question"
+                    <?php
+                    if (isset($_POST['question']))
+                    {
+                      echo 'value = "' .htmlspecialchars($_POST['question']). '"' ;
+                    }
+                    ?>
+                  >
 
                   <label for="reponse">La réponse à votre question : </label>
-                  <input type="textarea" id="reponse" name="reponse">
+                  <input type="textarea" id="reponse" name="reponse"
+                    <?php
+                    if (isset($_POST['reponse']))
+                    {
+                      echo 'value = "' .htmlspecialchars($_POST['reponse']). '"' ;
+                    }
+                    ?>
+                  >
 
                   <input class="button-envoyer" type="submit" name="dataPosted"value="Envoyer">
                   

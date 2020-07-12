@@ -36,7 +36,6 @@ catch (Exception $e)
     </head>
     
   <body>
-
     <main class="inscription-connexion">
       <fieldset>
           <legend>Créer un compte :</legend>
@@ -45,61 +44,55 @@ catch (Exception $e)
           <form method="post" action="inscription">
             <p>
                   <label for="pseudo">Identifiant : </label>
-                  <input type="text" id="pseudo" name="username" size="20" required>
+                  <input type="text" id="pseudo" name="username" size="20">
 
                   <label for="mp">Mot de passe : </label>
-                  <input type="password" id="mp" name="password" size="20" required>
+                  <input type="password" id="mp" name="password" size="20">
 
                   <label for="nom">Nom : </label>
-                  <input type="text" id="nom" name="nom" size="30"required>
+                  <input type="text" id="nom" name="nom" size="30" value=""
+                  >
 
                   <label for="prenom">Prénom : </label>
-                  <input type="text" id="prenom" name="prenom" size="30" required>
+                  <input type="text" id="prenom" name="prenom" size="30">
               
                   <label for="question">Votre question secrète : </label>
-                  <input type="textarea" id="question" name="question" required>
+                  <input type="textarea" id="question" name="question">
 
                   <label for="reponse">La réponse à votre question : </label>
-                  <input type="textarea" id="reponse" name="reponse" required>
+                  <input type="textarea" id="reponse" name="reponse">
 
                   <input class="button-envoyer" type="submit" value="Envoyer">
                   
                   <span>Les champs indiqués par une * sont obligatoires</span>
             </p>
           </form>
-
           <a href="connexion.php">se connecter</a>
-      </fieldset>
-      
-    </main>
-  </body>
-</html>
-
 
 <!-- VERIFICATION & AJOUT NOUVEL UTILISATEUR -->
 
 <?php
 
-if (isset($_POST))
+if (isset($_POST['nom']) && isset($_POST['prenom']) 
+&& isset($_POST['username']) && isset($_POST['password']) 
+&& isset($_POST['question']) && isset($_POST['reponse'])) 
 {
-  // Verification que tous les champs sont remplis
-  if (!empty($_POST['nom']) && !empty($_POST['prenom']) 
-  && !empty($_POST['username']) && !empty($_POST['password']) 
-  && !empty($_POST['question']) && !empty($_POST['reponse'])) 
+
+  $req = $bdd->prepare('SELECT username FROM account WHERE username = ?');
+  $req->execute(array($_POST['username']));
+  $dataAccount = $req->fetch();
+  if ($dataAccount)
   {
-
-    // Verification que l'identifiant n'existe pas
-    $req = $bdd->prepare('SELECT username FROM account WHERE username = ?');
-    $req->execute(array($_POST['username']));
-    $dataAccountUsername = $req->fetch();
-    if ( $dataAccountUsername)
-    {
-      // Identifiant existe déjà
-      $req->closeCursor();
-      echo 'Cet identifiant existe déjà';
-    }
-
-    else
+    // Identifiant existe déjà
+    $req->closeCursor();
+    echo '<span class="message"> Cet identifiant existe déjà </span>';
+  }
+  else
+  {
+    // Verification que tous les champs sont remplis
+    if (!empty($_POST['nom']) && !empty($_POST['prenom']) 
+    && !empty($_POST['username']) && !empty($_POST['password']) 
+    && !empty($_POST['question']) && !empty($_POST['reponse'])) 
     {
       $req->closeCursor();
       // Hashage du mot de passe
@@ -115,16 +108,18 @@ if (isset($_POST))
         'reponse' => htmlspecialchars($_POST['reponse'])
       ));
       $req2->closeCursor();
-
       header('Location: index.php');
     }
-  
-  }
-
-  else
-  {
-  echo 'il vous manque un champ à remplir';
+    else
+    {
+      echo '<span class="message"> il vous manque un champ à remplir </span>';
+    }
   }
 }
 
+
 ?>
+      <fieldset>
+    </main>
+  </body>
+</html>

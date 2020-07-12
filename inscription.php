@@ -91,8 +91,8 @@ if (isset($_POST))
     // Verification que l'identifiant n'existe pas
     $req = $bdd->prepare('SELECT username FROM account WHERE username = ?');
     $req->execute(array($_POST['username']));
-    $dataAccount = $req->fetch();
-    if ( $dataAccount )
+    $dataAccountUsername = $req->fetch();
+    if ( $dataAccountUsername)
     {
       // Identifiant existe déjà
       $req->closeCursor();
@@ -102,13 +102,15 @@ if (isset($_POST))
     else
     {
       $req->closeCursor();
+      // Hashage du mot de passe
+      $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
       // Insère le nouvel Utilisateur dans la BDD
       $req2 = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
       $req2->execute(array(
         'nom' => htmlspecialchars($_POST['nom']),
         'prenom' => htmlspecialchars($_POST['prenom']),
         'username' => htmlspecialchars($_POST['username']),
-        'password' => htmlspecialchars($_POST['password']),
+        'password' => $passwordHashed,
         'question' => htmlspecialchars($_POST['question']),
         'reponse' => htmlspecialchars($_POST['reponse'])
       ));

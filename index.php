@@ -26,7 +26,10 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $req->execute(array($_POST['username']));
         $dataAccount = $req->fetch();
 
-        if ($_POST['username'] == $dataAccount['username'] && $_POST['password'] == $dataAccount['password'])
+        // verification mot de passe (Hashé)
+        $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+
+        if ($_POST['username'] == $dataAccount['username'] && $isPasswordCorrect)
         {  
             $_SESSION['nom'] = $dataAccount['nom'];
             $_SESSION['prenom'] = $dataAccount['prenom'];

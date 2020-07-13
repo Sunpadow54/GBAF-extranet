@@ -53,7 +53,7 @@ if (isset($_POST['dataPosted']))
     {
 
       // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
-      if (preg_match( "#[a-z][A-Z][0-9][._-]?#", $_POST['password']))
+      if (preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password']))
       {
         // Hashage du mot de passe
         $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -80,7 +80,7 @@ if (isset($_POST['dataPosted']))
 
       else
       {
-        $erreur ="le mot de passe doit comprendre au moins une lettre, une majuscule et un chiffre";
+        $erreur ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
       }
     }
 

@@ -55,6 +55,7 @@ if (isset($_POST['dataPosted']))
       // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
       if (preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password']))
       {
+
         // Hashage du mot de passe
         $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -97,9 +98,7 @@ if (isset($_POST['dataPosted']))
 <!-------------- FORMULAIRE D'INSCRIPTION -->
 
 <!DOCTYPE html>
-
 <html>
-
   <head>
   
     <meta charset="utf-8" />
@@ -115,9 +114,7 @@ if (isset($_POST['dataPosted']))
   </head>
     
   <body>
-
     <main class="inscription-connexion">
-
       <fieldset>
 
           <legend>Créer un compte :</legend>
@@ -133,17 +130,18 @@ if (isset($_POST['dataPosted']))
 
           <!-- Formulaire avec 'value' préenregistrées -->  
           <form method="post" action="inscription">
-
             <p>
 
               <label for="pseudo">Identifiant : </label>
               <input type="text" id="pseudo" name="username" size="20" 
+
                 <?php
                 if (isset($_POST['username']))
                 {
                   echo 'value = "' .htmlspecialchars($_POST['username']). '"' ;
                 }
                 ?>
+
               >
 
 
@@ -153,45 +151,53 @@ if (isset($_POST['dataPosted']))
 
               <label for="nom">Nom : </label>
               <input type="text" id="nom" name="nom" size="30"
+
                 <?php
                 if (isset($_POST['nom']))
                 {
                   echo 'value = "' .htmlspecialchars($_POST['nom']). '"' ;
                 }
                 ?>
+
               >
 
 
               <label for="prenom">Prénom : </label>
               <input type="text" id="prenom" name="prenom" size="30"
+
                 <?php
                 if (isset($_POST['prenom']))
                 {
                   echo 'value = "' .htmlspecialchars($_POST['prenom']). '"' ;
                 }
                 ?>
+
               >
           
 
               <label for="question">Votre question secrète : </label>
               <input type="textarea" id="question" name="question"
+
                 <?php
                 if (isset($_POST['question']))
                 {
                   echo 'value = "' .htmlspecialchars($_POST['question']). '"' ;
                 }
                 ?>
+
               >
 
 
               <label for="reponse">La réponse à votre question : </label>
               <input type="textarea" id="reponse" name="reponse"
+
                 <?php
                 if (isset($_POST['reponse']))
                 {
                   echo 'value = "' .htmlspecialchars($_POST['reponse']). '"' ;
                 }
                 ?>
+
               >
 
 
@@ -200,15 +206,11 @@ if (isset($_POST['dataPosted']))
               <span>Les champs indiqués par une * sont obligatoires</span>
 
             </p>
-
           </form>
 
           <a href="index.php">se connecter</a>
 
       <fieldset>
-
     </main>
-
-  </body>
-  
+  </body>  
 </html>

@@ -77,8 +77,8 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
                 $req3->execute (array($_SESSION['id_user']));
                 $dataAccountNew= $req3->fetch();
 
-                $_SESSION['nom'] = $dataAccountNew['nom'];
-                $_SESSION['prenom'] = $dataAccountNew['prenom'];
+                $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
+                $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
                 $message = 'Vos changements ont bien été pris en compte';
 
@@ -146,6 +146,24 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
 <!-------- Formulaire avec 'value' préenregistrées -->  
         <form method="post" action="profil">
             <p>
+
+                <label for="pseudo">Identifiant : </label>
+                <input type="text" id="pseudo" name="username" size="20" 
+
+                    <?php
+                    // VALUE USERNAME si il n'y a pas eu de submit
+                    if (isset($dataAccount['username']) && !isset($_POST['dataSubmit']))
+                    {
+                        echo 'value = "' .htmlspecialchars($dataAccount['username']). '"' ;
+                    }
+                    // Sinon affiche le nouveau username
+                    elseif (isset($_POST['dataSubmit']))
+                    {
+                        echo 'value="' .htmlspecialchars($_POST['username']). '"' ;
+                    }
+                    ?>
+
+                >
 
                 <label for="nom">Nom : </label>
                 <input type="text" id="nom" name="nom" size="30"

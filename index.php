@@ -42,8 +42,8 @@ if (isset($_POST['username']) && isset($_POST['password']))
   {  
 
     // Connexion
-    $_SESSION['nom'] = $dataAccount['nom'];
-    $_SESSION['prenom'] = $dataAccount['prenom'];
+    $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
+    $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
     $_SESSION['id_user'] = $dataAccount['id_user'];
 
     header('Location: accueil.php');
@@ -80,12 +80,12 @@ if (isset($_POST['username']) && isset($_POST['password']))
         <img src="../images/GBAF.png" alt="Logo GBAF">
 
         <span class="message"> 
-        <?php 
-        if (isset($_SESSION['username']))
-        {
-          echo $welcome ;
-        }
-        ?>
+          <?php 
+          if (isset($_SESSION['username']))
+          {
+            echo $welcome ;
+          }
+          ?>
         </span>
 
         <form method="post"action="index.php">
@@ -120,7 +120,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
           </p>
         </form>
 
-        <a href=""> mot de passe oublié ?</a>
+        <a href="mp.php"> mot de passe oublié ?</a>
 
         <a href="inscription.php">créer un compte</a>
 

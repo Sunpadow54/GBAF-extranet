@@ -46,7 +46,7 @@
                         ?> 
                 </div>
                 <a href="deconnexion.php">Se déconnecter</a>
-                <a class="header-profil_overlay" href="#">Modifier mon profil</a>
+                <a class="header-profil_overlay" href="profil.php">Modifier mon profil</a>
             </div>
         </div>
     </header>

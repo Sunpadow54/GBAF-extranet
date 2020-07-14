@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user']))
 {
 
   include("header.php");

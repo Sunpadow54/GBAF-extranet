@@ -19,73 +19,64 @@ catch (Exception $e)
     die(' Erreur : ' . $e->getMessage());
 }
 
-?>
-
-<?php
 
 
+//Formulaire Default
+$formUsername =    '<label for="pseudo">Identifiant : </label>
+                    <input type="text" id="pseudo" name="username" size="20">
+                    ';
 
+// récupère session username
 if (isset($_POST['username']))
 {
-  // Verifie si le Username n'existe pas déjà
+  $_SESSION['username'] = $_POST['username'];
+}                   
+
+// Si Session username existe
+if (isset($_SESSION['username']))
+{
+
+  // Vérifie si le Username existe dans la Bdd
   $req = $bdd->prepare('SELECT * FROM account WHERE username = ?');
-  $req->execute(array($_POST['username']));
+  $req->execute(array($_SESSION['username']));
   $dataAccount = $req->fetch();
   $req->closeCursor();
-    
-    if  ($dataAccount)
-    {
-        $_SESSION['username'] = $_POST['username'];
-        $formQuestion =  '<label for="reponse">' .$dataAccount['question']. '? </label>
-                        <input type="textarea" id="reponse" name="reponse">
-                        ';
 
-/*         if  (isset($_POST['reponse']) && $_POST['reponse'] == $dataAccount['reponse'])
-        {
-            $label =  'bravo';
-            $input = 'yeahh';
-        }
-        elseif (isset($_POST['reponse']) && $_POST['reponse'] != $dataAccount['reponse'])
-        {
-            $erreur = ' pas bonne réponse';
-        } */
-    }
-    
-    else
-    {
-        $erreur = 'cet identifiant n\'existe pas';
+  // Si Username existe
+  if  ($dataAccount)
+  {
+      // on donne la question
+      $formQuestion =  '<label for="reponse">' .$dataAccount['question']. '? </label>
+                      <input type="textarea" id="reponse" name="reponse">
+                      ';
+      $erreur = "répondez à votre question secrète";
 
-        $formUsername =    '<label for="pseudo">Identifiant : </label>
-                            <input type="text" id="pseudo" name="username" size="20">
-                            ';
-    }
+      // Si bonne réponse
+      if  (isset($_POST['reponse']) && $_POST['reponse'] == $dataAccount['reponse'])
+      {
+        $erreur = 'bonne réponse';
+      }
+
+      //Si Mauvaise réponse
+      elseif  ($_POST['reponse'] != $dataAccount['reponse'])
+      {
+        $erreur = 'mauvaise réponse';
+      }
+
+      // Sinon propose de répondre
+      elseif (!isset($_POST['reponse']))
+      {
+        $erreur = "répondez à votre question secrète 2";
+      }
+
+  }
+
+  else
+  {
+      $erreur = 'cet identifiant n\'existe pas';
+  }
+
 }
-
-elseif (isset($_SESSION['username']))
-{
-    $req2 = $bdd->prepare('SELECT * FROM account WHERE username = ?');
-    $req2->execute(array($_SESSION['username']));
-    $dataAccount2 = $req2->fetch();
-    $req2->closeCursor();
-
-    if  (isset($_POST['reponse']) && $_POST['reponse'] == $dataAccount2['reponse'])
-    {
-        $test = 'bravo <br> yeaa!';
-    }
-    elseif (isset($_POST['reponse']) && $_POST['reponse'] != $dataAccount2['reponse'])
-    {
-        $erreur = ' pas bonne réponse';
-        
-    }
-}
-
-else
-{
-    $formUsername =    '<label for="pseudo">Identifiant : </label>
-                        <input type="text" id="pseudo" name="username" size="20">
-                        ';
-}
-
 
 ?>
 
@@ -125,23 +116,17 @@ else
           <p>
 
             <?php
-                if (isset($formQuestion))
-                {
-                    echo $formQuestion;
-                }
-                elseif (isset($test))
-                {
-                    echo $test;
-                }
-                elseif  (isset($formUsername))
+                if  (isset($formUsername))
                 {
                     echo $formUsername;
+                }
+                elseif (isset($formQuestion))
+                {
+                    echo $formQuestion;
                 }
             ?>
 
               <input class="button-envoyer" type="submit" name="dataPosted" value="Envoyer">
-
-
 
           </p>
         </form>

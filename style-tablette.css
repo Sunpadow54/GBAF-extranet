@@ -21,14 +21,15 @@ header{
 }
 /* ----------------------- SECTIONS */
 .main-accueil{
-    padding-right: 5em;
-    padding-left: 5em;
+    margin-right: 5em;
+    margin-left: 5em;
 }
 .main-partenaire{
-    padding-right: 5em;
-    padding-left: 5em;
+    margin-right: 5em;
+    margin-left: 5em;
 }
 main{
+    max-width: 100%;
     min-width: 100%;
 }
 

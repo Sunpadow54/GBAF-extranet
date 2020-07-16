@@ -29,16 +29,30 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
 
         <section class="commentaires">
             <div class="commentaires-formulaires">
+
                 <p> X commentaires </p>
-                <form class="commentaires-new" method="post" action="#">
-                    <p>
-                        <label for="new-comment">Nouveau commentaire</label>
-                        <div>
-                            <textarea name="new-comment" rows="" cols=""></textarea>
-                            <input type="submit" value="Envoyer" />
-                        </div>
-                    </p>
-                </form>
+
+                <div class="new_commentaire"> 
+
+                        <label class ="open_popup" for ="popup_button"> Nouveau commentaire</label>
+
+                        <input type ="checkbox" id ="popup_button">
+  
+                        <form class="new_commentaire_popup" method ="post" action="#">
+                            <p>
+
+                                <label class ="close_popup" for ="popup_button"> </label>
+
+                                <label for="new_commentaire_add">Ajoutez un nouveau commentaire sur <strong>ACTEUR?</strong> :</label>
+
+                                <textarea id="new_commentaire_add" name="new_commentaire_add" rows="6" cols="50"></textarea>
+
+                                <input type="submit" value="Envoyer" />
+                                                            
+                            </p>
+                            
+                        </form> 
+                </div>     
 
                 <form class="commentaires-likes" method="post" action="#">
                     <p>
@@ -71,7 +85,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
         </section>
 
         <aside class="retour-accueil">
-            <a href="index.php">retour à la page d'accueil</a>
+            <a href="accueil.php">retour à la page d'accueil</a>
         </aside>
 
     </main>

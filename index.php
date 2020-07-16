@@ -25,15 +25,16 @@ function UnsetPreviousSession()
     unset($_SESSION['username']);
 }
 
-
-// message si la personne viens de s'inscrire
-if (isset($_SESSION['username']) && !isset($_POST['connexionSubmit']))
+function deleteSession()
 {
-  $welcome = 'Vous pouvez vous connecter';
+  $_SESSION = array();
+  session_destroy();
 }
 
+
+
 /*--------------------------- Verification User */
-elseif (isset($_POST['username']) && isset($_POST['password']))
+if (isset($_POST['username']) && isset($_POST['password']))
 {
 
   $_SESSION['username'] = $_POST['username'];
@@ -101,17 +102,28 @@ elseif (isset($_POST['username']) && isset($_POST['password']))
         <img src="../images/GBAF.png" alt="Logo GBAF">
 
         <span class="message"> 
-          <?php 
-          if (isset($welcome))
-          {
-            echo $welcome ;
-          }
-
-          elseif (isset($erreur))
-          {
-            echo $erreur ;
-          }
+          
+          <?php
+            if (!isset($_POST['connexionSubmit']))
+            {
+              // message si la personne viens de changer de mp
+              if (isset($_SESSION['messagePWchanged']))
+              {
+                echo $_SESSION['messagePWchanged'];
+              }
+              // message si la personne viens de s'inscrire
+              if  (isset($_SESSION['messageWelcome']))
+              {
+                echo $_SESSION['messageWelcome'];
+              }
+            }
+            // message si erreur de connexion
+            if  (isset($erreur))
+            {
+              echo $erreur;
+            }
           ?>
+          
         </span>
 
         <form method="post"action="index.php">
@@ -130,17 +142,14 @@ elseif (isset($_POST['username']) && isset($_POST['password']))
                 {
                   echo 'value ="' .$_POST['username'].'"';
                 }
-                
+
                 ?>
               >
-
 
               <label for="mp">Mot de passe :</label>
               <input type="password" id="mp" name="password"required>
 
-
               <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick ="UnsetPreviousSession()">
-
 
               <span>Les champs indiqués par une * sont obligatoires</span>
 

@@ -74,6 +74,7 @@ if (isset($_POST['dataPosted']))
         $req2->closeCursor();
 
         $_SESSION['username'] = htmlspecialchars($_POST['username']);
+        $_SESSION['messageWelcome'] = 'Bienvenue ! Vous pouvez vous connecter';
 
         header('Location: index.php');
 

@@ -80,16 +80,19 @@ if (isset($_SESSION['username']))
     // 
     $questionUser = $dataAccount['question'];
     $formType = $formQuestion;
+    
     $erreur = 'répondez à votre question secrète : ';
 
     // Si la réponse correspond
     if  ($_POST['reponse'] == $dataAccount['reponse'])
     {
 
-      $erreur = 'Vous pouvez changer votre mot de passe : ';
+      unset($questionUser);
+
       // On affiche le formulaire de changement de mot de passe
       $formType = $fomPasswordChange;
-                
+      $erreur = 'Vous pouvez changer votre mot de passe : ';
+
     }
     // Mais si c'est une mauvaise réponse
     else
@@ -101,11 +104,13 @@ if (isset($_SESSION['username']))
   // ------------------------------ Si on envoie un nouveau mot de passe
   if  (isset($_POST['password']))
   {
+    
+    unset($questionUser);
 
     $formType = $fomPasswordChange;
 
     // Si le nouveau mot de passe est conforme
-    if(preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'] ))
+    if  (preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'] ))
     {
 
       // On Hash le mot de passe

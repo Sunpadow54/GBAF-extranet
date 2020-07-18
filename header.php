@@ -33,20 +33,33 @@
   <body>
     <header>
         <div class="header-contain">
+
             <a class="header-logo" href="accueil.php">
                     <img src="../images/GBAF.png" alt="Logo GBAF">
             </a>
 
-            <div class="header-profil">
-    <!--                 <input type="checkbox" id="profil-checkbox" > -->
-                <div class="header-profil_nom"> 
+
+            <ul class="header-profil">
+                
+                    <li class='profil_nom'>
                         <?php 
-                            echo '<p>' . htmlspecialchars($_SESSION['nom']) . '</p>'; 
-                            echo '<p>' . htmlspecialchars($_SESSION['prenom']) . '</p>'; 
-                        ?> 
-                </div>
-                <a href="deconnexion.php">Se déconnecter</a>
-                <a class="header-profil_overlay" href="profil.php">Modifier mon profil</a>
-            </div>
+                        if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user']))
+                        {
+                            echo '<p>' .htmlspecialchars($_SESSION['nom']). '</p>'; 
+                            echo '<p>' .htmlspecialchars($_SESSION['prenom']). '</p>';
+                        }
+                        ?>
+                    </li>
+
+                    <li>
+                        <a href="deconnexion.php">Se déconnecter</a>
+                    </li>
+
+                    <li>
+                        <a href="profil.php">Modifier mon profil</a>
+                    </li>
+                
+            </ul>
+
         </div>
     </header>

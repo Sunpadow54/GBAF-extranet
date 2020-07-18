@@ -10,7 +10,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
       <main class="main-accueil">
         <section class="GBAF">
           <h1>GBAF (Groupement Banque Assurance Français)</h1>
-          <div class="texte">
+          <div class="text">
             <p lang="fr"><strong>Le Groupement Banque Assurance Français (GBAF)</strong>​ est une fédération  représentant les 6 grands groupes français :
             <ul>
               <li>BNP Paribas</li>
@@ -37,7 +37,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
         <section class="list-acteurs">
           <h2>Acteurs et partenaires du système bancaire français </h2>
-          <p class="texte-acteurs"> texte acteurs et partenaires</p>        
+          <p class="text"> texte acteurs et partenaires</p>        
           <article class="acteurs">
             <nav>
               <ul>

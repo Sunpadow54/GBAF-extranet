@@ -8,7 +8,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
 
 ?>
 
-    <main class="main-partenaire">
+    <main>
 
         <section class="partenaire">
         <!-- Affichage des infos de l'acteur -->
@@ -21,7 +21,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
                 echo $dataActeur['logo'];
                 echo '<h2>' . $dataActeur['acteur'] . '</h2>';
                 echo '<a href="' . $dataActeur['site'] . '">voir le site</a>';
-                echo '<p>' .$dataActeur['description'] . '</p>';
+                echo '<div class="text"><p>' .$dataActeur['description'] . '</p></div>';
       
       ?>
 

@@ -1,3 +1,7 @@
+:root {
+    --gutter: 80px;
+}
+
 /* annule les :hover*/
 .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
@@ -8,50 +12,53 @@
 
 /* HEADER -- PROFIL*/
 
-header{
-    min-width: 300px;
-    margin-right: 5em;
-    margin-left: 5em;
+.header-contain{
+/* 
+     margin-right: 5em;
+    margin-left: 5em; */
 }
 
 /* HEADER -- PROFIL*/
 
-.header-profil_overlay{
+.header-profil > li:last-child{
     opacity: 1;
 }
 /* ----------------------- SECTIONS */
-.main-accueil{
+/* .main-accueil{
+    padding:0;
     margin-right: 5em;
     margin-left: 5em;
 }
 .main-partenaire{
     margin-right: 5em;
     margin-left: 5em;
-}
+} */
 main{
-    max-width: 100%;
-    min-width: 100%;
+    min-width: 500px;
 }
 
-section{
+/* section{
     padding-top:30px;
-}
+} */
 
 /* ------------------------------ Page Accueil */
 
 /* GBAF présentation */
-
-.texte{
+.text{
+    margin-right:var(--gutter_text);
+    margin-left:var(--gutter_text);
+}
+/* .texte{
     max-width: 85%;
     margin: auto;
-}
+} */
 
  /* Liste acteurs et partenaires */
 
-.texte-acteurs{
+/* .texte-acteurs{
     max-width: 85%;
     margin: auto;
- }
+ } */
 
 /* ------------------------------ Pages Connexion & Inscription */
 

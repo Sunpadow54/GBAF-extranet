@@ -1,4 +1,12 @@
-body{ font-size: 25px; min-width: 100%;}
+:root {
+    --gutter: 50px;
+    --gutter_text : 50px;
+    --header_height:calc(var(--header_logo_size) + var(--header_profil_height));
+    --header_logo_size:100px;
+    --header_profil_height:2em;
+}
+
+body{ font-size: 30px;}
 img, blockquote, textarea, input, li{
     max-width: 100%;
     margin:0;
@@ -9,116 +17,108 @@ img, blockquote, textarea, input, li{
  .header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
 }
-h1{font-size:2.2em;}
+h1{font-size:2em;}
+
+
 /* ----------------------- HEADER */
 
 header{
     position: static;
-    padding: 0;
-    margin:0;
 }
 .header-contain{
-    display: flex;
     flex-direction: column;
-    height: auto;
-    max-width: 100%;
-    min-width: 100%;
+    align-items: center;
+
 }
-header:after{
+.header-contain:after{
     content: "";
     display: block;
-    margin:0 auto;
-    width: 85%;
+    width: 88%;
     height: 0.20em;
     margin-top:0.5em;
-    background-color:rgba(0, 0, 0, 0.1) 
-}
-.header-logo{
-    width: 4em;
-    margin: 0;
-    align-self: center;
+    background-color:rgba(0, 0, 0, 0.1);
 }
 
 /* HEADER -- PROFIL*/
 
 .header-profil{
     justify-content: center;
-    width: 100%;
     position: initial;
+    height: var(--header_profil_height);
 }
-.header-profil_nom{
-    align-self: center;
-    font-size: 1em;
+/* bouton image deconnexion */
+.header-profil > li:nth-child(2){
+    position: absolute;
+    display: block;
+    top:0;
+    right:0;
+    margin:1em;
+    overflow: hidden;
 }
-.header-profil_nom + a{
+.header-profil > li:nth-child(2) > a{
+    display: block;
+    width: 3em;
+    height: 3em;
+    color:transparent;
+}
+ .header-profil > li:nth-child(2) > a::before{
+    content: "";
     position: absolute;
     top:0;
     right:0;
-    visibility: hidden;
-}
-.header-profil_nom + a:after{
-    content: "";
-    margin:1em;
-    display:inline-block;
+    display: block;
     background:url(../images/icone-deconnexion.png) center / cover no-repeat;
     width: 3em;
     height: 3em;
-    visibility: visible;
 }
-.header-profil_overlay{
-    bottom:auto;
+/*  bouton changer modifier profil*/
+.header-profil > li:last-child{
+    position: relative;
+    top:-1.7em;
     opacity: 0;
+    height: var(--header_profil_height);
 }
 
-/* ----------------------- SECTIONS */
+/* ----------------------- MAIN & SECTION & ARTICLE */
+main{
+    margin-top:0;
 
+}
 section{
     padding-top:30px;
+}
+.text {
+    margin-left: var(--gutter_text);
+    margin-right: var(--gutter_text);
 }
 
 /* ------------------------------ Page Accueil */
 
-.main-accueil{
-        margin:0; 
-        padding: 0 1.5em 0 1.5em;
-}
-
 /* GBAF présentation */
-
-.texte{
-    max-width: 85%;
-    margin: auto;
-}
 
  /* Liste acteurs et partenaires */
 
- .texte-acteurs{
-    max-width: 85%;
-    margin: auto;
- }
- .acteurs {
-    margin-top:3em;
-    padding:1em;
-    background-color: white;
+.acteur-seul{
+    height: auto;
 }
- .acteurs ul li{
+.acteur-seul{
      display: flex;
      flex-direction: column;
      justify-content: space-between;
      align-items: stretch;
      padding: 1em;
  }
-.acteurs ul li img{
-    width: 100%;
-    align-self: center;
+ .acteur-seul > img, .acteur-seul > h3, .acteur-seul > div {
+     margin-bottom: 1em;
+ }
+.acteur-seul > h3{
+    align-self: flex-start;
+}
+.acteur-seul :nth-child(4){
     margin:0;
-}
-.acteurs ul li :nth-child(4){
-    margin:0.5em;
     align-self: flex-end;
-    border: 0.08em solid black;
 }
-.acteurs ul li :nth-child(4):hover{
+.acteur-seul :nth-child(4):hover{
     display: none;
 }
 
@@ -126,10 +126,6 @@ section{
 
 /* SECTION PARTENAIRE */
 
-.main-partenaire{
-    margin:0; 
-    padding: 0 1.5em 0 1.5em;
-}
 
 /* SECTION Commentaires */
 
@@ -150,46 +146,19 @@ section{
 
 /*  Nouveau Commentaire*/
 .new_commentaire_popup{
-    width: 100%;
     height: 100%;
-    z-index: 3;
     top:0;
+    bottom:0;
 }
 .new_commentaire_popup > p{
-    font-size: 1.1em;
-    height: 30%;
-    justify-content: space-around;
-    margin:1em;
+    height: 35%;
+    width: 80%;
 }
-.new_commentaire_popup > p :nth-child(2){
-    margin:0;
-}
-.new_commentaire_popup > p > textarea{
-    align-self: center;
-    width: 96%; 
-    margin:0;
-    font-size: 1.1em;
-}
-.new_commentaire_popup > p > input{
-    align-self: flex-end;
-    margin:0;
-    font-size: 1.1em;
-    padding:0.2em 1em 0.2em 1em;
-}
-
-.new_commentaire{
-    grid-column: 1 /2;
-    grid-row: 2/3;
-    font-size: 1.2em;
-}
-
-
-
+/* likes */
 .commentaires-likes{
     grid-column: 2/3;
     grid-row: 2/3;
     color:transparent;
-/*     filter:drop-shadow(0px 0px 5px rgba(0,0,0,0.1)); */
 }
 .commentaires-likes > p{
     font-size: 1.5em;

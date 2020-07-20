@@ -6,7 +6,7 @@
     --header_profil_height:2em;
 }
 
-body{ font-size: 30px;}
+body{ font-size: 30px; width: 100%;}
 img, blockquote, textarea, input, li{
     max-width: 100%;
     margin:0;
@@ -169,36 +169,21 @@ section{
 
 /* ------------------------------ Pages Connexion & Inscription */
 
-.inscription-connexion{
-    height: 100%;
-    width: 100%;
-    background-color: #ebebeb;
-}
-.inscription-connexion > fieldset{
-    width: 80%;
+ .inscription-connexion{
     margin:0;
-    padding:1em 2em 1em 2em;
-    border:2px solid rgba(0, 0, 0, 0.3);
-}
-.inscription-connexion > fieldset > legend{
-    padding:0.4em; 
-    margin:0; 
-    font-size: 1.5em;
-}
-.inscription-connexion > fieldset > form > p{
-    font-size: 1.5em;
-}
-.inscription-connexion form > p :nth-child(even){
-    font-size: 1.5em;
-}
-.inscription-connexion form > p > .button-envoyer{
-    font-size: 1em;
-}
-.inscription-connexion > fieldset > a{
-    text-decoration: underline;
-    font-size: 1.3em;
-    margin-bottom: 1em;
-}
-#question, #reponse{
     width: 100%;
+    background-color:transparent;
 }
+.form_container{
+    min-width: 100%;
+    max-width: 100%;
+    background-color:transparent;
+}
+.form_container fieldset{
+    border:none;
+    font-size: 1.4em;
+    padding:0.7em;
+}
+ .form_container fieldset > a{
+    text-decoration: underline;
+ }

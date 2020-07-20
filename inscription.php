@@ -93,125 +93,110 @@ if (isset($_POST['dataPosted']))
   }
 }
 
+
+include("header.php");
 ?>
 
 
 <!-------------- FORMULAIRE D'INSCRIPTION -->
 
-<!DOCTYPE html>
-<html>
-  <head>
-  
-    <meta charset="utf-8" />
-
-    <title> GBAF extranet</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" media="all and (min-device-width : 320px) and (max-device-width : 480px)" href="style-mobile.css">
-    <link rel="stylesheet" media="all and (max-device-width: 1280px ) and (min-device-width: 481px)" href="style-tablette.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">  
-    
-  </head>
-    
-  <body>
     <main class="inscription-connexion">
-      <fieldset>
+      <section class="form_container">
+        <fieldset>
 
-          <legend>Créer un compte :</legend>
-          
-          <img src="../images/GBAF.png" alt="Logo GBAF">
-                    
-          <?php // message d'erreur
-          if (isset($erreur))
-          {
-            echo '<span class="message-erreur">' . $erreur .' </span>'; 
-          }
-          ?>
+            <legend>Créer un compte :</legend>
+                      
+            <?php // message d'erreur
+            if (isset($erreur))
+            {
+              echo '<span class="message-erreur">' . $erreur .' </span>'; 
+            }
+            ?>
 
-          <!-- Formulaire avec 'value' préenregistrées -->  
-          <form method="post" action="inscription">
-            <p>
+            <!-- Formulaire avec 'value' préenregistrées -->  
+            <form method="post" action="inscription">
+              <p>
 
-              <label for="pseudo">Identifiant : </label>
-              <input type="text" id="pseudo" name="username" size="20" 
+                <label for="pseudo">Identifiant : </label>
+                <input type="text" id="pseudo" name="username" size="20" 
 
-                <?php
-                if (isset($_POST['username']))
-                {
-                  echo 'value = "' .htmlspecialchars($_POST['username']). '"' ;
-                }
-                ?>
+                  <?php
+                  if (isset($_POST['username']))
+                  {
+                    echo 'value = "' .htmlspecialchars($_POST['username']). '"' ;
+                  }
+                  ?>
 
-              >
-
-
-              <label for="mp">Mot de passe : </label>
-              <input type="password" id="mp" name="password" size="20">
+                >
 
 
-              <label for="nom">Nom : </label>
-              <input type="text" id="nom" name="nom" size="30"
-
-                <?php
-                if (isset($_POST['nom']))
-                {
-                  echo 'value = "' .htmlspecialchars($_POST['nom']). '"' ;
-                }
-                ?>
-
-              >
+                <label for="mp">Mot de passe : </label>
+                <input type="password" id="mp" name="password" size="20">
 
 
-              <label for="prenom">Prénom : </label>
-              <input type="text" id="prenom" name="prenom" size="30"
+                <label for="nom">Nom : </label>
+                <input type="text" id="nom" name="nom" size="30"
 
-                <?php
-                if (isset($_POST['prenom']))
-                {
-                  echo 'value = "' .htmlspecialchars($_POST['prenom']). '"' ;
-                }
-                ?>
+                  <?php
+                  if (isset($_POST['nom']))
+                  {
+                    echo 'value = "' .htmlspecialchars($_POST['nom']). '"' ;
+                  }
+                  ?>
 
-              >
-          
-
-              <label for="question">Votre question secrète : </label>
-              <input type="textarea" id="question" name="question"
-
-                <?php
-                if (isset($_POST['question']))
-                {
-                  echo 'value = "' .htmlspecialchars($_POST['question']). '"' ;
-                }
-                ?>
-
-              >
+                >
 
 
-              <label for="reponse">La réponse à votre question : </label>
-              <input type="textarea" id="reponse" name="reponse"
+                <label for="prenom">Prénom : </label>
+                <input type="text" id="prenom" name="prenom" size="30"
 
-                <?php
-                if (isset($_POST['reponse']))
-                {
-                  echo 'value = "' .htmlspecialchars($_POST['reponse']). '"' ;
-                }
-                ?>
+                  <?php
+                  if (isset($_POST['prenom']))
+                  {
+                    echo 'value = "' .htmlspecialchars($_POST['prenom']). '"' ;
+                  }
+                  ?>
 
-              >
+                >
+            
+
+                <label for="question">Votre question secrète : </label>
+                <input type="textarea" id="question" name="question"
+
+                  <?php
+                  if (isset($_POST['question']))
+                  {
+                    echo 'value = "' .htmlspecialchars($_POST['question']). '"' ;
+                  }
+                  ?>
+
+                >
 
 
-              <input class="button-envoyer" type="submit" name="dataPosted"value="Envoyer">
-              
-              <span>Les champs indiqués par une * sont obligatoires</span>
+                <label for="reponse">La réponse à votre question : </label>
+                <input type="textarea" id="reponse" name="reponse"
 
-            </p>
-          </form>
+                  <?php
+                  if (isset($_POST['reponse']))
+                  {
+                    echo 'value = "' .htmlspecialchars($_POST['reponse']). '"' ;
+                  }
+                  ?>
 
-          <a href="index.php">se connecter</a>
+                >
 
-      <fieldset>
+
+                <input class="button-envoyer" type="submit" name="dataPosted"value="Envoyer">
+                
+                <span>Les champs indiqués par une * sont obligatoires</span>
+
+              </p>
+            </form>
+
+            <a href="index.php">se connecter</a>
+
+          </fieldset>
+      </section>
     </main>
-  </body>  
-</html>
+    
+<?php include("footer.php"); ?>

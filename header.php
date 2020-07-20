@@ -38,16 +38,17 @@
                     <img src="../images/GBAF.png" alt="Logo GBAF">
             </a>
 
+            <?php 
 
-            <ul class="header-profil">
-                
-                    <li class='profil_nom'>
-                        <?php 
-                        if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user']))
-                        {
+            if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user']))
+
+            { echo ' 
+                <ul class="header-profil">
+                    <li class="profil_nom"> ' ; 
+                 
                             echo '<p>' .htmlspecialchars($_SESSION['nom']). '</p>'; 
                             echo '<p>' .htmlspecialchars($_SESSION['prenom']). '</p>';
-                        }
+                        
                         ?>
                     </li>
 
@@ -60,6 +61,10 @@
                     </li>
                 
             </ul>
+            
+            <?php 
+            } 
+            ?>
 
         </div>
     </header>

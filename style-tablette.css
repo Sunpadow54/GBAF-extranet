@@ -12,35 +12,13 @@
 
 /* HEADER -- PROFIL*/
 
-.header-contain{
-/* 
-     margin-right: 5em;
-    margin-left: 5em; */
-}
-
-/* HEADER -- PROFIL*/
-
 .header-profil > li:last-child{
     opacity: 1;
 }
 /* ----------------------- SECTIONS */
-/* .main-accueil{
-    padding:0;
-    margin-right: 5em;
-    margin-left: 5em;
-}
-.main-partenaire{
-    margin-right: 5em;
-    margin-left: 5em;
-} */
 main{
     min-width: 500px;
 }
-
-/* section{
-    padding-top:30px;
-} */
-
 /* ------------------------------ Page Accueil */
 
 /* GBAF présentation */
@@ -48,33 +26,20 @@ main{
     margin-right:var(--gutter_text);
     margin-left:var(--gutter_text);
 }
-/* .texte{
-    max-width: 85%;
-    margin: auto;
-} */
-
- /* Liste acteurs et partenaires */
-
-/* .texte-acteurs{
-    max-width: 85%;
-    margin: auto;
- } */
 
 /* ------------------------------ Pages Connexion & Inscription */
-
+.form_container > fieldset > a{
+    text-decoration: underline;
+}
+.form_container fieldset{
+    border:none;
+    font-size: 0.9em;
+}
+.form_container{
+    max-width: 500px;
+}
 @media all and (orientation : portrait){
-    .inscription-connexion > fieldset > form > p{
-        font-size: 1.3em;
-    }
-    .inscription-connexion form > p :nth-child(even){
-        font-size: 1.3em;
-    }
-    .inscription-connexion form > p > :last-child{
-        font-size: 1em;
-    }
-    .inscription-connexion > fieldset > a{
-        text-decoration: underline;
-        font-size: 1.1em;
-        margin-bottom: 1em;
+    .form_container fieldset{
+        font-size: 1.2em;
     }
 }

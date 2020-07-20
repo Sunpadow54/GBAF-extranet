@@ -65,14 +65,14 @@ if (isset($_POST['username']) && isset($_POST['password']))
 
     else
     {
-      $erreur = "Mauvaise mot de passe";
+      $erreur = "Ce n'est pas le bon mot de passe";
     }
 
   }
 
   else
   {
-      $erreur = " Mauvais Identifiant";
+      $erreur = "Cet identifiant n'existe pas";
   }
 
 }
@@ -85,70 +85,72 @@ include("header.php");
 <!-- ---------------------------Formulaire Connexion -->      
 
     <main class="inscription-connexion">
-      <fieldset>
+      <section class="form_container">
+        <fieldset>
 
-        <legend>Se connecter :</legend>
+          <legend> Se connecter : </legend>
 
-        <span class="message"> 
-          
-          <?php
-            if (!isset($_POST['connexionSubmit']))
-            {
-              // message si la personne viens de changer de mp
-              if (isset($_SESSION['messagePWchanged']))
+          <span class="message"> 
+            
+            <?php
+              if (!isset($_POST['connexionSubmit']))
               {
-                echo $_SESSION['messagePWchanged'];
+                // message si la personne viens de changer de mp
+                if (isset($_SESSION['messagePWchanged']))
+                {
+                  echo $_SESSION['messagePWchanged'];
+                }
+                // message si la personne viens de s'inscrire
+                if  (isset($_SESSION['messageWelcome']))
+                {
+                  echo $_SESSION['messageWelcome'];
+                }
               }
-              // message si la personne viens de s'inscrire
-              if  (isset($_SESSION['messageWelcome']))
+              // message si erreur de connexion
+              if  (isset($erreur))
               {
-                echo $_SESSION['messageWelcome'];
+                echo $erreur;
               }
-            }
-            // message si erreur de connexion
-            if  (isset($erreur))
-            {
-              echo $erreur;
-            }
-          ?>
-          
-        </span>
+            ?>
+            
+          </span>
 
-        <form method="post"action="index.php">
-          <p>
+          <form method="post"action="index.php">
+            <p>
 
-              <label for="pseudo">Identifiant :</label>
-              <input type="text" id="pseudo" name="username" required 
-                <?php
+                <label for="pseudo">Identifiant : </label>
+                <input type="text" id="pseudo" name="username" required 
+                  <?php
 
-                if (isset($_SESSION['username']) && !isset($connexionSubmit))
-                {
-                  echo 'value ="' .$_SESSION['username'].'"';
-                }
+                  if (isset($_SESSION['username']) && !isset($connexionSubmit))
+                  {
+                    echo 'value ="' .$_SESSION['username'].'"';
+                  }
 
-                elseif (isset($connexionSubmit))
-                {
-                  echo 'value ="' .$_POST['username'].'"';
-                }
+                  elseif (isset($connexionSubmit))
+                  {
+                    echo 'value ="' .$_POST['username'].'"';
+                  }
 
-                ?>
-              >
+                  ?>
+                >
 
-              <label for="mp">Mot de passe :</label>
-              <input type="password" id="mp" name="password"required>
+                <label for="mp">Mot de passe : </label>
+                <input type="password" id="mp" name="password"required>
 
-              <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick ="UnsetPreviousSession()">
+                <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick ="UnsetPreviousSession()">
 
-              <span>Les champs indiqués par une * sont obligatoires</span>
+                <span>Les champs indiqués par une <em>*</em> sont obligatoires</span>
 
-          </p>
-        </form>
+            </p>
+          </form>
 
-        <a href="mp.php"> mot de passe oublié ?</a>
+          <a href="mp.php"> mot de passe oublié ?</a>
 
-        <a href="inscription.php">créer un compte</a>
+          <a href="inscription.php">créer un compte</a>
 
-      </fieldset>
+        </fieldset>
+      </section>
     </main>
-  </body>
-</html>
+    
+<?php include("footer.php"); ?>

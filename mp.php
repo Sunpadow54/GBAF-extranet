@@ -128,7 +128,7 @@ if (isset($_SESSION['username']))
 
       $req2->closeCursor();
 
-      $_SESSION['messagePWchanged'] = 'Votre mot de passe à bien été changé . Vous pouvez vous connecter';
+      $_SESSION['messagePWchanged'] = 'Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter';
 
       header('Location: index.php');
 
@@ -144,62 +144,51 @@ if (isset($_SESSION['username']))
 
 }
 
-
+include("header.php");
 
 ?>
 
 
 <!-- ---------------------------Formulaire Connexion -->      
-<!DOCTYPE html>
-<html>
-  <head>
-      <meta charset="utf-8" />
-      <title> GBAF extranet - oubli mot de passe</title>
-
-      <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" media="all and (min-device-width : 320px) and (max-device-width : 480px)" href="style-mobile.css">
-      <link rel="stylesheet" media="all and (max-device-width: 1280px ) and (min-device-width: 481px)" href="style-tablette.css">
-
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">  
-  </head>
-
-  <body>
     <main class="inscription-connexion">
-      <fieldset>
+      <section class="form_container">
+        <fieldset>
 
-        <legend>Mot de passe oublié ?</legend>
+          <legend>Mot de passe oublié ?</legend>
 
-        <img src="../images/GBAF.png" alt="Logo GBAF">
-
-          <?php 
-          //message erreur
-          if (isset($erreur))
-          {
-            echo '<span class="message-erreur">' . $erreur .' </span>'; 
-          }
-          ?>
-
-
-        <form method="post"action="mp.php">
-          <p>
-
-            <?php
-              if  (isset($questionUser))
-              {
-                echo $questionUser;
-              }
-              // Affiche le formulaire adéquat
-              echo $formType;
+            <?php 
+            //message erreur
+            if (isset($erreur))
+            {
+              echo '<span class="message-erreur">' . $erreur .' </span>'; 
+            }
             ?>
 
-              <input class="button-envoyer" type="submit" name="dataPosted" value="Envoyer">
 
-          </p>
-        </form>
+          <form method="post"action="mp.php">
+            <p>
 
-        <a href="index.php">Connexion</a>
+              <?php
+                if  (isset($questionUser))
+                {
+                  echo $questionUser;
+                }
+                // Affiche le formulaire adéquat
+                echo $formType;
+              ?>
 
-      </fieldset>
+                <input class="button-envoyer" type="submit" name="dataPosted" value="Envoyer">
+
+            </p>
+          </form>
+
+          <a href="index.php">Connexion</a>
+
+        </fieldset>
+      </section>
     </main>
-  </body>
-</html>
+<?php
+
+include("footer.php");
+
+?>

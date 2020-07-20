@@ -95,168 +95,154 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
         }
     }
 
+
+include("header.php"); 
+
 ?>
  
 <!-------------- HTML FORMULAIRE Modification Profil -->
 
-<!DOCTYPE html>
-<html>
-  <head>
-  
-    <meta charset="utf-8" />
-
-    <title> GBAF extranet- Profil</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" media="all and (min-device-width : 320px) and (max-device-width : 480px)" href="style-mobile.css">
-    <link rel="stylesheet" media="all and (max-device-width: 1280px ) and (min-device-width: 481px)" href="style-tablette.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">  
-    
-  </head>
-
-  <body>
     <main class="inscription-connexion">
-      <fieldset>
+        <section class="form_container">
+            <fieldset>
 
-        <legend>Modifier son Profil</legend>
-        
-        <img src="../images/GBAF.png" alt="Logo GBAF">
+                <legend>Modifier son Profil</legend>
+                        
+                <?php
+                    // message d'erreur
+                    if (isset($erreur))
+                    {
+                        echo '<span class="message-erreur">' . $erreur .' </span>'; 
+                    }
+                    elseif (isset($message))
+                    {
+                        echo '<span class="message-erreur">' . $message .' </span>'; 
+                    }
+                ?>
+
+                <?php
+                    // affichage username qui ne peut pas être changé
+                    if (isset($dataAccount['username']))
+                    {
+                        echo '<h2>' .htmlspecialchars($dataAccount['username']). '</h2>' ;
+                    }
+                ?>
                 
-        <?php
-            // message d'erreur
-            if (isset($erreur))
-            {
-                echo '<span class="message-erreur">' . $erreur .' </span>'; 
-            }
-            elseif (isset($message))
-            {
-                echo '<span class="message-erreur">' . $message .' </span>'; 
-            }
-        ?>
+                <!-------- Formulaire avec 'value' préenregistrées -->  
+                <form method="post" action="profil">
+                    <p>
 
-        <?php
-            // affichage username qui ne peut pas être changé
-            if (isset($dataAccount['username']))
-            {
-                 echo '<h2>' .htmlspecialchars($dataAccount['username']). '</h2>' ;
-            }
-        ?>
-        
-<!-------- Formulaire avec 'value' préenregistrées -->  
-        <form method="post" action="profil">
-            <p>
+                        <label for="pseudo">Identifiant : </label>
+                        <input type="text" id="pseudo" name="username" size="20" 
 
-                <label for="pseudo">Identifiant : </label>
-                <input type="text" id="pseudo" name="username" size="20" 
+                            <?php
+                            // VALUE USERNAME si il n'y a pas eu de submit
+                            if (isset($dataAccount['username']) && !isset($_POST['dataSubmit']))
+                            {
+                                echo 'value = "' .htmlspecialchars($dataAccount['username']). '"' ;
+                            }
+                            // Sinon affiche le nouveau username
+                            elseif (isset($_POST['dataSubmit']))
+                            {
+                                echo 'value="' .htmlspecialchars($_POST['username']). '"' ;
+                            }
+                            ?>
 
-                    <?php
-                    // VALUE USERNAME si il n'y a pas eu de submit
-                    if (isset($dataAccount['username']) && !isset($_POST['dataSubmit']))
-                    {
-                        echo 'value = "' .htmlspecialchars($dataAccount['username']). '"' ;
-                    }
-                    // Sinon affiche le nouveau username
-                    elseif (isset($_POST['dataSubmit']))
-                    {
-                        echo 'value="' .htmlspecialchars($_POST['username']). '"' ;
-                    }
-                    ?>
+                        >
 
-                >
+                        <label for="nom">Nom : </label>
+                        <input type="text" id="nom" name="nom" size="30"
 
-                <label for="nom">Nom : </label>
-                <input type="text" id="nom" name="nom" size="30"
+                            <?php
+                            // VALUE NOM si il n'y a pas eu de submit
+                            if (isset($dataAccount['nom']) && !isset($_POST['dataSubmit']))
+                            {
+                                echo 'value = "' .htmlspecialchars($dataAccount['nom']). '"' ;
+                            }
+                            // Sinon affiche le nouveau nom
+                            elseif (isset($_POST['dataSubmit']))
+                            {
+                                echo 'value="' .htmlspecialchars($_POST['nom']). '"' ;
+                            }
+                            ?>
 
-                    <?php
-                    // VALUE NOM si il n'y a pas eu de submit
-                    if (isset($dataAccount['nom']) && !isset($_POST['dataSubmit']))
-                    {
-                        echo 'value = "' .htmlspecialchars($dataAccount['nom']). '"' ;
-                    }
-                    // Sinon affiche le nouveau nom
-                    elseif (isset($_POST['dataSubmit']))
-                    {
-                        echo 'value="' .htmlspecialchars($_POST['nom']). '"' ;
-                    }
-                    ?>
-
-                >
+                        >
 
 
-                <label for="prenom">Prénom : </label>
-                <input type="text" id="prenom" name="prenom" size="30"
+                        <label for="prenom">Prénom : </label>
+                        <input type="text" id="prenom" name="prenom" size="30"
 
-                    <?php
-                    // VALUE PRENOM si il n'y a pas eu de submit
-                    if (isset($dataAccount['prenom']) && !isset($_POST['dataSubmit']))
-                    {
-                        echo 'value = "' .htmlspecialchars($dataAccount['prenom']). '"' ;
-                    }
-                    // Sinon on affiche le nouveau prenom
-                    elseif (isset($_POST['dataSubmit']))
-                    {
-                        echo 'value="' .htmlspecialchars($_POST['prenom']). '"' ;
-                    }
-                    ?>
+                            <?php
+                            // VALUE PRENOM si il n'y a pas eu de submit
+                            if (isset($dataAccount['prenom']) && !isset($_POST['dataSubmit']))
+                            {
+                                echo 'value = "' .htmlspecialchars($dataAccount['prenom']). '"' ;
+                            }
+                            // Sinon on affiche le nouveau prenom
+                            elseif (isset($_POST['dataSubmit']))
+                            {
+                                echo 'value="' .htmlspecialchars($_POST['prenom']). '"' ;
+                            }
+                            ?>
 
-                >
-            
+                        >
+                    
 
-                <label for="question">Votre question secrète : </label>
-                <input type="textarea" id="question" name="question"
+                        <label for="question">Votre question secrète : </label>
+                        <input type="textarea" id="question" name="question"
 
-                    <?php
-                    // VALUE QUESTION si il n'y a pas eu de submit
-                    if (isset($dataAccount['question']) && !isset($_POST['dataSubmit']))
-                    {
-                        echo 'value = "' .htmlspecialchars($dataAccount['question']). '"' ;
-                    }
-                    // Sinon on affiche la nouvelle question
-                    elseif (isset($_POST['dataSubmit']))
-                    {
-                        echo 'value="' .htmlspecialchars($_POST['question']). '"' ;
-                    }
-                    ?>
+                            <?php
+                            // VALUE QUESTION si il n'y a pas eu de submit
+                            if (isset($dataAccount['question']) && !isset($_POST['dataSubmit']))
+                            {
+                                echo 'value = "' .htmlspecialchars($dataAccount['question']). '"' ;
+                            }
+                            // Sinon on affiche la nouvelle question
+                            elseif (isset($_POST['dataSubmit']))
+                            {
+                                echo 'value="' .htmlspecialchars($_POST['question']). '"' ;
+                            }
+                            ?>
 
-                >
+                        >
 
 
-                <label for="reponse">La réponse à votre question : </label>
-                <input type="textarea" id="reponse" name="reponse"
+                        <label for="reponse">La réponse à votre question : </label>
+                        <input type="textarea" id="reponse" name="reponse"
 
-                    <?php
-                    // VALUE REPONSE si il n'y a pas eu de submit
-                    if (isset($dataAccount['reponse']) && !isset($_POST['dataSubmit']))
-                    {
-                        echo 'value = "' .htmlspecialchars($dataAccount['reponse']). '"' ;
-                    }
-                    // Sinon on affiche la nouvelle reponse
-                    elseif (isset($_POST['dataSubmit']))
-                    {
-                        echo 'value="' .htmlspecialchars($_POST['reponse']). '"' ;
-                    }
-                    ?>
+                            <?php
+                            // VALUE REPONSE si il n'y a pas eu de submit
+                            if (isset($dataAccount['reponse']) && !isset($_POST['dataSubmit']))
+                            {
+                                echo 'value = "' .htmlspecialchars($dataAccount['reponse']). '"' ;
+                            }
+                            // Sinon on affiche la nouvelle reponse
+                            elseif (isset($_POST['dataSubmit']))
+                            {
+                                echo 'value="' .htmlspecialchars($_POST['reponse']). '"' ;
+                            }
+                            ?>
 
-                >
-                
-                <label for="mp">Entrez votre mot de passe: </label>
-                <input type="password" id="mp" name="password" size="20">
+                        >
+                        
+                        <label for="mp">Entrez votre mot de passe: </label>
+                        <input type="password" id="mp" name="password" size="20">
 
-                <input class="button-envoyer" type="submit" name="dataSubmit" value="Envoyer" onclick="UnsetPreviousSession()" >
+                        <input class="button-envoyer" type="submit" name="dataSubmit" value="Envoyer" onclick="UnsetPreviousSession()" >
 
-            </p>
-        </form>
+                        <span><em>*</em> Tous les champs doivent être remplis</span>
 
-        <a href="accueil.php">Retour à l'accueil</a>
+                    </p>
+                </form>
 
-      <fieldset>
+                <a href="accueil.php">Retour à l'accueil</a>
+
+            </fieldset>
+        </section>
     </main>
-  </body> 
-</html>
 
 <?php
-
+ include("footer.php");
 }
 
 // Si pas de Session , pas accès à Profil

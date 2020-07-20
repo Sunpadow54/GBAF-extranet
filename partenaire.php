@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user']))
 {
 
     include("header.php"); 
@@ -23,7 +23,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
                 echo '<a href="' . $dataActeur['site'] . '">voir le site</a>';
                 echo '<div class="text"><p>' .$dataActeur['description'] . '</p></div>';
       
-      ?>
+        ?>
 
         </section>
 
@@ -43,11 +43,14 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
 
                                 <label class ="close_popup" for ="popup_button"> </label>
 
-                                <label for="new_commentaire_add">Ajoutez un nouveau commentaire sur <strong>ACTEUR?</strong> :</label>
+                                <label for="post">Ajoutez un nouveau commentaire sur 
+                                    <strong>
+                                        <?php echo $dataActeur['acteur']; ?>
+                                    </strong> :</label>
 
-                                <textarea id="new_commentaire_add" name="new_commentaire_add" rows="6" cols="50"></textarea>
+                                <textarea id="post" name="post" rows="6" cols="50"></textarea>
 
-                                <input type="submit" value="Envoyer" />
+                                <input type="submit" value="Envoyer" name="postPosted" />
                                                             
                             </p>
                             
@@ -66,21 +69,33 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']))
             </div>
 
             <ul class="commentaires-liste">
-                <li>
-                    <p>Prénom</p>
-                    <p>Nom</p>
-                    <p>text commentaire</p>
-                </li>
-                <li>
-                    <p>Prénom</p>
-                    <p>Nom</p>
-                    <p>text commentaire</p>
-                </li>
-                <li>
-                    <p>Prénom</p>
-                    <p>Nom</p>
-                    <p>text commentaire</p>
-                </li>
+                
+
+                    <?php
+                    //cherche les commentaires sur le partenaire
+                    $req2 = $bdd->prepare ('SELECT  p.post as comment,
+                                                    DATE_FORMAT(p.date_add, "%d/%m/%Y") as commentDate,
+                                                    a.prenom as autorName
+                                            FROM post p
+                                            INNER JOIN account a
+                                            ON p.id_user = a.id_user
+                                            WHERE p.id_acteur = ?
+                                            
+                                            ');
+
+                    $req2->execute (array($_GET['id_acteur']));
+
+                    while($dataComment = $req2->fetch()){
+
+                            echo '<li><p>' . $dataComment['autorName']  . '</p>';
+                            echo '<p>' . $dataComment['commentDate']  . '</p>';
+                            echo '<p>' . htmlspecialchars($dataComment['comment'])  . '</p></li>';
+                    }
+                    
+                    $req2->closeCursor();
+                    
+                ?>
+                
             </ul>
         </section>
 
@@ -100,4 +115,22 @@ else
   header('Location: index.php');
 }
 
+
+
+// Ajouter un nouveau commentaire
+
+if (isset($_POST['postPosted']) and !empty($_POST['post']))
+{
+
+    $req3 = $bdd->prepare   ('INSERT into post (id_user, id_acteur, date_add, post)
+                            VALUES (:id_user, :id_acteur, NOW(), :post)
+                            ');
+    $req3->execute   (array(
+                            'id_user' => $_SESSION['id_user'],
+                            'id_acteur' => $dataActeur['id_acteur'],
+                            'post' => htmlspecialchars($_POST['post'])
+                            ));
+    $req3->closeCursor();
+
+}
 ?>

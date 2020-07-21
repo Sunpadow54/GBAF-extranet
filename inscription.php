@@ -63,12 +63,12 @@ if (isset($_POST['dataPosted']))
         $req2 = $bdd->prepare ('INSERT INTO account (nom, prenom, username, password, question, reponse) 
                                 VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
         $req2->execute(array(
-          'nom' => htmlspecialchars($_POST['nom']),
-          'prenom' => htmlspecialchars($_POST['prenom']),
-          'username' => htmlspecialchars($_POST['username']),
+          'nom' => ($_POST['nom']),
+          'prenom' => ($_POST['prenom']),
+          'username' => ($_POST['username']),
           'password' => $passwordHashed,
-          'question' => htmlspecialchars($_POST['question']),
-          'reponse' => htmlspecialchars($_POST['reponse'])
+          'question' => ($_POST['question']),
+          'reponse' => ($_POST['reponse'])
           ));
 
         $req2->closeCursor();
@@ -186,7 +186,7 @@ include("header.php");
                 >
 
 
-                <input class="button-envoyer" type="submit" name="dataPosted"value="Envoyer">
+                <input class="button-envoyer" type="submit" name="dataPosted" value="Envoyer">
                 
                 <span>Les champs indiqués par une * sont obligatoires</span>
 

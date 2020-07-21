@@ -22,7 +22,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                 echo '<h2>' . $dataActeur['acteur'] . '</h2>';
                 echo '<a href="' . $dataActeur['site'] . '">voir le site</a>';
                 echo '<div class="text"><p>' .$dataActeur['description'] . '</p></div>';
-      
+
         ?>
 
         </section>
@@ -30,7 +30,15 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         <section class="commentaires">
             <div class="commentaires-formulaires">
 
-                <p> X commentaires </p>
+                <?php
+                // Affiche le nombre de commentaire sur l'acteur
+                $req2 = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
+                $req2->execute(array($_GET['id_acteur']));
+                $reponse = $req2->fetch();
+            
+                echo '<p>' . $reponse['nbrComments'] . ' commentaires </p>';
+                
+                ?>
 
                 <div class="new_commentaire"> 
 
@@ -73,26 +81,26 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                     <?php
                     //cherche les commentaires sur le partenaire
-                    $req2 = $bdd->prepare ('SELECT  p.post as comment,
+                    $req3 = $bdd->prepare ('SELECT  p.post as comment,
                                                     DATE_FORMAT(p.date_add, "%d/%m/%Y") as commentDate,
                                                     a.prenom as autorName
                                             FROM post p
                                             INNER JOIN account a
                                             ON p.id_user = a.id_user
                                             WHERE p.id_acteur = ?
-                                            
+                                            ORDER by commentDate DESC
                                             ');
 
-                    $req2->execute (array($_GET['id_acteur']));
+                    $req3->execute (array($_GET['id_acteur']));
 
-                    while($dataComment = $req2->fetch()){
+                    while($dataComment = $req3->fetch()){
 
-                            echo '<li><p>' . $dataComment['autorName']  . '</p>';
+                            echo '<li><p>' . htmlspecialchars($dataComment['autorName'])  . '</p>';
                             echo '<p>' . $dataComment['commentDate']  . '</p>';
                             echo '<p>' . htmlspecialchars($dataComment['comment'])  . '</p></li>';
                     }
                     
-                    $req2->closeCursor();
+                    $req3->closeCursor();
                     
                 ?>
                 
@@ -122,15 +130,15 @@ else
 if (isset($_POST['postPosted']) and !empty($_POST['post']))
 {
 
-    $req3 = $bdd->prepare   ('INSERT into post (id_user, id_acteur, date_add, post)
+    $req4 = $bdd->prepare   ('INSERT into post (id_user, id_acteur, date_add, post)
                             VALUES (:id_user, :id_acteur, NOW(), :post)
                             ');
-    $req3->execute   (array(
+    $req4->execute   (array(
                             'id_user' => $_SESSION['id_user'],
                             'id_acteur' => $dataActeur['id_acteur'],
-                            'post' => htmlspecialchars($_POST['post'])
+                            'post' => ($_POST['post'])
                             ));
-    $req3->closeCursor();
+    $req4->closeCursor();
 
 }
 ?>

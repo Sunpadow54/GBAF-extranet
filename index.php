@@ -124,12 +124,12 @@ include("header.php");
 
                   if (isset($_SESSION['username']) && !isset($connexionSubmit))
                   {
-                    echo 'value ="' .$_SESSION['username'].'"';
+                    echo 'value ="' . htmlspecialchars($_SESSION['username']).'"';
                   }
 
                   elseif (isset($connexionSubmit))
                   {
-                    echo 'value ="' .$_POST['username'].'"';
+                    echo 'value ="' . htmlspecialchars($_POST['username']) .'"';
                   }
 
                   ?>

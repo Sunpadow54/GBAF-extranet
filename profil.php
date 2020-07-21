@@ -64,10 +64,10 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
                                         WHERE id_user = :id_user
                                         ');
                 $req2->execute (array(
-                    'nom' => htmlspecialchars($_POST['nom']),
-                    'prenom' => htmlspecialchars($_POST['prenom']),
-                    'question' => htmlspecialchars($_POST['question']),
-                    'reponse' => htmlspecialchars($_POST['reponse']),
+                    'nom' => ($_POST['nom']),
+                    'prenom' => ($_POST['prenom']),
+                    'question' => ($_POST['question']),
+                    'reponse' => ($_POST['reponse']),
                     'id_user' => $dataAccount['id_user']
                 ));
                 $req2->closeCursor();
@@ -124,7 +124,7 @@ include("header.php");
                     // affichage username qui ne peut pas être changé
                     if (isset($dataAccount['username']))
                     {
-                        echo '<h2>' .htmlspecialchars($dataAccount['username']). '</h2>' ;
+                        echo '<h3>' .htmlspecialchars($dataAccount['username']). '</h3>' ;
                     }
                 ?>
                 

@@ -285,7 +285,7 @@ article{
     margin-bottom: 1em;
 }
 .commentaires-formulaires > p{
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 
@@ -340,7 +340,7 @@ article{
 }
 .new_commentaire_popup > p > textarea{
     padding: 0.5em;
-    font-family: 'Roboto', sans-serif;
+    font-family: Helvetica, serif;
     color: rgba(0, 0, 0, 0.6);
 }
 .new_commentaire_popup > p > input{
@@ -350,7 +350,6 @@ article{
 #popup_button:checked + .new_commentaire_popup{
     display: flex;
 }
-
 
 
 /* Like / dislike*/
@@ -401,6 +400,18 @@ display: none;
     margin-bottom: 1em;
     list-style:none;
     background-color: white;
+}
+.commentaires-liste > li :nth-child(1){
+    color:DimGray;
+    margin-bottom: 0.1em;
+}
+.commentaires-liste > li :nth-child(2){
+    color:DimGray;
+    font-size: 0.85em;
+    margin-bottom: 0.6em;
+}
+.commentaires-liste > li > :last-child{
+    font-family: Helvetica, serif;
 }
 
 /* Aside retour page accueil*/

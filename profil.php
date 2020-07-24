@@ -42,6 +42,20 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
     // Verification si Submit -> variables créées
     if(isset($_POST['dataSubmit']))
     {
+        $req2 = $bdd->prepare('SELECT username FROM account WHERE username = ?');
+        $req2->execute(array($_POST['username']));
+        $isUsernameExist = $req2->fetch();
+
+        // que l'username n'existe pas déjà et n'est pas l'username actuel
+        if ($isUsernameExist && $dataAccount['username'] != $_POST['username']) {
+
+            $erreur = " Ce nom d'utilisateur existe déjà ";
+
+        
+        } else {
+
+        
+
 
         //Verification tous les champs ont été remplis
         if  (!empty($_POST['nom']) && !empty($_POST['prenom'])
@@ -49,50 +63,46 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
 
         {
 
-            // et que le mot de passe est correct
-            $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+                // et que le mot de passe est correct
+                $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
 
-            if  ($isPasswordCorrect && !empty($_POST['password']))
-            {
+                if  ($isPasswordCorrect && !empty($_POST['password']))
+                {
 
-                // Change les infos de la BDD
-                $req2 = $bdd->prepare ('UPDATE account SET 
-                                        nom = :nom, 
-                                        prenom = :prenom,
-                                        question = :question,
-                                        reponse = :reponse
-                                        WHERE id_user = :id_user
-                                        ');
-                $req2->execute (array(
-                    'nom' => ($_POST['nom']),
-                    'prenom' => ($_POST['prenom']),
-                    'question' => ($_POST['question']),
-                    'reponse' => ($_POST['reponse']),
-                    'id_user' => $dataAccount['id_user']
-                ));
-                $req2->closeCursor();
+                    // Change les infos de la BDD
+                    $req3 = $bdd->prepare ('UPDATE account SET 
+                                            nom = :nom, 
+                                            prenom = :prenom,
+                                            question = :question,
+                                            reponse = :reponse
+                                            WHERE id_user = :id_user
+                                            ');
+                    $req3->execute (array(
+                        'nom' => ($_POST['nom']),
+                        'prenom' => ($_POST['prenom']),
+                        'question' => ($_POST['question']),
+                        'reponse' => ($_POST['reponse']),
+                        'id_user' => $dataAccount['id_user']
+                    ));
+                    $req3->closeCursor();
 
-                // Récupère les nouvelles valeurs de SESSION
-                $req3 = $bdd->prepare('SELECT nom, prenom FROM account WHERE id_user = ?');
-                $req3->execute (array($_SESSION['id_user']));
-                $dataAccountNew= $req3->fetch();
+                    // Récupère les nouvelles valeurs de SESSION
+                    $req4 = $bdd->prepare('SELECT nom, prenom FROM account WHERE id_user = ?');
+                    $req4->execute (array($_SESSION['id_user']));
+                    $dataAccountNew= $req4->fetch();
 
-                $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
-                $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
+                    $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
+                    $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
-                $message = 'Vos changements ont bien été pris en compte';
+                    $message = 'Vos changements ont bien été pris en compte';
 
-            }
+                }
 
-            else
-            {
-                $erreur ="Le mot de passe est incorrect ou manquant";
-            }
-        }
-        else
-        {
+        } else {
+
             $erreur =" Veuillez remplir tous les champs";
         }
+    }
     }
 
 

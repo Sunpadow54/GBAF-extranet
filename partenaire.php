@@ -84,12 +84,15 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     // F. Fonction qui affiche tous les commentaires sur l'acteur
     function listCommentaires ($bdd, $idActeur)
     {
-        $req3 = $bdd->prepare ('SELECT  p.post as comment, DATE_FORMAT(p.date_add, "%d/%m/%Y") as commentDate, a.prenom as autorName
+        $req3 = $bdd->prepare ('SELECT  p.post as comment, 
+                                        DATE_FORMAT(p.date_add, "%d/%m/%Y") as commentDate,
+                                        DATE_FORMAT(p.date_add, "%d/%m/%Y %T") as commentDateOrder, 
+                                        a.prenom as autorName
                                 FROM post p
                                 INNER JOIN account a
                                 ON p.id_user = a.id_user
                                 WHERE p.id_acteur = ?
-                                ORDER by commentDate DESC');
+                                ORDER by commentDateOrder DESC');
 
         $req3->bindValue(1, $idActeur, PDO::PARAM_INT);
         $req3->execute ();

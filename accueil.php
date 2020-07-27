@@ -44,16 +44,16 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
   <!-- Recupération des acteurs dans la bdd-->
               <?php
-                  $reponse = $bdd->query('SELECT * FROM acteur');
-                  /*  Affichage des infos des acteurs */
+                  $reponse = $bdd->query('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
                   while($dataPartenaires = $reponse->fetch())
               {
+              /*  Affichage des infos des acteurs */
               ?>
                 <li class="acteur-seul">
                   <?php
                   echo $dataPartenaires['logo'];
                   echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
-                  echo '<div class="acteur-seul_description">' . $dataPartenaires['description'] . '</div>';
+                  echo '<div class="acteur-seul_description">' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
                   echo ' <a href="partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
                   ?>
                 </li>

@@ -9,7 +9,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     $idActeur = htmlspecialchars($_GET['id_acteur']);
 
     // A. Cherche les infos de l'Acteur
-    $req = $bdd->prepare('SELECT * FROM partenaires WHERE id_acteur = ?');
+    $req = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
     $req->execute(array($idActeur));
     $dataActeur = $req->fetch();
     $req->closeCursor();
@@ -154,13 +154,13 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                     <!-- D. Nombre de like -->
                     <p> <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?> </p>
                     <!-- Ajoute un like (vote.php)-->
-                    <a href= "<?php echo 'votF.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>" >
+                    <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>" >
                         <!-- E. icone dislike-->  
                         <img src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" alt="like">
                     </a>
 
                     <!-- Ajoute un dislike -->
-                    <a href= "<?php echo 'votF.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>" >
+                    <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>" >
                         <!-- E. icone dislike (vote.php)--> 
                         <img src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" alt="dislike">
                     </a>

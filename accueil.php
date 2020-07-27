@@ -44,7 +44,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
   <!-- Recupération des acteurs dans la bdd-->
               <?php
-                  $reponse = $bdd->query('SELECT * FROM partenaires');
+                  $reponse = $bdd->query('SELECT * FROM acteur');
                   /*  Affichage des infos des acteurs */
                   while($dataPartenaires = $reponse->fetch())
               {

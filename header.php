@@ -57,7 +57,7 @@
                     </li>
 
                     <li>
-                        <a href="profil.php">Modifier mon profil</a>
+                        <a href="profil.php">Paramètres du compte</a>
                     </li>
                 
             </ul>

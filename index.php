@@ -1,23 +1,7 @@
 <?php
 
-session_start();
+include("account.php");
 
-/* Base de donnée connexion :*/
-try
-{
-    $bdd= new PDO(
-        'mysql:host=localhost;
-        dbname=gbaf-extranet;
-        charset=utf8',
-        'root',
-        '',
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-}
-catch (Exception $e)
-{
-    die(' Erreur : ' . $e->getMessage());
-}
 
 // FONCTION pour effacer les valeurs de session 
 function UnsetPreviousSession()
@@ -39,11 +23,8 @@ if (isset($_POST['username']) && isset($_POST['password']))
 
   $_SESSION['username'] = $_POST['username'];
 
-  //Cherche l'username et compare à la BDD
-  $req = $bdd->prepare('SELECT * FROM account WHERE username = ?');
-  $req->execute(array($_POST['username']));
-  $dataAccount = $req->fetch();
-  $req->closeCursor();
+  // Cherche L'utilisateur dans la BDD (voir account.php)
+  $dataAccount = SearchUser($bdd, $_POST['username']);
 
   // Si l'username existe
   if ($dataAccount)
@@ -78,7 +59,8 @@ if (isset($_POST['username']) && isset($_POST['password']))
 }
 
 
-include("header.php"); 
+include("header.php");
+
 ?>
 
 

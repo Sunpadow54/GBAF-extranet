@@ -1,23 +1,6 @@
 <?php
 
-session_start();
-
-try
-{
-    $bdd = new PDO(
-        'mysql:host=localhost;
-        dbname=gbaf-extranet;
-        charset=utf8',
-        'root',
-        '',
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-}
-
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
+include("account.php");
 
 
 // FONCTION pour effacer les valeurs de session
@@ -29,81 +12,73 @@ function UnsetPreviousSession()
 
 
 // -------------------------entre sur la page Modification Profil
-if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))
-{
+if  (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))   {
 
-    // Cherche l'utilisateur dans la BDD
-    $req = $bdd->prepare('SELECT * FROM account WHERE id_user = ?');
-    $req->execute(array($_SESSION['id_user']));
-    $dataAccount = $req->fetch();
+    // Cherche L'utilisateur dans la BDD (voir account.php)
+    $dataAccount = SearchUser($bdd, $_SESSION['username']);
 
-    $req->closeCursor();
+    // Si on change ses infos
+    if  (isset($_POST['dataSubmit']))   {
 
-    // Verification si Submit -> variables créées
-    if(isset($_POST['dataSubmit']))
-    {
+        //on cherche à savoir si l'username existe déjà
         $req2 = $bdd->prepare('SELECT username FROM account WHERE username = ?');
         $req2->execute(array($_POST['username']));
         $isUsernameExist = $req2->fetch();
 
-        // que l'username n'existe pas déjà et n'est pas l'username actuel
-        if ($isUsernameExist && $dataAccount['username'] != $_POST['username']) {
-
-            $erreur = " Ce nom d'utilisateur existe déjà ";
-
-        
-        } else {
-
+        // Si l'username n'existe pas
+        if  (!$isUsernameExist OR $dataAccount['username'] == $_POST['username'])   {
         
 
+            // Verification tous les champs ont été remplis
+            if  (!empty($_POST['nom']) && !empty($_POST['prenom'])
+                && !empty($_POST['question']) && !empty($_POST['reponse']))   {
 
-        //Verification tous les champs ont été remplis
-        if  (!empty($_POST['nom']) && !empty($_POST['prenom'])
-            && !empty($_POST['question']) && !empty($_POST['reponse']))
+                    // et que le mot de passe est correct
+                    $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
 
-        {
+                    if  ($isPasswordCorrect && !empty($_POST['password']))  {
 
-                // et que le mot de passe est correct
-                $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+                        // Change les infos de la BDD
+                        $req3 = $bdd->prepare ('UPDATE account SET 
+                                                nom = :nom, 
+                                                prenom = :prenom,
+                                                question = :question,
+                                                reponse = :reponse
+                                                WHERE id_user = :id_user
+                                                ');
+                        $req3->execute (array(
+                            'nom' => ($_POST['nom']),
+                            'prenom' => ($_POST['prenom']),
+                            'question' => ($_POST['question']),
+                            'reponse' => ($_POST['reponse']),
+                            'id_user' => $dataAccount['id_user']
+                        ));
+                        $req3->closeCursor();
 
-                if  ($isPasswordCorrect && !empty($_POST['password']))
-                {
+                        // Récupère les nouvelles valeurs de SESSION (fonction voir account.php)
+                        $dataAccountNew = SearchUser($bdd, $_SESSION['username']);
 
-                    // Change les infos de la BDD
-                    $req3 = $bdd->prepare ('UPDATE account SET 
-                                            nom = :nom, 
-                                            prenom = :prenom,
-                                            question = :question,
-                                            reponse = :reponse
-                                            WHERE id_user = :id_user
-                                            ');
-                    $req3->execute (array(
-                        'nom' => ($_POST['nom']),
-                        'prenom' => ($_POST['prenom']),
-                        'question' => ($_POST['question']),
-                        'reponse' => ($_POST['reponse']),
-                        'id_user' => $dataAccount['id_user']
-                    ));
-                    $req3->closeCursor();
+                        $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
+                        $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
-                    // Récupère les nouvelles valeurs de SESSION
-                    $req4 = $bdd->prepare('SELECT nom, prenom FROM account WHERE id_user = ?');
-                    $req4->execute (array($_SESSION['id_user']));
-                    $dataAccountNew= $req4->fetch();
+                        $message = 'Vos changements ont bien été pris en compte';
 
-                    $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
-                    $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
+                    }
 
-                    $message = 'Vos changements ont bien été pris en compte';
+                } else {
+
+                    $erreur =" Veuillez remplir tous les champs";
 
                 }
 
         } else {
 
-            $erreur =" Veuillez remplir tous les champs";
+            $erreur = " Ce nom d'utilisateur existe déjà ";
+
         }
+  
     }
-    }
+
 
 
 include("header.php"); 

@@ -4,9 +4,10 @@ session_start();
 
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
-    include("header.php"); 
+    include("header.php");
 
     $idActeur = htmlspecialchars($_GET['id_acteur']);
+
 
     // A. Cherche les infos de l'Acteur
     $req = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
@@ -108,11 +109,11 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         }
         
         $req3->closeCursor();
-    }
-    
- 
+    } 
 
-?>
+
+    /* 	------------------------------------------------ HTML ------------------------------------------------ */
+    ?> 
 
     <main>
         <!-- A. Section infos de l'acteur -->
@@ -127,9 +128,9 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
         <!-- Section commentaires -->
         <section class="commentaires">
-            <div class="commentaires-formulaires">
+            <div class="commentaires_dynamic">
 
-                <!-- B. Nombre de commentaires sur l'acteur-->
+                <!-- B. Nombre de commentaires -->
                 <p> <?php echo $nbrcommentsPosted; ?> commentaires </p>
 
                 <!-- Ajouter un nouveau commentaire -->
@@ -138,43 +139,46 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                     <label class ="open_popup" for ="popup_button"> Nouveau commentaire</label>
                     <input type ="checkbox" id ="popup_button">
                     <!-- C. fenêtre pop-up du formulaire -->
-                    <form class="new_commentaire_popup" method ="post" action="#">
+                    <form class="new_commentaire_formulaire" method ="post" action="#">
                         <p>
 
                             <label class ="close_popup" for ="popup_button"> </label>
-                            <label for="post">Ajoutez un nouveau commentaire sur <strong> <?php echo $dataActeur['acteur']; ?> </strong> : </label>
-                            <textarea id="post" name="post" rows="6" cols="50"></textarea>
+                            <label for="post">Ajoutez un nouveau commentaire sur <em> <?php echo $dataActeur['acteur']; ?> </em>: </label>
+                            <textarea id="post" name="post"></textarea>
                             <input type="submit" value="Envoyer" name="newCommentPosted" />   
                        
                         </p> 
-                    </form> 
-  
+                    </form>
+                    
                 </div>     
 
                 <!-- Likes / Dislikes -->
-                <div class="commentaires-likes">
-                    
-                    <!-- D. Nombre de like -->
-                    <p> <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?> </p>
-                    <!-- Ajoute un like (vote.php)-->
-                    <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>" >
-                        <!-- E. icone dislike-->  
-                        <img src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" alt="like">
-                    </a>
+                <div class="commentaires_vote">
 
-                    <!-- Ajoute un dislike -->
-                    <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>" >
-                        <!-- E. icone dislike (vote.php)--> 
-                        <img src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" alt="dislike">
-                    </a>
-                    <!-- D. Nombre de dislike -->
-                    <p> <?php nbrLikeDislike($dataActeur['id_acteur'], 'dislike', $bdd); ?> </p>
+                    <div class="vote_like">
+                        <!-- D. Nombre de like -->
+                        <p> <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?> </p>
 
+                        <!-- Ajoute un like (vote.php) / E. icone like -->
+                        <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>" >
+                            <img src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" alt="like">
+                        </a>
+                    </div>
+
+                    <div class="vote_dislike">
+                    <!-- Ajoute un dislike (vote.php) / E. icone dislike--> 
+                        <a href= "<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>" >
+                            <img src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" alt="dislike">
+                        </a>
+
+                        <!-- D. Nombre de dislike -->
+                        <p> <?php nbrLikeDislike($dataActeur['id_acteur'], 'dislike', $bdd); ?> </p>
+                    </div>
                 </div>
             </div>
 
             <!-- F. Liste de tous les commentaires -->
-            <ul class="commentaires-liste">
+            <ul class="commentaires-list">
 
                 <!--<li> -->
                 <?php listCommentaires($bdd, $idActeur); ?>

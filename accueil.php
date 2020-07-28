@@ -15,7 +15,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
 		while ($dataPartenaires = $req->fetch())	{
 		
-			echo '<li class="acteur-seul">';
+			echo '<li class="acteur_seul">';
 				echo $dataPartenaires['logo'];
 				echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
 				echo '<div class="acteur-seul_description">' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
@@ -27,11 +27,12 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
 	} 
 
+
+	/* 	------------------------------------------------ HTML ------------------------------------------------ */
 	?>
 
-<!-- ------------------------------------------------HTML---------------------------------------- --> 
-
-	<main class="main-accueil">
+	<main>
+		<!-- Section Présentation GBAF -->
 		<section class="GBAF">
 
 			<h1>GBAF (Groupement Banque Assurance Français)</h1>
@@ -68,16 +69,17 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 		</section>
 
 
-		<section class="list-acteurs">
+		<!-- Section présentation Acteurs / Partenaires -->
+		<section class="acteurs">
 
 			<h2>Acteurs et partenaires du système bancaire français </h2>
 
 			<p class="text"> texte acteurs et partenaires</p>    
 
-			<article class="acteurs">
+			<article class="acteurs_list">
 				<nav>
 					<ul>
-						<!-- <li> : Affichage liste des acteurs -->
+						<!-- <li> acteur_seul-->
 						<?php
 							SearchActeurs($bdd);
 						?>

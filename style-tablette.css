@@ -1,45 +1,54 @@
+/* ------------------------------ Global ------------------------------*/
 :root {
     --gutter: 80px;
 }
 
 /* annule les :hover*/
-.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
+.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs_list ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
     display:none;
 }
 
 
 /* ----------------------- HEADER */
 
-/* HEADER -- PROFIL*/
-
+ /* Profil*/
+ /*  bouton modifier son profil*/
 .header-profil > li:last-child{
     opacity: 1;
 }
-/* ----------------------- SECTIONS */
+
+
+/* ----------------------- MAIN $ textes */
+
 main{
     min-width: 500px;
 }
-/* ------------------------------ Page Accueil */
 
-/* GBAF présentation */
 .text{
     margin-right:var(--gutter_text);
     margin-left:var(--gutter_text);
 }
 
-/* ------------------------------ Pages Connexion & Inscription */
-.form_container > fieldset > a{
-    text-decoration: underline;
-}
-.form_container fieldset{
-    border:none;
-    font-size: 0.9em;
-}
+
+/* ------------------------------ Accueil Connecté------------------------------*/
+
+
+/* ------------------------------ Index / Inscription / Modifier son Profil / MP ------------------------------*/
+
+/* Section */
 .form_container{
     max-width: 500px;
 }
-@media all and (orientation : portrait){
     .form_container fieldset{
-        font-size: 1.2em;
+        border:none;
+        font-size: 0.9em;
     }
-}
+    @media all and (orientation : portrait){
+        .form_container fieldset{
+            font-size: 1.2em;
+        }
+    }
+        /* liens vers index ou accueil .. */
+        .form_container > fieldset > a{
+            text-decoration: underline;
+        }

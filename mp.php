@@ -1,10 +1,10 @@
 <?php
 
+
 include("account.php");
 
 
-
-// Formulaires 
+// Les Formulaires 
 $formDefault = '<label for="pseudo">Identifiant : </label>
       <input type="text" id="pseudo" name="username" size="20">';
 
@@ -16,134 +16,162 @@ $fomPasswordChange = '<label for="mp">Nouveau mot de passe : </label>
 $formType = $formDefault;
 
 
-// Si on envoie son username on récupère session username
-if (isset($_POST['username']))  {
+/* // Modifie Session username si formulaire envoyé
+if (isset($_POST['username']))
+{
 
-    $_SESSION['username'] = $_POST['username'];
-
-}
-
-// Si on viens d'arriver sur la page, on efface toutes les Sessions existantes (securité)
-elseif (!isset($_POST['dataPosted']))   {
+  $_SESSION['username'] = htmlspecialchars($_POST['username']);
+  
+} */
+/* elseif (!isset($_POST['dataPosted']))   {
 
     $_SESSION = array();
     session_destroy();
 
 }
+ */
+
+/*----------------------- Vérification Utilisateur existe */
+
+if (isset($_POST['username']) )
+{
+
+    // Modifie Session username si formulaire envoyé
+    $_SESSION['username'] = htmlspecialchars($_POST['username']);
+
+    // cherche l'utilisateur
+    $dataAccount = SearchUser($bdd, $_POST['username']);
+
+    // Si l'utilisateur existe
+    if (!empty($dataAccount)){
+
+        $userExist = true;
+        $erreur = "Cet identifiant existe";
+        $usernameValid = $_POST['username'];
+
+    } else {
+        
+        $userExist = false;
+        $erreur = "Cet identifiant n'existe pas";
+
+    }
+} else {
+
+  $userExist = false;
+
+}
 
 
-/*  -------------------------------- Si Session username existe -------------------------------- */
-if  (isset($_SESSION['username']))   {
+/*-----------------------  Si l'utilisateur existe, Affiche la question et son formulaire */
 
-    // Cherche L'utilisateur dans la BDD (voir account.php)
+if  ($userExist)    { 
+    
+    $formType = $formQuestion;
+    // On donne la question
+    $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
+    $erreur = 'répondez à votre question secrète : ';
+    // récupère son username pour les autres formulaires
+    $_SESSION['username'] = $dataAccount['username'];
+
+} /* else {
+
+    $erreur = 'cet identifiant n\'existe pas';
+
+} */
+    
+
+/*----------------------- Si on répond à la question secrète */
+
+if  (isset($_POST['reponse'])){
+    
+    $formType = $formQuestion;
     $dataAccount = SearchUser($bdd, $_SESSION['username']);
+    $questionUser = $dataAccount['question'];
+    $erreur = 'répondez à votre question secrète : ';
 
-    // ------------------------------ Si l'utilisateur existe
-    if  ($dataAccount)    { 
-        
-        // On donne la question
-        $formType = $formQuestion;
-        $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
-        $erreur = 'répondez à votre question secrète : ';
-        
+    // Si la réponse correspond
+    if  ($_POST['reponse'] == $dataAccount['reponse'])  {
+
+        unset($questionUser);
+        // On affiche le formulaire de changement de mot de passe
+        $formType = $fomPasswordChange;
+        $erreur = 'Vous pouvez changer votre mot de passe : ';
+
     } else {
 
-        $erreur = 'cet identifiant n\'existe pas';
-
-    }
-
-
-    // ------------------------------ Si on envoie une réponse
-    if  (isset($_POST['reponse'])){
-         
         $questionUser = $dataAccount['question'];
-        $formType = $formQuestion;
-        
-        $erreur = 'répondez à votre question secrète : ';
+        $erreur = 'Ce n\'est pas la réponse attendue';
 
-        // Si la réponse correspond
-        if  ($_POST['reponse'] == $dataAccount['reponse'])  {
-
-            unset($questionUser);
-
-            // On affiche le formulaire de changement de mot de passe
-            $formType = $fomPasswordChange;
-            $erreur = 'Vous pouvez changer votre mot de passe : ';
-
-        } else {
-
-            $erreur = 'Ce n\'est pas la réponse attendue';
-
-        }
     }
+}
 
-    // ------------------------------ Si on envoie un nouveau mot de passe
-    if  (isset($_POST['password'])) {
-        
-        unset($questionUser);
 
-        $formType = $fomPasswordChange;
+/*----------------------- Si on modifie son mot de passe */
 
-        // Si le nouveau mot de passe est conforme
-        if  (preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'] ))    {
+if  (isset($_POST['password'])) {
+    
+    unset($questionUser);
+    $formType = $fomPasswordChange;
 
-            // On Hash le mot de passe
-            $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    // Si le nouveau mot de passe est conforme
+    if  (preg_match( "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'] ))    {
 
-            // On remplace le mp dans la base de données
-            $req2 = $bdd->prepare('UPDATE account SET
-                                    password = :password
-                                    WHERE username = :username
-                                ');
-            $req2->execute  (array(
-                'password' => $passwordHashed,
-                'username' => $_SESSION['username']
-            ));
+        // On Hash le mot de passe
+        $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $req2->closeCursor();
+        // On remplace le mp dans la base de données
+        $req2 = $bdd->prepare('UPDATE account SET
+                                password = :password
+                                WHERE username = :username
+                            ');
+        $req2->execute  (array(
+            'password' => $passwordHashed,
+            'username' => $_SESSION['username']
+        ));
+        $req2->closeCursor();
 
-            $_SESSION['messagePWchanged'] = 'Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter';
+        $_SESSION['messagePWchanged'] = 'Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter';
 
-            header('Location: index.php');
+        header('Location: index.php');
 
-        } else  {
+    } else  {
 
-            // Si le mot de passe n'est pas conforme
-            $erreur ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
-        
-        }
-
+        // Si le mot de passe n'est pas conforme
+        $erreur ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+    
     }
 
 }
 
 
 
-/* ------------------------------------------------HTML---------------------------------------- */
 
+
+/* ------------------------------------------------HTML---------------------------------------- */
+ 
 include("header.php");
 
 ?>
 
 
-<!-- ---------------------------HTML FORMULAIRE CHANGEMENT DE MP -->      
+<!-- ---------------------------HTML FORMULAIRE CHANGEMENT DE MP -->
+
 <main class="inscription-connexion">
     <section class="form_container">
         <fieldset>
 
             <legend>Mot de passe oublié ?</legend>
 
-            <!-- message erreur span-->
-            <?php 
+                <!-- message erreur span-->
+                <span class="message-erreur">
 
-            if (isset($erreur)) {
+                <?php 
 
-            echo '<span class="message-erreur">' . $erreur .' </span>';
+MessageError($erreur);
 
-            }
+                ?>
 
-            ?>
-
+                </span>
 
             <form method="post"action="mp.php">
                 <p>

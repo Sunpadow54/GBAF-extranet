@@ -3,60 +3,80 @@
 include("account.php");
 
 
-// FONCTION pour effacer les valeurs de session 
-function UnsetPreviousSession()
+
+/* // Modifie Session username si formulaire envoyé
+if (isset($_POST['username']))
 {
-    unset($_SESSION['username']);
-}
-
-function deleteSession()
-{
-  $_SESSION = array();
-  session_destroy();
-}
+  // Modifie Session username si formulaire envoyé
+  $_SESSION['username'] = htmlspecialchars($_POST['username']);
+  
+} */
 
 
+/*--------------------------- Vérification Utilisateur existe */
 
-/*--------------------------- Verification User */
-if (isset($_POST['username']) && isset($_POST['password']))
+if (isset($_POST['username']) )
 {
 
-  $_SESSION['username'] = $_POST['username'];
+	// Modifie Session username si formulaire envoyé
+	$_SESSION['username'] = htmlspecialchars($_POST['username']);
 
-  // Cherche L'utilisateur dans la BDD (voir account.php)
-  $dataAccount = SearchUser($bdd, $_POST['username']);
+	// cherche l'utilisateur
+	$dataAccount = SearchUser($bdd, $_POST['username']);
 
-  // Si l'username existe
-  if ($dataAccount)
-  {  
+	// Si l'utilisateur existe
+	if (!empty($dataAccount)) {
 
-    // Verification mot de passe (Hashé)
-    $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+		$userExist = true;
+		$erreur = "Cet identifiant existe"; 
 
-    //si le mot de passe correspond
-    if ($isPasswordCorrect)
-    {
-      // Connexion
-      $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
-      $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
-      $_SESSION['id_user'] = $dataAccount['id_user'];
+	} else {
 
-      header('Location: accueil.php');
-    }
+		$userExist = false;
+		$erreur = "Cet identifiant n'existe pas";
 
-    else
-    {
-      $erreur = "Ce n'est pas le bon mot de passe";
-    }
+  	}
 
-  }
-
-  else
-  {
-      $erreur = "Cet identifiant n'existe pas";
-  }
+} else {
+  
+  	$userExist = false;
 
 }
+
+
+// Si l'username existe
+if ($userExist)	{  
+
+	// Vérification mot de passe (Hashé)
+	$isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+
+	// Si le mot de passe correspond
+	if ($isPasswordCorrect)
+	{
+		// Connexion
+		$_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
+		$_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
+		$_SESSION['id_user'] = $dataAccount['id_user'];
+
+		header('Location: accueil.php');
+	}
+
+	else
+	{
+		$erreur = "Ce n'est pas le bon mot de passe";
+	}
+
+} /* else {
+
+	echo 'nope' ;
+
+} */
+
+/*   else
+{
+	$erreur = "Cet identifiant n'existe pas";
+} */
+
 
 
 include("header.php");
@@ -75,24 +95,26 @@ include("header.php");
           <span class="message"> 
             
             <?php
-              if (!isset($_POST['connexionSubmit']))
-              {
-                // message si la personne viens de changer de mp
-                if (isset($_SESSION['messagePWchanged']))
-                {
-                  echo $_SESSION['messagePWchanged'];
-                }
-                // message si la personne viens de s'inscrire
-                if  (isset($_SESSION['messageWelcome']))
-                {
-                  echo $_SESSION['messageWelcome'];
-                }
-              }
-              // message si erreur de connexion
-              if  (isset($erreur))
-              {
-                echo $erreur;
-              }
+				if (!isset($_POST['connexionSubmit']))
+				{
+					// message si la personne viens de changer de mp
+					if (isset($_SESSION['messagePWchanged']))
+					{
+					echo $_SESSION['messagePWchanged'];
+					}
+					// message si la personne viens de s'inscrire
+					if  (isset($_SESSION['messageWelcome']))
+					{
+					echo $_SESSION['messageWelcome'];
+					}
+				}
+
+				// message si erreur de connexion
+				if  (isset($erreur))	{
+
+					echo $erreur;
+					
+				}
             ?>
             
           </span>
@@ -101,26 +123,12 @@ include("header.php");
             <p>
 
                 <label for="pseudo">Identifiant : </label>
-                <input type="text" id="pseudo" name="username" required 
-                  <?php
-
-                  if (isset($_SESSION['username']) && !isset($connexionSubmit))
-                  {
-                    echo 'value ="' . htmlspecialchars($_SESSION['username']).'"';
-                  }
-
-                  elseif (isset($connexionSubmit))
-                  {
-                    echo 'value ="' . htmlspecialchars($_POST['username']) .'"';
-                  }
-
-                  ?>
-                >
+                <input type="text" id="pseudo" name="username" required value ="<?php ValueInputUsername(); ?>" >
 
                 <label for="mp">Mot de passe : </label>
                 <input type="password" id="mp" name="password"required>
 
-                <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick ="UnsetPreviousSession()">
+                <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick =" UnsetPreviousSession()">
 
                 <span>Les champs indiqués par une <em>*</em> sont obligatoires</span>
 

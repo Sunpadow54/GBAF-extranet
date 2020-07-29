@@ -67,25 +67,26 @@ if  (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))   {
 
                 } else {
 
-                    $erreur =" Veuillez remplir tous les champs";
+                    $message =" Veuillez remplir tous les champs";
 
                 }
 
         } else {
 
-            $erreur = " Ce nom d'utilisateur existe déjà ";
+            $message = " Ce nom d'utilisateur existe déjà ";
 
         }
   
     }
 
 
+/* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
+
 
 include("header.php"); 
 
 ?>
  
-<!-------------- HTML FORMULAIRE Modification Profil -->
 
     <main class="inscription-connexion">
         <section class="form_container">
@@ -93,25 +94,8 @@ include("header.php");
 
                 <legend>Modifier son Profil</legend>
                         
-                <?php
-                    // message d'erreur
-                    if (isset($erreur))
-                    {
-                        echo '<span class="message-erreur">' . $erreur .' </span>'; 
-                    }
-                    elseif (isset($message))
-                    {
-                        echo '<span class="message-erreur">' . $message .' </span>'; 
-                    }
-                ?>
-
-                <?php
-                    // affichage username qui ne peut pas être changé
-                    if (isset($dataAccount['username']))
-                    {
-                        echo '<h3>' .htmlspecialchars($dataAccount['username']). '</h3>' ;
-                    }
-                ?>
+                <!-- message erreur -->
+                <span class="message-erreur"> <?php MessageError($message); ?> </span>
                 
                 <!-------- Formulaire avec 'value' préenregistrées -->  
                 <form method="post" action="profil">

@@ -28,12 +28,12 @@ if (isset($_POST['username']) )
 	if (!empty($dataAccount)) {
 
 		$userExist = true;
-		$erreur = "Cet identifiant existe"; 
+		$message = "Cet identifiant existe"; 
 
 	} else {
 
 		$userExist = false;
-		$erreur = "Cet identifiant n'existe pas";
+		$message = "Cet identifiant n'existe pas";
 
   	}
 
@@ -63,7 +63,7 @@ if ($userExist)	{
 
 	else
 	{
-		$erreur = "Ce n'est pas le bon mot de passe";
+		$message = "Ce n'est pas le bon mot de passe";
 	}
 
 } /* else {
@@ -74,7 +74,7 @@ if ($userExist)	{
 
 /*   else
 {
-	$erreur = "Cet identifiant n'existe pas";
+	$message = "Cet identifiant n'existe pas";
 } */
 
 
@@ -100,21 +100,18 @@ include("header.php");
 					// message si la personne viens de changer de mp
 					if (isset($_SESSION['messagePWchanged']))
 					{
-					echo $_SESSION['messagePWchanged'];
+						echo $_SESSION['messagePWchanged'];
 					}
 					// message si la personne viens de s'inscrire
 					if  (isset($_SESSION['messageWelcome']))
 					{
-					echo $_SESSION['messageWelcome'];
+						echo $_SESSION['messageWelcome'];
 					}
 				}
 
-				// message si erreur de connexion
-				if  (isset($erreur))	{
+				// message d'erreur
+				MessageError($message);
 
-					echo $erreur;
-					
-				}
             ?>
             
           </span>

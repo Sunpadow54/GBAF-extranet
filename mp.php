@@ -46,13 +46,13 @@ if (isset($_POST['username']) )
     if (!empty($dataAccount)){
 
         $userExist = true;
-        $erreur = "Cet identifiant existe";
+        $message = "Cet identifiant existe";
         $usernameValid = $_POST['username'];
 
     } else {
         
         $userExist = false;
-        $erreur = "Cet identifiant n'existe pas";
+        $message = "Cet identifiant n'existe pas";
 
     }
 } else {
@@ -69,13 +69,13 @@ if  ($userExist)    {
     $formType = $formQuestion;
     // On donne la question
     $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
-    $erreur = 'répondez à votre question secrète : ';
+    $message = 'répondez à votre question secrète : ';
     // récupère son username pour les autres formulaires
     $_SESSION['username'] = $dataAccount['username'];
 
 } /* else {
 
-    $erreur = 'cet identifiant n\'existe pas';
+    $message = 'cet identifiant n\'existe pas';
 
 } */
     
@@ -87,7 +87,7 @@ if  (isset($_POST['reponse'])){
     $formType = $formQuestion;
     $dataAccount = SearchUser($bdd, $_SESSION['username']);
     $questionUser = $dataAccount['question'];
-    $erreur = 'répondez à votre question secrète : ';
+    $message = 'répondez à votre question secrète : ';
 
     // Si la réponse correspond
     if  ($_POST['reponse'] == $dataAccount['reponse'])  {
@@ -95,12 +95,12 @@ if  (isset($_POST['reponse'])){
         unset($questionUser);
         // On affiche le formulaire de changement de mot de passe
         $formType = $fomPasswordChange;
-        $erreur = 'Vous pouvez changer votre mot de passe : ';
+        $message = 'Vous pouvez changer votre mot de passe : ';
 
     } else {
 
         $questionUser = $dataAccount['question'];
-        $erreur = 'Ce n\'est pas la réponse attendue';
+        $message = 'Ce n\'est pas la réponse attendue';
 
     }
 }
@@ -137,7 +137,7 @@ if  (isset($_POST['password'])) {
     } else  {
 
         // Si le mot de passe n'est pas conforme
-        $erreur ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+        $message ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
     
     }
 
@@ -162,16 +162,8 @@ include("header.php");
 
             <legend>Mot de passe oublié ?</legend>
 
-                <!-- message erreur span-->
-                <span class="message-erreur">
-
-                <?php 
-
-MessageError($erreur);
-
-                ?>
-
-                </span>
+            <!-- message erreur -->
+            <span class="message-erreur"> <?php MessageError($message); ?> </span>
 
             <form method="post"action="mp.php">
                 <p>

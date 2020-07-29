@@ -49,19 +49,19 @@ if (isset($_POST['dataPosted']))    {
 
             } else {
 
-                $erreur ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+                $message ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
             
             }
 
         } else {
 
-          $erreur =" Veuillez remplir tous les champs";
+          $message =" Veuillez remplir tous les champs";
 
         }
 
     } else {     
         // Username existe déjà
-        $erreur = " Ce nom d'utilisateur existe déjà ";
+        $message = " Ce nom d'utilisateur existe déjà ";
     }
 
 }
@@ -79,12 +79,8 @@ include("header.php");
 
         <legend>Créer un compte :</legend>
                     
-        <?php // message d'erreur
-        if (isset($erreur))
-        {
-            echo '<span class="message-erreur">' . $erreur .' </span>'; 
-        }
-        ?>
+        <!-- message erreur -->
+        <span class="message-erreur"> <?php MessageError($message); ?> </span>
 
         <!-- Formulaire avec 'value' préenregistrées -->  
         <form method="post" action="inscription">

@@ -52,14 +52,14 @@ function ValueInputUsername()
 }
 
 
-//  Fonction message erreur
-$erreur = '';
-function MessageError($erreur)
+//  Fonction message erreur / message
+$message = '';
+function MessageError($message)
 {
 
-  if (isset($erreur)) {
+  if (isset($message)) {
 
-    echo  $erreur;
+    echo  $message;
     
   }
 

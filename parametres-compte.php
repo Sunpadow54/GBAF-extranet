@@ -3,7 +3,6 @@
 include("account.php");
 
 
-
 // -------------------------entre sur la page Modification Profil
 if  (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))   {
 
@@ -54,29 +53,30 @@ if  (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))   {
                         $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
                         $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
-                        $message = 'Vos changements ont bien été pris en compte';
+                        $message = 5;
 
                     }
 
                 } else {
 
-                    $message =" Veuillez remplir tous les champs";
+                    $message = 2;
 
                 }
 
         } else {
 
-            $message = " Ce nom d'utilisateur existe déjà ";
+            $message = 10;
 
         }
   
     }
 
 
+
 /* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
 
 
-include("header.php"); 
+include("header.php");
 
 ?>
  
@@ -88,10 +88,10 @@ include("header.php");
                 <legend>Modifier son Profil</legend>
                         
                 <!-- message erreur -->
-                <span class="message-erreur"> <?php IsMessageError($message); ?> </span>
+                <span class="message-erreur"> <?php messageError($message); ?> </span>
                 
                 <!-------- Formulaire avec 'value' préenregistrées -->  
-                <form method="post" action="profil">
+                <form method="post" action="parametres-compte.php">
                     <p>
 
                         <label for="pseudo">Identifiant : </label>
@@ -197,7 +197,9 @@ include("header.php");
                     </p>
                 </form>
 
-                <a href="accueil.php">Retour à l'accueil</a>
+                <a href="mp.php"> changer son mot de passe </a>
+
+                <a href="accueil.php"> Retour à l'accueil </a>
 
             </fieldset>
         </section>

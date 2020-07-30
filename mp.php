@@ -16,20 +16,6 @@ $fomPasswordChange = '<label for="mp">Nouveau mot de passe : </label>
 $formType = $formDefault;
 
 
-/* // Modifie Session username si formulaire envoyé
-if (isset($_POST['username']))
-{
-
-  $_SESSION['username'] = htmlspecialchars($_POST['username']);
-  
-} */
-/* elseif (!isset($_POST['dataPosted']))   {
-
-    $_SESSION = array();
-    session_destroy();
-
-}
- */
 
 /*----------------------- Vérification Utilisateur existe */
 
@@ -46,13 +32,12 @@ if (isset($_POST['username']) )
     if (!empty($dataAccount)){
 
         $userExist = true;
-        $message = "Cet identifiant existe";
         $usernameValid = $_POST['username'];
 
     } else {
         
         $userExist = false;
-        $message = "Cet identifiant n'existe pas";
+        $message = 1;
 
     }
 } else {
@@ -69,7 +54,7 @@ if  ($userExist)    {
     $formType = $formQuestion;
     // On donne la question
     $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
-    $message = 'répondez à votre question secrète : ';
+    $message = 6;
     // récupère son username pour les autres formulaires
     $_SESSION['username'] = $dataAccount['username'];
 
@@ -87,7 +72,7 @@ if  (isset($_POST['reponse'])){
     $formType = $formQuestion;
     $dataAccount = SearchUser($bdd, $_SESSION['username']);
     $questionUser = $dataAccount['question'];
-    $message = 'répondez à votre question secrète : ';
+    $message = 6;
 
     // Si la réponse correspond
     if  ($_POST['reponse'] == $dataAccount['reponse'])  {
@@ -95,12 +80,12 @@ if  (isset($_POST['reponse'])){
         unset($questionUser);
         // On affiche le formulaire de changement de mot de passe
         $formType = $fomPasswordChange;
-        $message = 'Vous pouvez changer votre mot de passe : ';
+        $message = 8;
 
     } else {
 
         $questionUser = $dataAccount['question'];
-        $message = 'Ce n\'est pas la réponse attendue';
+        $message = 7;
 
     }
 }
@@ -130,21 +115,19 @@ if  (isset($_POST['password'])) {
         ));
         $req2->closeCursor();
 
-        $_SESSION['messagePWchanged'] = 'Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter';
+        $message = 9;
+        $_SESSION['message'] = $message;
 
         header('Location: index.php');
 
     } else  {
 
         // Si le mot de passe n'est pas conforme
-        $message ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+        $message = 4;
     
     }
 
 }
-
-
-
 
 
 /* ------------------------------------------------HTML---------------------------------------- */
@@ -160,10 +143,10 @@ include("header.php");
     <section class="form_container">
         <fieldset>
 
-            <legend>Mot de passe oublié ?</legend>
+            <legend> Mot de passe oublié ? </legend>
 
             <!-- message erreur -->
-            <span class="message-erreur"> <?php MessageError($message); ?> </span>
+            <span class="message-erreur"> <?php messageError($message); ?> </span>
 
             <form method="post"action="mp.php">
                 <p>
@@ -187,7 +170,9 @@ include("header.php");
                 </p>
             </form>
 
-            <a href="index.php">Connexion</a>
+            <a href="index.php"> Connexion </a>
+
+            <a href="inscription.php"> créer un compte </a>
 
         </fieldset>
     </section>

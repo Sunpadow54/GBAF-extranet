@@ -20,6 +20,7 @@ catch (Exception $e)
 }
 
 
+
 // Fonction cherche l'utilisateur
 function SearchUser ($bdd, $userName) {
 
@@ -32,43 +33,82 @@ function SearchUser ($bdd, $userName) {
   return $dataAccount;
 }
 
-$message = 0;
-switch ($message)
-{
-  case 0:
-    echo '';
-  break;
-
-  case 1:
-    echo "Cet identifiant n'existe pas";
-  break;
-
-  case 2:
-      echo "Ce n'est pas le bon mot de passe";
-  break;
-
-  case 3:
-    echo "le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
-  break;
-
-  case 4:
-    echo " Veuillez remplir tous les champs";
 
 
-}
+// message / erreur
 
-//  Fonction Affiche message erreur / message
+$message = '';
 
-function IsMessageError($message)
+// message si la personne viens de changer de mp OU viens de s'inscrire
+if (!isset($_POST['connexionSubmit']))
 {
 
-  if (isset($message)) {
-
-    echo  $message;
+    if (isset($_SESSION['message']))
+    {
+        $message = $_SESSION['message'];
+        
+    }
     
-  }
-
+    unset($_SESSION['message']);
 }
+
+//  Fonction message / erreur
+function messageError($message)
+{
+
+	switch ($message)	{
+
+		case 1:
+			echo "Cet identifiant n'existe pas";
+		break;
+
+		case 2:
+			echo "Veuillez remplir tous les champs";
+		break;
+
+		case 3:
+			echo "Ce n'est pas le bon mot de passe";
+		break;
+
+		case 4:
+			echo "Le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+		break;
+
+		// Paramètre-compte modification
+		case 5:
+			echo "Vos changements ont bien été pris en compte";
+		break;
+
+		// Modification MP
+		case 6:
+			echo "répondez à votre question secrète : ";
+		break;
+
+		case 7:
+			echo "Ce n'est pas la réponse attendue";
+		break;
+
+		case 8:
+			echo "Vous pouvez changer votre mot de passe : ";
+		break;
+
+		case 9:
+			echo "Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter";
+		break;
+
+		// inscription
+		case 10:
+			echo "Cet identifiant existe déjà ";
+		break;
+
+		// après inscription
+		case 11:
+			echo "Bienvenue ! Vous pouvez vous connecter";
+		break;
+
+	}
+}
+
 
 
 // Fonction garde en mémoire la value postée de l'username
@@ -89,6 +129,8 @@ function ValueInputUsername()
 
 }
 
+
+
 // FONCTION pour effacer les valeurs de session 
 function UnsetPreviousSession()
 {
@@ -96,6 +138,8 @@ function UnsetPreviousSession()
 }
 
 
+
+// FONCTION pour effacer toute session
 function deleteSession()
 {
   $_SESSION = array();

@@ -42,26 +42,28 @@ if (isset($_POST['dataPosted']))    {
 
                 $req2->closeCursor();
 
+                $message = 11;
+
                 $_SESSION['username'] = htmlspecialchars($_POST['username']);
-                $_SESSION['messageWelcome'] = 'Bienvenue ! Vous pouvez vous connecter';
+                $_SESSION['message'] = $message;
 
                 header('Location: index.php');
 
             } else {
 
-                $message ="le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+                $message = 4;
             
             }
 
         } else {
 
-          $message =" Veuillez remplir tous les champs";
+          $message = 2;
 
         }
 
     } else {     
         // Username existe déjà
-        $message = " Ce nom d'utilisateur existe déjà ";
+        $message = 10;
     }
 
 }
@@ -77,10 +79,10 @@ include("header.php");
     <section class="form_container">
     <fieldset>
 
-        <legend>Créer un compte :</legend>
+        <legend> Créer un compte : </legend>
                     
         <!-- message erreur -->
-        <span class="message-erreur"> <?php MessageError($message); ?> </span>
+        <span class="message-erreur"> <?php messageError($message); ?> </span>
 
         <!-- Formulaire avec 'value' préenregistrées -->  
         <form method="post" action="inscription">
@@ -162,7 +164,9 @@ include("header.php");
             </p>
         </form>
 
-        <a href="index.php">se connecter</a>
+        <a href="index.php"> se connecter </a>
+
+        <a href="mp.php"> mot de passe oublié ? </a>
 
         </fieldset>
     </section>

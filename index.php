@@ -3,16 +3,6 @@
 include("account.php");
 
 
-
-/* // Modifie Session username si formulaire envoyé
-if (isset($_POST['username']))
-{
-  // Modifie Session username si formulaire envoyé
-  $_SESSION['username'] = htmlspecialchars($_POST['username']);
-  
-} */
-
-
 /*--------------------------- Vérification Utilisateur existe */
 
 if (isset($_POST['username']) )
@@ -28,12 +18,12 @@ if (isset($_POST['username']) )
 	if (!empty($dataAccount)) {
 
 		$userExist = true;
-		$message = "Cet identifiant existe"; 
+		/* $message = "Cet identifiant existe"; */ 
 
 	} else {
 
 		$userExist = false;
-		$message = "Cet identifiant n'existe pas";
+		$message = 1;
 
   	}
 
@@ -63,21 +53,10 @@ if ($userExist)	{
 
 	else
 	{
-		$message = "Ce n'est pas le bon mot de passe";
+		$message = 3;
 	}
 
-} /* else {
-
-	echo 'nope' ;
-
-} */
-
-/*   else
-{
-	$message = "Cet identifiant n'existe pas";
-} */
-
-
+}
 
 include("header.php");
 
@@ -92,29 +71,7 @@ include("header.php");
 
           <legend> Se connecter : </legend>
 
-          <span class="message"> 
-            
-            <?php
-				if (!isset($_POST['connexionSubmit']))
-				{
-					// message si la personne viens de changer de mp
-					if (isset($_SESSION['messagePWchanged']))
-					{
-						echo $_SESSION['messagePWchanged'];
-					}
-					// message si la personne viens de s'inscrire
-					if  (isset($_SESSION['messageWelcome']))
-					{
-						echo $_SESSION['messageWelcome'];
-					}
-				}
-
-				// message d'erreur
-				MessageError($message);
-
-            ?>
-            
-          </span>
+          <span class="message"> <?php messageError($message); ?> </span>
 
           <form method="post"action="index.php">
             <p>
@@ -132,9 +89,9 @@ include("header.php");
             </p>
           </form>
 
-          <a href="mp.php"> mot de passe oublié ?</a>
+          <a href="mp.php"> mot de passe oublié ? </a>
 
-          <a href="inscription.php">créer un compte</a>
+          <a href="inscription.php"> créer un compte </a>
 
         </fieldset>
       </section>

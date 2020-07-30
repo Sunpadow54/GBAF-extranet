@@ -20,7 +20,7 @@ catch (Exception $e)
 }
 
 
-// Fonction cherche utilisateur
+// Fonction cherche l'utilisateur
 function SearchUser ($bdd, $userName) {
 
   $req = $bdd->prepare('SELECT * FROM account WHERE username = ?');
@@ -30,6 +30,44 @@ function SearchUser ($bdd, $userName) {
   $req->closeCursor();
 
   return $dataAccount;
+}
+
+$message = 0;
+switch ($message)
+{
+  case 0:
+    echo '';
+  break;
+
+  case 1:
+    echo "Cet identifiant n'existe pas";
+  break;
+
+  case 2:
+      echo "Ce n'est pas le bon mot de passe";
+  break;
+
+  case 3:
+    echo "le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
+  break;
+
+  case 4:
+    echo " Veuillez remplir tous les champs";
+
+
+}
+
+//  Fonction Affiche message erreur / message
+
+function IsMessageError($message)
+{
+
+  if (isset($message)) {
+
+    echo  $message;
+    
+  }
+
 }
 
 
@@ -50,21 +88,6 @@ function ValueInputUsername()
   }
 
 }
-
-
-//  Fonction message erreur / message
-$message = '';
-function MessageError($message)
-{
-
-  if (isset($message)) {
-
-    echo  $message;
-    
-  }
-
-}
-
 
 // FONCTION pour effacer les valeurs de session 
 function UnsetPreviousSession()

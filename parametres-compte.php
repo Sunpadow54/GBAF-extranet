@@ -3,13 +3,6 @@
 include("account.php");
 
 
-// FONCTION pour effacer les valeurs de session
-function UnsetPreviousSession()
-{
-    unset($_SESSION['name']);
-    unset($_SESSION['prenom']);
-}
-
 
 // -------------------------entre sur la page Modification Profil
 if  (isset($_SESSION['id_user']) && !empty($_SESSION['id_user']))   {
@@ -95,7 +88,7 @@ include("header.php");
                 <legend>Modifier son Profil</legend>
                         
                 <!-- message erreur -->
-                <span class="message-erreur"> <?php MessageError($message); ?> </span>
+                <span class="message-erreur"> <?php IsMessageError($message); ?> </span>
                 
                 <!-------- Formulaire avec 'value' préenregistrées -->  
                 <form method="post" action="profil">

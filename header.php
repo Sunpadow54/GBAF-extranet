@@ -65,7 +65,7 @@ catch (Exception $e)
 
                 <!-- bouton Modifier son Profil -->
                 <li>
-                    <a href="profil.php">Paramètres du compte</a>
+                    <a href="parametres-compte.php">Paramètres du compte</a>
                 </li>
                 
             </ul>

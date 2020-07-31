@@ -1,7 +1,16 @@
-<?php 
+<?php
 session_start();
-$_SESSION = array();
 
-session_destroy();
-header('Location: index.php');
-?>
+include("account.php");
+
+if (isset($_SESSION['wantMpChange'])) {
+
+    deleteSession();
+
+    header('Location: mp.php');
+} else {
+
+    deleteSession();
+
+    header('Location: index.php');
+}

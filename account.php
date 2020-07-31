@@ -18,6 +18,23 @@ try {
 
 
 
+// FONCTION pour effacer les valeurs de session 
+function UnsetPreviousSession()
+{
+    unset($_SESSION['username']);
+}
+
+
+
+// FONCTION pour effacer toute session
+function deleteSession()
+{
+    $_SESSION = array();
+    session_destroy();
+}
+
+
+
 // Fonction cherche l'utilisateur
 function SearchUser($bdd, $userName)
 {
@@ -138,18 +155,12 @@ function defaultInputValue($valuePosted, $oldDataUser)
 }
 
 
+//Fonction pour les values de la question/réponse dans paramètres de compte
+function ValueInputQandR($valuePosted) {
 
-// FONCTION pour effacer les valeurs de session 
-function UnsetPreviousSession()
-{
-    unset($_SESSION['username']);
-}
+    if (isset($_POST['dataSubmit'])){
 
+        echo htmlspecialchars($_POST[$valuePosted]);
+    }
 
-
-// FONCTION pour effacer toute session
-function deleteSession()
-{
-    $_SESSION = array();
-    session_destroy();
 }

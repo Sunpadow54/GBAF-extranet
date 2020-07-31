@@ -2,6 +2,7 @@
 
 include("account.php");
 
+$_SESSION['wantMpChange'] = 'yes';
 
 
 // -------------------------entre sur la page Modification Profil
@@ -123,7 +124,7 @@ include("header.php");
                         type="textarea"
                         id="question"
                         name="question"
-                        value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
+                        value="<?php ValueInputQandR('question');?>"
                     />
 
 
@@ -134,7 +135,7 @@ include("header.php");
                         type="textarea" 
                         id="reponse" 
                         name="reponse"
-                        value="<?php defaultInputValue('reponse', $dataAccountOld['reponse']);?>"
+                        value="<?php ValueInputQandR('reponse');?>"
                     />
 
                     <label for="mp">Entrez votre mot de passe: </label>
@@ -160,7 +161,7 @@ include("header.php");
                 </p>
             </form>
 
-            <a href="mp.php"> changer son mot de passe </a>
+            <a href="deconnexion.php"> changer son mot de passe </a>
 
             <a href="accueil.php"> Retour à l'accueil </a>
         </fieldset>

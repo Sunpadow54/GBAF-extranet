@@ -10,7 +10,7 @@ include("account.php");
 if (isset($_POST['dataSubmit'])) {
 
     // Cherche si l'utilisateur dans la BDD (voir account.php)
-    $dataAccount = SearchUser($bdd, $_POST['username']);
+    $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'username n'existe pas
     if (!$dataAccount) {

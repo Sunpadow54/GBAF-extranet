@@ -9,13 +9,13 @@ $_SESSION['wantMpChange'] = 'yes';
 if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
 
     // Cherche L'utilisateur dans la BDD (voir account.php)
-    $dataAccountOld = SearchUser($bdd, $_SESSION['username']);
+    $dataAccountOld = searchUser($bdd, $_SESSION['username']);
 
     // Si on change ses infos
     if (isset($_POST['dataSubmit'])) {
 
         //on cherche à savoir si l'username existe déjà
-        $dataAccount = SearchUser($bdd, $_POST['username']);
+        $dataAccount = searchUser($bdd, $_POST['username']);
 
         // Si l'username n'existe pas
         if (!$dataAccount or $dataAccountOld['username'] == $_POST['username']) {
@@ -49,7 +49,7 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
                     $req_update_infos_user->closeCursor();
 
                     // Récupère les nouvelles valeurs de SESSION (fonction voir account.php)
-                    $dataAccountNew = SearchUser($bdd, $_SESSION['username']);
+                    $dataAccountNew = searchUser($bdd, $_SESSION['username']);
 
                     $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
                     $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
@@ -124,7 +124,7 @@ include("header.php");
                         type="textarea"
                         id="question"
                         name="question"
-                        value="<?php ValueInputQandR('question');?>"
+                        value="<?php valueInputQandR('question');?>"
                     />
 
 
@@ -135,7 +135,7 @@ include("header.php");
                         type="textarea" 
                         id="reponse" 
                         name="reponse"
-                        value="<?php ValueInputQandR('reponse');?>"
+                        value="<?php valueInputQandR('reponse');?>"
                     />
 
                     <label for="mp">Entrez votre mot de passe: </label>
@@ -151,7 +151,7 @@ include("header.php");
                         type="submit"
                         name="dataSubmit"
                         value="Envoyer"
-                        onclick="UnsetPreviousSession()"
+                        onclick="unsetPreviousSession()"
                     />
 
                     <span>

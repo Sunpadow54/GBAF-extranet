@@ -7,7 +7,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     include("header.php");
 
     // fonction recherche les infos des acteurs dans la bdd
-    function SearchActeurs($bdd)
+    function searchActeurs($bdd)
     {
 
         $req_data_acteur = $bdd->prepare('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
@@ -103,7 +103,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                 <nav>
                     <ul>
                         <!-- <li> acteur_seul-->
-                        <?php SearchActeurs($bdd); ?>
+                        <?php searchActeurs($bdd); ?>
                     </ul>
                 </nav>
             </article>

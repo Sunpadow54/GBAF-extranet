@@ -11,7 +11,7 @@ if (isset($_POST['username'])) {
     $_SESSION['username'] = htmlspecialchars($_POST['username']);
 
     // cherche l'utilisateur
-    $dataAccount = SearchUser($bdd, $_POST['username']);
+    $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'utilisateur existe
     if (!empty($dataAccount)) {
@@ -71,7 +71,7 @@ include("header.php");
 								id="pseudo"
 								name="username"
 								required
-								value="<?php ValueInputUsername(); ?>"
+								value="<?php valueInputUsername(); ?>"
 							/>
 
 							<label for="mp">Mot de passe : </label>
@@ -87,7 +87,7 @@ include("header.php");
 								type="submit"
 								name="connexionSubmit"
 								value="Connexion"
-								onclick=" UnsetPreviousSession()"
+								onclick=" unsetPreviousSession()"
 							/>
 
 							<span

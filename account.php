@@ -19,7 +19,7 @@ try {
 
 
 // FONCTION pour effacer les valeurs de session 
-function UnsetPreviousSession()
+function unsetPreviousSession()
 {
     unset($_SESSION['username']);
 }
@@ -36,7 +36,7 @@ function deleteSession()
 
 
 // Fonction cherche l'utilisateur
-function SearchUser($bdd, $userName)
+function searchUser($bdd, $userName)
 {
 
     $req_select_info_user = $bdd->prepare('SELECT * FROM account WHERE username = ?');
@@ -127,7 +127,7 @@ $mpValid = "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#";
 
 
 // Fonction garde en mémoire la value postée de l'username
-function ValueInputUsername()
+function valueInputUsername()
 {
 
     if (isset($_SESSION['username']) && !isset($connexionSubmit)) {
@@ -156,7 +156,7 @@ function defaultInputValue($valuePosted, $oldDataUser)
 
 
 //Fonction pour les values de la question/réponse dans paramètres de compte
-function ValueInputQandR($valuePosted) {
+function valueInputQandR($valuePosted) {
 
     if (isset($_POST['dataSubmit'])){
 

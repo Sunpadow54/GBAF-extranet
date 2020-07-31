@@ -25,7 +25,7 @@ if (isset($_POST['username'])) {
     $_SESSION['username'] = htmlspecialchars($_POST['username']);
 
     // cherche l'utilisateur
-    $dataAccount = SearchUser($bdd, $_POST['username']);
+    $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'utilisateur existe
     if (!empty($dataAccount)) {
@@ -65,7 +65,7 @@ if ($userExist) {
 if (isset($_POST['reponse'])) {
 
     $formType = $formQuestion;
-    $dataAccount = SearchUser($bdd, $_SESSION['username']);
+    $dataAccount = searchUser($bdd, $_SESSION['username']);
     $questionUser = $dataAccount['question'];
     $message = 6;
 

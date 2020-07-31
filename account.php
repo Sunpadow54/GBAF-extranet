@@ -22,11 +22,11 @@ try {
 function SearchUser($bdd, $userName)
 {
 
-    $req = $bdd->prepare('SELECT * FROM account WHERE username = ?');
-    $req->bindValue(1, $userName);
-    $req->execute();
-    $dataAccount = $req->fetch();
-    $req->closeCursor();
+    $req_data_user = $bdd->prepare('SELECT * FROM account WHERE username = ?');
+    $req_data_user->bindValue(1, $userName);
+    $req_data_user->execute();
+    $dataAccount = $req_data_user->fetch();
+    $req_data_user->closeCursor();
 
     return $dataAccount;
 }

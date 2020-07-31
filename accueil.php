@@ -10,10 +10,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     function SearchActeurs($bdd)
     {
 
-        $req = $bdd->prepare('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
-        $req->execute();
+        $req_data_acteur = $bdd->prepare('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
+        $req_data_acteur->execute();
 
-        while ($dataPartenaires = $req->fetch()) {
+        while ($dataPartenaires = $req_data_acteur->fetch()) {
 
             echo '<li class="acteur_seul">';
             echo $dataPartenaires['logo'];
@@ -22,7 +22,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             echo '<a href="partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
             echo '</li>';
         }
-        $req->closeCursor();
+        $req_data_acteur->closeCursor();
     }
 
 

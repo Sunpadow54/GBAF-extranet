@@ -32,21 +32,21 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
                 if ($isPasswordCorrect && !empty($_POST['password'])) {
 
                     // Change les infos de la BDD
-                    $req3 = $bdd->prepare('UPDATE account SET 
+                    $req_update_infos_user = $bdd->prepare('UPDATE account SET 
                                                 nom = :nom, 
                                                 prenom = :prenom,
                                                 question = :question,
                                                 reponse = :reponse
                                                 WHERE id_user = :id_user
                                                 ');
-                    $req3->execute(array(
+                    $req_update_infos_user->execute(array(
                         'nom' => ($_POST['nom']),
                         'prenom' => ($_POST['prenom']),
                         'question' => ($_POST['question']),
                         'reponse' => ($_POST['reponse']),
                         'id_user' => $dataAccount['id_user']
                     ));
-                    $req3->closeCursor();
+                    $req_update_infos_user->closeCursor();
 
                     // Récupère les nouvelles valeurs de SESSION (fonction voir account.php)
                     $dataAccountNew = SearchUser($bdd, $_SESSION['username']);

@@ -10,32 +10,32 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
 
     // A. Cherche les infos de l'Acteur
-    $req = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
-    $req->execute(array($idActeur));
-    $dataActeur = $req->fetch();
-    $req->closeCursor();
+    $req_data_acteur = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+    $req_data_acteur->execute(array($idActeur));
+    $dataActeur = $req_data_acteur->fetch();
+    $req_data_acteur->closeCursor();
 
 
     // B. Compte le nombre de commentaire sur l'acteur
-    $req2 = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
-    $req2->execute(array($idActeur));
-    $commentsPosted = $req2->fetch();
+    $req_nbr_comments = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
+    $req_nbr_comments->execute(array($idActeur));
+    $commentsPosted = $req_nbr_comments->fetch();
     $nbrcommentsPosted = $commentsPosted['nbrComments'];
-    $req2->closeCursor();
+    $req_nbr_comments->closeCursor();
 
 
     // C. Ajoute un nouveau commentaire
     if (isset($_POST['newCommentPosted']) and !empty($_POST['post'])) {
 
-        $req4 = $bdd->prepare('INSERT into post (id_user, id_acteur, date_add, post)
+        $req_insert_comment = $bdd->prepare('INSERT into post (id_user, id_acteur, date_add, post)
                                 VALUES (:id_user, :id_acteur, NOW(), :post)
                                 ');
-        $req4->execute(array(
+        $req_insert_comment->execute(array(
             'id_user' => $_SESSION['id_user'],
             'id_acteur' => $dataActeur['id_acteur'],
             'post' => ($_POST['post'])
         ));
-        $req4->closeCursor();
+        $req_insert_comment->closeCursor();
     }
 
 
@@ -43,17 +43,17 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     function nbrLikeDislike($idActeur, $voteValue, $bdd)
     {
 
-        $req5 = $bdd->prepare('SELECT COUNT(vote) as `nombre` FROM `vote` WHERE id_acteur = ? AND vote = ?');
+        $req_nbr_like_dislike = $bdd->prepare('SELECT COUNT(vote) as `nombre` FROM `vote` WHERE id_acteur = ? AND vote = ?');
 
-        $req5->bindValue(1, $idActeur, PDO::PARAM_INT);
-        $req5->bindValue(2, $voteValue, PDO::PARAM_STR);
+        $req_nbr_like_dislike->bindValue(1, $idActeur, PDO::PARAM_INT);
+        $req_nbr_like_dislike->bindValue(2, $voteValue, PDO::PARAM_STR);
 
-        $req5->execute();
-        $LikeOrDislike = $req5->fetch();
-        $req5->closeCursor();
+        $req_nbr_like_dislike->execute();
+        $likeOrDislike = $req_nbr_like_dislike->fetch();
+        $req_nbr_like_dislike->closeCursor();
 
-        if (isset($LikeOrDislike['nombre'])) {
-            echo $LikeOrDislike['nombre'];
+        if (isset($likeOrDislike['nombre'])) {
+            echo $likeOrDislike['nombre'];
         } else {
             echo "0";
         }
@@ -61,10 +61,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
 
     // E. Cherche si l'user a like ou a dislike
-    $req6 = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
-    $req6->execute(array($_GET['id_acteur'], $_SESSION['id_user']));
-    $userVote = $req6->fetch();
-    $req6->closeCursor();
+    $req_vote_user = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
+    $req_vote_user->execute(array($_GET['id_acteur'], $_SESSION['id_user']));
+    $userVote = $req_vote_user->fetch();
+    $req_vote_user->closeCursor();
 
     if (isset($userVote['vote'])) {
         if ($userVote['vote'] == 'like') {
@@ -83,7 +83,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     // F. Fonction qui affiche tous les commentaires sur l'acteur
     function listCommentaires($bdd, $idActeur)
     {
-        $req3 = $bdd->prepare('SELECT  p.post as comment, 
+        $req_comment = $bdd->prepare('SELECT  p.post as comment, 
                                         DATE_FORMAT(p.date_add, "%d/%m/%Y") as commentDate,
                                         DATE_FORMAT(p.date_add, "%d/%m/%Y %T") as commentDateOrder, 
                                         a.prenom as autorName
@@ -93,10 +93,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                                 WHERE p.id_acteur = ?
                                 ORDER by commentDateOrder DESC');
 
-        $req3->bindValue(1, $idActeur, PDO::PARAM_INT);
-        $req3->execute();
+        $req_comment->bindValue(1, $idActeur, PDO::PARAM_INT);
+        $req_comment->execute();
 
-        while ($dataComment = $req3->fetch()) {
+        while ($dataComment = $req_comment->fetch()) {
 
             echo '<li>';
             echo '<p>' . htmlspecialchars($dataComment['autorName'])  . '</p>';
@@ -105,7 +105,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             echo '</li>';
         }
 
-        $req3->closeCursor();
+        $req_comment->closeCursor();
     }
 
     /* 	------------------------------------------------ HTML page Partenaire ------------------------------------------------ */

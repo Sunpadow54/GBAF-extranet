@@ -98,15 +98,15 @@ if (isset($_POST['password'])) {
         $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         // On remplace le mp dans la base de données
-        $req2 = $bdd->prepare('UPDATE account SET
+        $req_update_password = $bdd->prepare('UPDATE account SET
                                 password = :password
                                 WHERE username = :username
                             ');
-        $req2->execute(array(
+        $req_update_password->execute(array(
             'password' => $passwordHashed,
             'username' => $_SESSION['username']
         ));
-        $req2->closeCursor();
+        $req_update_password->closeCursor();
 
         $message = 9;
         $_SESSION['message'] = $message;

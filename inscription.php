@@ -31,9 +31,9 @@ if (isset($_POST['dataPosted'])) {
                 $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
                 // Insère le nouvel Utilisateur dans la BDD
-                $req2 = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) 
+                $req_add_user = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) 
                                         VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
-                $req2->execute(array(
+                $req_add_user->execute(array(
                     'nom' => ($_POST['nom']),
                     'prenom' => ($_POST['prenom']),
                     'username' => ($_POST['username']),
@@ -42,7 +42,7 @@ if (isset($_POST['dataPosted'])) {
                     'reponse' => ($_POST['reponse'])
                 ));
 
-                $req2->closeCursor();
+                $req_add_user->closeCursor();
 
                 $message = 11;
 

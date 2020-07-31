@@ -3,22 +3,21 @@
 include("account.php");
 
 
+
 // -------------------------entre sur la page Modification Profil
 if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
 
     // Cherche L'utilisateur dans la BDD (voir account.php)
-    $dataAccount = SearchUser($bdd, $_SESSION['username']);
+    $dataAccountOld = SearchUser($bdd, $_SESSION['username']);
 
     // Si on change ses infos
     if (isset($_POST['dataSubmit'])) {
 
         //on cherche à savoir si l'username existe déjà
-        $req2 = $bdd->prepare('SELECT username FROM account WHERE username = ?');
-        $req2->execute(array($_POST['username']));
-        $isUsernameExist = $req2->fetch();
+        $dataAccount = SearchUser($bdd, $_POST['username']);
 
         // Si l'username n'existe pas
-        if (!$isUsernameExist or $dataAccount['username'] == $_POST['username']) {
+        if (!$dataAccount or $dataAccountOld['username'] == $_POST['username']) {
 
             // Verification tous les champs ont été remplis
             if (
@@ -27,7 +26,7 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
             ) {
 
                 // et que le mot de passe est correct
-                $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+                $isPasswordCorrect = password_verify($_POST['password'], $dataAccountOld['password']);
 
                 if ($isPasswordCorrect && !empty($_POST['password'])) {
 
@@ -55,6 +54,9 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
                     $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
                     $message = 5;
+                } else {
+
+                    $message = 3;
                 }
             } else {
 
@@ -90,16 +92,8 @@ include("header.php");
                         type="text"
                         id="pseudo"
                         name="username"
-                        size="20" <?php
-                                        // VALUE USERNAME si il n'y a pas eu de submit
-                                        if (isset($dataAccount['username']) && !isset($_POST['dataSubmit'])) {
-                                            echo 'value = "' . htmlspecialchars($dataAccount['username']) . '"';
-                                        }
-                                        // Sinon affiche le nouveau username
-                                        elseif (isset($_POST['dataSubmit'])) {
-                                            echo 'value="' . htmlspecialchars($_POST['username']) . '"';
-                                        }
-                                        ?>
+                        size="20" 
+                        value="<?php defaultInputValue('username', $dataAccountOld['username']);?>"
                     />
 
                     <label for="nom">Nom : </label>
@@ -107,16 +101,8 @@ include("header.php");
                         type="text"
                         id="nom"
                         name="nom"
-                        size="30" <?php
-                                        // VALUE NOM si il n'y a pas eu de submit
-                                        if (isset($dataAccount['nom']) && !isset($_POST['dataSubmit'])) {
-                                            echo 'value = "' . htmlspecialchars($dataAccount['nom']) . '"';
-                                        }
-                                        // Sinon affiche le nouveau nom
-                                        elseif (isset($_POST['dataSubmit'])) {
-                                            echo 'value="' . htmlspecialchars($_POST['nom']) . '"';
-                                        }
-                                        ?>
+                        size="30"
+                        value="<?php defaultInputValue('nom', $dataAccountOld['nom']);?>"
                     />
 
 
@@ -125,16 +111,8 @@ include("header.php");
                         type="text"
                         id="prenom"
                         name="prenom"
-                        size="30" <?php
-                                        // VALUE PRENOM si il n'y a pas eu de submit
-                                        if (isset($dataAccount['prenom']) && !isset($_POST['dataSubmit'])) {
-                                            echo 'value = "' . htmlspecialchars($dataAccount['prenom']) . '"';
-                                        }
-                                        // Sinon on affiche le nouveau prenom
-                                        elseif (isset($_POST['dataSubmit'])) {
-                                            echo 'value="' . htmlspecialchars($_POST['prenom']) . '"';
-                                        }
-                                        ?>
+                        size="30"
+                        value="<?php defaultInputValue('prenom', $dataAccountOld['prenom']);?>"
                     />
 
 
@@ -144,16 +122,8 @@ include("header.php");
                     <input
                         type="textarea"
                         id="question"
-                        name="question" <?php
-                                        // VALUE QUESTION si il n'y a pas eu de submit
-                                        if (isset($dataAccount['question']) && !isset($_POST['dataSubmit'])) {
-                                            echo 'value = "' . htmlspecialchars($dataAccount['question']) . '"';
-                                        }
-                                        // Sinon on affiche la nouvelle question
-                                        elseif (isset($_POST['dataSubmit'])) {
-                                            echo 'value="' . htmlspecialchars($_POST['question']) . '"';
-                                        }
-                                        ?>
+                        name="question"
+                        value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
                     />
 
 
@@ -163,16 +133,8 @@ include("header.php");
                     <input
                         type="textarea" 
                         id="reponse" 
-                        name="reponse" <?php
-                                        // VALUE REPONSE si il n'y a pas eu de submit
-                                        if (isset($dataAccount['reponse']) && !isset($_POST['dataSubmit'])) {
-                                            echo 'value = "' . htmlspecialchars($dataAccount['reponse']) . '"';
-                                        }
-                                        // Sinon on affiche la nouvelle reponse
-                                        elseif (isset($_POST['dataSubmit'])) {
-                                            echo 'value="' . htmlspecialchars($_POST['reponse']) . '"';
-                                        }
-                                        ?>
+                        name="reponse"
+                        value="<?php defaultInputValue('reponse', $dataAccountOld['reponse']);?>"
                     />
 
                     <label for="mp">Entrez votre mot de passe: </label>

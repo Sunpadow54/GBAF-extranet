@@ -7,11 +7,10 @@ include("account.php");
 
 
 // Verifie si les variables ont été crées
-if (isset($_POST['dataPosted'])) {
+if (isset($_POST['dataSubmit'])) {
 
     // Cherche si l'utilisateur dans la BDD (voir account.php)
     $dataAccount = SearchUser($bdd, $_POST['username']);
-
 
     // Si l'username n'existe pas
     if (!$dataAccount) {
@@ -22,7 +21,6 @@ if (isset($_POST['dataPosted'])) {
             && !empty($_POST['username']) && !empty($_POST['password'])
             && !empty($_POST['question']) && !empty($_POST['reponse'])
         ) {
-
 
             // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
             if (preg_match($mpValid, $_POST['password'])) {
@@ -90,11 +88,8 @@ include("header.php");
 						type="text"
 						id="pseudo"
 						name="username"
-						size="20" <?php
-									if (isset($_POST['username'])) {
-										echo 'value = "' . htmlspecialchars($_POST['username']) . '"';
-									}
-									?>
+                        size="20"
+                        value="<?php defaultInputValue('username', '');?>"
 					/>
 
 					<label for="mp">Mot de passe : </label>
@@ -110,11 +105,8 @@ include("header.php");
 						type="text" 
 						id="nom" 
 						name="nom" 
-						size="30" <?php
-                                            if (isset($_POST['nom'])) {
-                                                echo 'value = "' . htmlspecialchars($_POST['nom']) . '"';
-                                            }
-                                            ?>
+                        size="30"
+                        value="<?php defaultInputValue('nom', '');?>"
 					/>
 
                     <label for="prenom">Prénom : </label>
@@ -122,11 +114,8 @@ include("header.php");
 						type="text" 
 						id="prenom" 
 						name="prenom" 
-						size="30" <?php
-                                            if (isset($_POST['prenom'])) {
-                                                echo 'value = "' . htmlspecialchars($_POST['prenom']) . '"';
-                                            }
-                                            ?>
+                        size="30"
+                        value="<?php defaultInputValue('prenom', '');?>"
 					/>
 
                     <label for="question">
@@ -135,11 +124,8 @@ include("header.php");
 					<input 
 						type="textarea" 
 						id="question" 
-						name="question" <?php
-											if (isset($_POST['question'])) {
-												echo 'value = "' . htmlspecialchars($_POST['question']) . '"';
-											}
-											?>
+                        name="question"
+                        value="<?php defaultInputValue('question', '');?>"
 					/>
 
                     <label for="reponse">
@@ -148,17 +134,14 @@ include("header.php");
 					<input 
 						type="textarea" 
 						id="reponse" 
-						name="reponse" <?php
-											if (isset($_POST['reponse'])) {
-												echo 'value = "' . htmlspecialchars($_POST['reponse']) . '"';
-											}
-											?>
-					/>
+                        name="reponse"
+                        value="<?php defaultInputValue('reponse', '');?>"
+                    />
 
 					<input
 						class="button-envoyer"
 						type="submit"
-						name="dataPosted"
+						name="dataSubmit"
 						value="Envoyer"
 					/>
 

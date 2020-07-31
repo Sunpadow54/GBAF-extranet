@@ -22,11 +22,11 @@ try {
 function SearchUser($bdd, $userName)
 {
 
-    $req_data_user = $bdd->prepare('SELECT * FROM account WHERE username = ?');
-    $req_data_user->bindValue(1, $userName);
-    $req_data_user->execute();
-    $dataAccount = $req_data_user->fetch();
-    $req_data_user->closeCursor();
+    $req_select_info_user = $bdd->prepare('SELECT * FROM account WHERE username = ?');
+    $req_select_info_user->bindValue(1, $userName);
+    $req_select_info_user->execute();
+    $dataAccount = $req_select_info_user->fetch();
+    $req_select_info_user->closeCursor();
 
     return $dataAccount;
 }
@@ -119,6 +119,21 @@ function ValueInputUsername()
     } elseif (isset($connexionSubmit)) {
 
         echo htmlspecialchars($_POST['username']);
+    }
+}
+
+
+
+// Fonction garde en mémoire les infos postées
+function defaultInputValue($valuePosted, $oldDataUser)
+{
+
+    if (isset($_POST['dataSubmit'])){
+
+        echo htmlspecialchars($_POST[$valuePosted]);
+    } else {
+
+        echo htmlspecialchars($oldDataUser);
     }
 }
 

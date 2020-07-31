@@ -17,7 +17,7 @@ if (isset($_POST['username'])) {
     if (!empty($dataAccount)) {
 
         $userExist = true;
-        /* $message = "Cet identifiant existe"; */
+
     } else {
 
         $userExist = false;

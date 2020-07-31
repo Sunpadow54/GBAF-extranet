@@ -1,56 +1,55 @@
 /* ------------------------------ Global ------------------------------*/
 :root {
-    --gutter: 80px;
+	--gutter: 80px;
 }
 
 /* annule les :hover*/
-.header-profil:hover .header-profil_overlay, .header-profil > label + a:hover, .header-profil_overlay:hover, .acteurs_list ul li a:hover, .commentaires-new label:hover, .inscription-connexion > fieldset > a:hover{
-    display:none;
+.header-profil:hover .header-profil_overlay,
+.header-profil > label + a:hover,
+.header-profil_overlay:hover,
+.acteurs_list ul li a:hover,
+.commentaires-new label:hover,
+.inscription-connexion > fieldset > a:hover {
+	display: none;
 }
-
 
 /* ----------------------- HEADER */
 
- /* Profil*/
- /*  bouton modifier son profil*/
-.header-profil > li:last-child{
-    opacity: 1;
+/* Profil*/
+/*  bouton modifier son profil*/
+.header-profil > li:last-child {
+	opacity: 1;
 }
-
 
 /* ----------------------- MAIN $ textes */
 
-main{
-    min-width: 500px;
+main {
+	min-width: 500px;
 }
 
-.text{
-    margin-right:var(--gutter_text);
-    margin-left:var(--gutter_text);
+.text {
+	margin-right: var(--gutter_text);
+	margin-left: var(--gutter_text);
 }
-
 
 /* ------------------------------ Accueil Connecté------------------------------*/
-
 
 /* ------------------------------ Index / Inscription / Modifier son Profil / MP ------------------------------*/
 
 /* Section */
-.form_container{
-    max-width: 500px;
+.form_container {
+	max-width: 500px;
 }
-    .form_container fieldset{
-        border:none;
-        font-size: 0.9em;
-    }
-    @media all and (orientation : portrait){
-        .form_container fieldset{
-            font-size: 1.2em;
-        }
-    }
-        /* liens vers index ou accueil .. */
-        .form_container > fieldset > a{
-            text-decoration: underline;
-        }
-
-    
+.form_container fieldset {
+	border: none;
+	font-size: 0.9em;
+}
+@media all and (orientation: portrait) {
+	.form_container fieldset {
+		font-size: 1.2em;
+	}
+}
+/* liens vers index ou accueil .. */
+.form_container > fieldset > a {
+	text-decoration: underline;
+}

@@ -5,96 +5,103 @@ include("account.php");
 
 /*--------------------------- Vérification Utilisateur existe */
 
-if (isset($_POST['username']) )
-{
+if (isset($_POST['username'])) {
 
-	// Modifie Session username si formulaire envoyé
-	$_SESSION['username'] = htmlspecialchars($_POST['username']);
+    // Modifie Session username si formulaire envoyé
+    $_SESSION['username'] = htmlspecialchars($_POST['username']);
 
-	// cherche l'utilisateur
-	$dataAccount = SearchUser($bdd, $_POST['username']);
+    // cherche l'utilisateur
+    $dataAccount = SearchUser($bdd, $_POST['username']);
 
-	// Si l'utilisateur existe
-	if (!empty($dataAccount)) {
+    // Si l'utilisateur existe
+    if (!empty($dataAccount)) {
 
-		$userExist = true;
-		/* $message = "Cet identifiant existe"; */ 
+        $userExist = true;
+        /* $message = "Cet identifiant existe"; */
+    } else {
 
-	} else {
-
-		$userExist = false;
-		$message = 1;
-
-  	}
-
+        $userExist = false;
+        $message = 1;
+    }
 } else {
-  
-  	$userExist = false;
 
+    $userExist = false;
 }
 
 
 // Si l'username existe
-if ($userExist)	{  
+if ($userExist) {
 
-	// Vérification mot de passe (Hashé)
-	$isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+    // Vérification mot de passe (Hashé)
+    $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
 
-	// Si le mot de passe correspond
-	if ($isPasswordCorrect)
-	{
-		// Connexion
-		$_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
-		$_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
-		$_SESSION['id_user'] = $dataAccount['id_user'];
+    // Si le mot de passe correspond
+    if ($isPasswordCorrect) {
+        // Connexion
+        $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
+        $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
+        $_SESSION['id_user'] = $dataAccount['id_user'];
 
-		header('Location: accueil.php');
-	}
-
-	else
-	{
-		$message = 3;
-	}
-
+        header('Location: accueil.php');
+    } else {
+        $message = 3;
+    }
 }
 
 include("header.php");
 
+/* ------------------------------------------------HTML index---------------------------------------- */
+
 ?>
 
+<main class="inscription-connexion">
+			<section class="form_container">
+				<fieldset>
+					<legend>Se connecter :</legend>
 
-<!-- ---------------------------Formulaire Connexion -->      
+					<span class="message">
+						<?php messageError($message); ?>
+					</span>
 
-    <main class="inscription-connexion">
-      <section class="form_container">
-        <fieldset>
+					<form method="post" action="index.php">
+						<p>
+							<label for="pseudo">Identifiant : </label>
+							<input
+								type="text"
+								id="pseudo"
+								name="username"
+								required
+								value="<?php ValueInputUsername(); ?>"
+							/>
 
-          <legend> Se connecter : </legend>
+							<label for="mp">Mot de passe : </label>
+							<input
+								type="password"
+								id="mp"
+								name="password"
+								required
+							/>
 
-          <span class="message"> <?php messageError($message); ?> </span>
+							<input
+								class="button-envoyer"
+								type="submit"
+								name="connexionSubmit"
+								value="Connexion"
+								onclick=" UnsetPreviousSession()"
+							/>
 
-          <form method="post"action="index.php">
-            <p>
+							<span
+								>Les champs indiqués par une <em>*</em> sont
+								obligatoires</span
+							>
+						</p>
+					</form>
 
-                <label for="pseudo">Identifiant : </label>
-                <input type="text" id="pseudo" name="username" required value ="<?php ValueInputUsername(); ?>" >
+					<a href="mp.php"> mot de passe oublié ? </a>
 
-                <label for="mp">Mot de passe : </label>
-                <input type="password" id="mp" name="password"required>
+					<a href="inscription.php"> créer un compte </a>
+				</fieldset>
+			</section>
+		</main>
 
-                <input class="button-envoyer" type="submit" name ='connexionSubmit' value="Connexion" onclick =" UnsetPreviousSession()">
-
-                <span>Les champs indiqués par une <em>*</em> sont obligatoires</span>
-
-            </p>
-          </form>
-
-          <a href="mp.php"> mot de passe oublié ? </a>
-
-          <a href="inscription.php"> créer un compte </a>
-
-        </fieldset>
-      </section>
-    </main>
-    
 <?php include("footer.php"); ?>

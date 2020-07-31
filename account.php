@@ -104,6 +104,11 @@ function messageError($message)
 
 
 
+// REGEX mp
+$mpValid = "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#";
+
+
+
 // Fonction garde en mémoire la value postée de l'username
 function ValueInputUsername()
 {

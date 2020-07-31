@@ -92,7 +92,7 @@ if (isset($_POST['password'])) {
     $formType = $fomPasswordChange;
 
     // Si le nouveau mot de passe est conforme
-    if (preg_match("#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'])) {
+    if (preg_match($mpValid, $_POST['password'])) {
 
         // On Hash le mot de passe
         $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);

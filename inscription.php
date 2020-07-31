@@ -25,7 +25,7 @@ if (isset($_POST['dataPosted'])) {
 
 
             // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
-            if (preg_match("#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#", $_POST['password'])) {
+            if (preg_match($mpValid, $_POST['password'])) {
 
                 // Hashage du mot de passe
                 $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);

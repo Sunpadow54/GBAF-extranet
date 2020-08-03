@@ -3,48 +3,39 @@
 include("account.php");
 
 
-/*--------------------------- Vérification Utilisateur existe */
+if (isset($_POST['dataSubmit'])) {
 
-if (isset($_POST['username'])) {
-
-    // Modifie Session username si formulaire envoyé
-    $_SESSION['username'] = htmlspecialchars($_POST['username']);
-
-    // cherche l'utilisateur
+    // Cherche l'utilisateur dans la BDD (voir account.php)
     $dataAccount = searchUser($bdd, $_POST['username']);
 
-    // Si l'utilisateur existe
-    if (!empty($dataAccount)) {
+    // Si l'user existe
+    if ($dataAccount) {
 
-        $userExist = true;
+        // Verification que tous les champs ne sont pas vides
+        if (!empty($_POST['username']) && !empty($_POST['password']))
+        {
 
+            // Vérification mot de passe (Hashé)
+            $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+
+            // Si le mot de passe correspond
+            if ($isPasswordCorrect) {
+                // Connexion
+                $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
+                $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
+                $_SESSION['id_user'] = $dataAccount['id_user'];
+
+                header('Location: accueil.php');
+            } else {
+                $message = 3;
+            }
+        } else {
+
+            $message = 2;
+        }
     } else {
 
-        $userExist = false;
-        $message = 1;
-    }
-} else {
-
-    $userExist = false;
-}
-
-
-// Si l'username existe
-if ($userExist) {
-
-    // Vérification mot de passe (Hashé)
-    $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
-
-    // Si le mot de passe correspond
-    if ($isPasswordCorrect) {
-        // Connexion
-        $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
-        $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
-        $_SESSION['id_user'] = $dataAccount['id_user'];
-
-        header('Location: accueil.php');
-    } else {
-        $message = 3;
+        $message = 1;        
     }
 }
 
@@ -71,7 +62,10 @@ include("header.php");
 								id="pseudo"
 								name="username"
 								required
-								value="<?php valueInputUsername(); ?>"
+                                value="<?php /* valueInputUsername(); */
+                                defaultInputValue('username', '')
+                                
+                                ?>"
 							/>
 
 							<label for="mp">Mot de passe : </label>
@@ -85,7 +79,7 @@ include("header.php");
 							<input
 								class="button-envoyer"
 								type="submit"
-								name="connexionSubmit"
+								name="dataSubmit"
 								value="Connexion"
 								onclick=" unsetPreviousSession()"
 							/>

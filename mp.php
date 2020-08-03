@@ -17,48 +17,26 @@ $formType = $formDefault;
 
 
 
-/*----------------------- Vérification Utilisateur existe */
+/*-----------------------  Si l'utilisateur existe, Affiche la question et son formulaire */
 
 if (isset($_POST['username'])) {
 
-    // Modifie Session username si formulaire envoyé
-    $_SESSION['username'] = htmlspecialchars($_POST['username']);
-
-    // cherche l'utilisateur
+    // Cherche si l'utilisateur dans la BDD (voir account.php)
     $dataAccount = searchUser($bdd, $_POST['username']);
 
-    // Si l'utilisateur existe
-    if (!empty($dataAccount)) {
+    if ($dataAccount) {
 
-        $userExist = true;
-        $usernameValid = $_POST['username'];
+        // récupère son username pour les autres formulaires
+        $_SESSION['username'] = $dataAccount['username'];
+        // On donne la question
+        $formType = $formQuestion;
+        $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
+        $message = 6;
     } else {
 
-        $userExist = false;
         $message = 1;
     }
-} else {
-
-    $userExist = false;
-}
-
-
-/*-----------------------  Si l'utilisateur existe, Affiche la question et son formulaire */
-
-if ($userExist) {
-
-    $formType = $formQuestion;
-    // On donne la question
-    $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
-    $message = 6;
-    // récupère son username pour les autres formulaires
-    $_SESSION['username'] = $dataAccount['username'];
-} /* else {
-
-    $message = 'cet identifiant n\'existe pas';
-
-} */
-
+} 
 
 /*----------------------- Si on répond à la question secrète */
 
@@ -151,7 +129,7 @@ include("header.php");
 
                     <input class="button-envoyer" 
                         type="submit" 
-                        name="dataPosted" 
+                        name="dataSubmit" 
                         value="Envoyer"
                     />
                 </p>

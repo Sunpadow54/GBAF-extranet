@@ -126,41 +126,21 @@ $mpValid = "#(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z.-_]{4,}#";
 
 
 
-// Fonction garde en mémoire la value postée de l'username
-function valueInputUsername()
-{
-
-    if (isset($_SESSION['username']) && !isset($connexionSubmit)) {
-
-        echo htmlspecialchars($_SESSION['username']);
-    } elseif (isset($connexionSubmit)) {
-
-        echo htmlspecialchars($_POST['username']);
-    }
-}
-
-
-
 // Fonction garde en mémoire les infos postées
-function defaultInputValue($valuePosted, $oldDataUser)
+function defaultInputValue($valuePost_Session, $defaultDataUser)
 {
 
     if (isset($_POST['dataSubmit'])){
 
-        echo htmlspecialchars($_POST[$valuePosted]);
-    } else {
+        echo htmlspecialchars($_POST[$valuePost_Session]);
 
-        echo htmlspecialchars($oldDataUser);
+    } elseif (isset($_SESSION[$valuePost_Session])) {
+
+        echo htmlspecialchars($_SESSION[$valuePost_Session]);
+
+    } elseif (isset($defaultDataUser)){
+        
+        echo htmlspecialchars($defaultDataUser);
+
     }
-}
-
-
-//Fonction pour les values de la question/réponse dans paramètres de compte
-function valueInputQandR($valuePosted) {
-
-    if (isset($_POST['dataSubmit'])){
-
-        echo htmlspecialchars($_POST[$valuePosted]);
-    }
-
 }

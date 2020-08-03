@@ -124,7 +124,7 @@ include("header.php");
                         type="textarea"
                         id="question"
                         name="question"
-                        value="<?php valueInputQandR('question');?>"
+                        value="<?php defaultInputValue('question', '');?>"
                     />
 
 
@@ -135,7 +135,7 @@ include("header.php");
                         type="textarea" 
                         id="reponse" 
                         name="reponse"
-                        value="<?php valueInputQandR('reponse');?>"
+                        value="<?php defaultInputValue('reponse','');?>"
                     />
 
                     <label for="mp">Entrez votre mot de passe: </label>

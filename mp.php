@@ -46,9 +46,10 @@ if (isset($_POST['reponse'])) {
     $dataAccount = searchUser($bdd, $_SESSION['username']);
     $questionUser = $dataAccount['question'];
     $message = 6;
+    $isGoodAnswer = password_verify($_POST['reponse'], $dataAccount['reponse']);
 
     // Si la réponse correspond
-    if ($_POST['reponse'] == $dataAccount['reponse']) {
+    if ($isGoodAnswer){
 
         unset($questionUser);
         // On affiche le formulaire de changement de mot de passe

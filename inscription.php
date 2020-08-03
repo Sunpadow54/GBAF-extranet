@@ -27,7 +27,7 @@ if (isset($_POST['dataSubmit'])) {
 
                 // Hashage du mot de passe
                 $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
+                $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
                 // Insère le nouvel Utilisateur dans la BDD
                 $req_add_user = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) 
                                         VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
@@ -37,7 +37,7 @@ if (isset($_POST['dataSubmit'])) {
                     'username' => ($_POST['username']),
                     'password' => $passwordHashed,
                     'question' => ($_POST['question']),
-                    'reponse' => ($_POST['reponse'])
+                    'reponse' => $reponseHashed
                 ));
 
                 $req_add_user->closeCursor();

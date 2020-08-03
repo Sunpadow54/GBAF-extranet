@@ -30,6 +30,8 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                 if ($isPasswordCorrect && !empty($_POST['password'])) {
 
+                    $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
+
                     // Change les infos de la BDD
                     $req_update_infos_user = $bdd->prepare('UPDATE account SET 
                                                 nom = :nom, 
@@ -42,7 +44,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                         'nom' => ($_POST['nom']),
                         'prenom' => ($_POST['prenom']),
                         'question' => ($_POST['question']),
-                        'reponse' => ($_POST['reponse']),
+                        'reponse' => $reponseHashed,
                         'id_user' => $dataAccount['id_user']
                     ));
                     $req_update_infos_user->closeCursor();

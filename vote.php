@@ -21,32 +21,53 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         }
 
 
-        // Cherche si l'user n'a pas déjà like/dislike
+/*         // Cherche si l'user n'a pas déjà like/dislike
         $req = $bdd->prepare('SELECT * FROM vote WHERE id_user = ? AND id_acteur = ?');
         $req->execute(array($_SESSION['id_user'], $_GET['id_acteur']));
         $hasUserAlreadyVote = $req->fetch();
-        $req->closeCursor();
+        $req->closeCursor(); */
+        $req_vote_user = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
+        $req_vote_user->execute(array($_GET['id_acteur'], $_SESSION['id_user']));
+        $userVote = $req_vote_user->fetch();
+        $req_vote_user->closeCursor();
 
 
-        // Si il a pas déjà voté
-        if (!$hasUserAlreadyVote) {
+        // Si il a pas voté
+        if (!$userVote) {
 
-            $req2 = $bdd->prepare('INSERT INTO vote (id_user, id_acteur, vote)
+            // on Ajoute son vote
+            $req_insert_vote = $bdd->prepare('INSERT INTO vote (id_user, id_acteur, vote)
                                     VALUES (:id_user, :id_acteur, :vote)');
-            $req2->execute(array(
+            $req_insert_vote->execute(array(
                 'id_user' => ($_SESSION['id_user']),
                 'id_acteur' => ($_GET['id_acteur']),
                 'vote' => ($_GET['vote'])
             ));
 
-            $req2->closeCursor();
+            $req_insert_vote->closeCursor();
 
             header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
-        } else {
 
+        } elseif ($userVote AND $_GET['vote'] != $userVote['vote']) {
+
+            // on change son vote
+            $req_update_vote = $bdd->prepare('UPDATE vote SET vote = :vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
+            $req_update_vote->execute(array(
+                'vote' => ($_GET['vote']),
+                'id_user' => ($_SESSION['id_user']),
+                'id_acteur' => ($_GET['id_acteur']),
+            ));
+            $req_update_vote->closeCursor();
+
+            header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
+
+        } else {
 
             header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
         }
+    } else {
+
+    header('Location: index.php');
     }
 } else {
 

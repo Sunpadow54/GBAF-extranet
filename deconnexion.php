@@ -3,7 +3,7 @@ session_start();
 
 include("account.php");
 
-if (isset($_SESSION['wantMpChange'])) {
+if ($_SESSION['wantMpChange']) {
 
     deleteSession();
 

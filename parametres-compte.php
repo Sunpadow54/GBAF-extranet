@@ -2,12 +2,11 @@
 
 include("account.php");
 
-$_SESSION['wantMpChange'] = 'yes';
-
-
 // -------------------------entre sur la page Modification Profil
-if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
+    
+    $_SESSION['wantMpChange'] = true;
     // Cherche L'utilisateur dans la BDD (voir account.php)
     $dataAccountOld = searchUser($bdd, $_SESSION['username']);
 
@@ -55,6 +54,7 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
                     $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
 
                     $message = 5;
+
                 } else {
 
                     $message = 3;
@@ -72,7 +72,7 @@ if (isset($_SESSION['id_user']) && !empty($_SESSION['id_user'])) {
 	
 /* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
 
-include("header.php");
+ include("header.php");
 
 ?>
 
@@ -124,7 +124,7 @@ include("header.php");
                         type="textarea"
                         id="question"
                         name="question"
-                        value="<?php defaultInputValue('question', '');?>"
+                        value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
                     />
 
 
@@ -135,7 +135,7 @@ include("header.php");
                         type="textarea" 
                         id="reponse" 
                         name="reponse"
-                        value="<?php defaultInputValue('reponse','');?>"
+                        value=""
                     />
 
                     <label for="mp">Entrez votre mot de passe: </label>

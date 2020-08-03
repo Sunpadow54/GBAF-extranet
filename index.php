@@ -24,6 +24,7 @@ if (isset($_POST['dataSubmit'])) {
                 $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
                 $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
                 $_SESSION['id_user'] = $dataAccount['id_user'];
+                $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
 
                 header('Location: accueil.php');
             } else {

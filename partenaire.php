@@ -6,6 +6,8 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
     include("header.php");
 
+    $_SESSION['wantMpChange'] = false;
+
     $idActeur = htmlspecialchars($_GET['id_acteur']);
 
 

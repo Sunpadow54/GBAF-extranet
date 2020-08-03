@@ -107,7 +107,7 @@ include("header.php");
 <main class="inscription-connexion">
     <section class="form_container">
         <fieldset>
-            <legend> Mot de passe oublié ? </legend>
+            <legend> Changer son mot de passe </legend>
 
             <!-- message erreur -->
             <span class="message-erreur"> 

@@ -162,40 +162,34 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                 <!-- Likes / Dislikes -->
                 <div class="commentaires_vote">
-                    <div class="vote_like">
-                        <!-- D. Nombre de like -->
-                        <p>
-                            <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?>
-                        </p>
+                    <a class="vote_like"
+                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
+                    >
+                            <p>
+                                <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?>
+                            </p>
 
                         <!-- Ajoute un like (vote.php) / E. icone like -->
-                        <a 
-                            href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
-                        >
+
                             <img 
                                 src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" 
                                 alt="like"
                             />
-                        </a>
+                    </a>
 
-                    </div>
-
-                    <div class="vote_dislike">
-                        <!-- Ajoute un dislike (vote.php) / E. icone dislike-->
-                        <a 
-                            href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
-                        >
-                            <img 
-                                src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" 
-                                alt="dislike"
-                            />
-                        </a>
+                    <a class="vote_dislike"
+                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
+                    >
+                        <img 
+                            src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" 
+                            alt="dislike"
+                        />
 
                         <!-- D. Nombre de dislike -->
                         <p> 
                             <?php nbrLikeDislike($dataActeur['id_acteur'], 'dislike', $bdd); ?> 
                         </p>
-                    </div>
+                    </a>
                 </div>
             </div>
 

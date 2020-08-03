@@ -172,7 +172,7 @@ article {
 	margin-top: var(--space_article);
 }
 
-/* ------------------------------ Accueil Connecté------------------------------*/
+/* ------------------------------ Accueil / Connecté------------------------------*/
 
 /* Section Présentation GBAF */
 .GBAF-illustration {
@@ -274,7 +274,7 @@ article {
 	color: white;
 }
 
-/* ------------------------------ Partenaire Connecté------------------------------*/
+/* ------------------------------ Partenaire / Connecté------------------------------*/
 
 /* Section infos du partenaire */
 /* Logo du partenaire */
@@ -299,7 +299,7 @@ article {
 /* Section Commentaires */
 .commentaires {
 	width: auto;
-	background-color: rgba(0, 0, 0, 0.05);
+	background-color: #cecece;
 	padding: 4em;
 }
 .commentaires_dynamic {
@@ -399,14 +399,15 @@ article {
 .commentaires_vote {
 	display: flex;
 }
+/* boutons envoyer son vote */
 .vote_like,
 .vote_dislike {
-	display: flex;
+    display: flex;
 	box-shadow: -1px -2px 5px rgba(255, 255, 255, 0.8),
 		2px 2px 5px rgba(0, 0, 0, 0.2);
 	background-color: white;
 	padding: 0.4em 0.3em 0.4em 0.3em;
-	cursor: pointer;
+    cursor: pointer;
 }
 .vote_like:hover,
 .vote_dislike:hover {
@@ -433,12 +434,12 @@ article {
 	text-align: center;
 	line-height: 1.25em;
 }
-/* bouton envoyer son vote */
-.commentaires_vote a {
-	display: block;
+/* icone Nbr like ou dislike */
+.commentaires_vote img{
 	width: 1.25em;
 	height: 1.25em;
 }
+
 /* liste des commentaires */
 .commentaires-list {
 	padding: 0;

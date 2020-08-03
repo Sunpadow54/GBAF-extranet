@@ -162,24 +162,27 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                 <!-- Likes / Dislikes -->
                 <div class="commentaires_vote">
+                    <!-- Ajoute un like (vote.php) -->
                     <a class="vote_like"
                         href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
                     >
-                            <p>
-                                <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?>
-                            </p>
+                        <!-- D. Nombre de like -->
+                        <p>
+                            <?php nbrLikeDislike($dataActeur['id_acteur'], 'like', $bdd); ?>
+                        </p>
 
-                        <!-- Ajoute un like (vote.php) / E. icone like -->
-
-                            <img 
-                                src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" 
-                                alt="like"
-                            />
+                        <!-- E. icone like -->
+                        <img 
+                            src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" 
+                            alt="like"
+                        />
                     </a>
 
+                    <!-- Ajoute un dislike (vote.php) -->
                     <a class="vote_dislike"
                         href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
                     >
+                        <!-- E. icone dislike -->
                         <img 
                             src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" 
                             alt="dislike"

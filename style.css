@@ -402,12 +402,12 @@ article {
 /* boutons envoyer son vote */
 .vote_like,
 .vote_dislike {
-    display: flex;
+	display: flex;
 	box-shadow: -1px -2px 5px rgba(255, 255, 255, 0.8),
 		2px 2px 5px rgba(0, 0, 0, 0.2);
 	background-color: white;
 	padding: 0.4em 0.3em 0.4em 0.3em;
-    cursor: pointer;
+	cursor: pointer;
 }
 .vote_like:hover,
 .vote_dislike:hover {
@@ -435,7 +435,7 @@ article {
 	line-height: 1.25em;
 }
 /* icone Nbr like ou dislike */
-.commentaires_vote img{
+.commentaires_vote img {
 	width: 1.25em;
 	height: 1.25em;
 }

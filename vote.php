@@ -20,17 +20,11 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             die('Erreur : ' . $e->getMessage());
         }
 
-
-/*         // Cherche si l'user n'a pas déjà like/dislike
-        $req = $bdd->prepare('SELECT * FROM vote WHERE id_user = ? AND id_acteur = ?');
-        $req->execute(array($_SESSION['id_user'], $_GET['id_acteur']));
-        $hasUserAlreadyVote = $req->fetch();
-        $req->closeCursor(); */
+        //Cherche le vote de l'utilisateur sur la page acteur
         $req_vote_user = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
         $req_vote_user->execute(array($_GET['id_acteur'], $_SESSION['id_user']));
         $userVote = $req_vote_user->fetch();
         $req_vote_user->closeCursor();
-
 
         // Si il a pas voté
         if (!$userVote) {
@@ -47,8 +41,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             $req_insert_vote->closeCursor();
 
             header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
-
-        } elseif ($userVote AND $_GET['vote'] != $userVote['vote']) {
+        } elseif ($userVote and $_GET['vote'] != $userVote['vote']) {
 
             // on change son vote
             $req_update_vote = $bdd->prepare('UPDATE vote SET vote = :vote WHERE id_user = :id_user AND id_acteur = :id_acteur');
@@ -60,14 +53,13 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             $req_update_vote->closeCursor();
 
             header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
-
         } else {
 
             header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
         }
     } else {
 
-    header('Location: index.php');
+        header('Location: index.php');
     }
 } else {
 

@@ -31,12 +31,12 @@ and (-webkit-min-device-pixel-ratio: 2) {
 	}
 	h2 {
 		font-size: 1.3em;
-	}
+    }
 
 	/* ----------------------- HEADER */
 	header {
 		position: static;
-		max-height: max-content;
+        max-height: max-content;
 	}
 	.header-contain {
 		flex-direction: column;
@@ -223,7 +223,8 @@ and (-webkit-min-device-pixel-ratio: 2) {
 	/* Main */
 	.inscription-connexion {
 		margin: 0;
-		width: 100%;
+        width: 100%;
+        height:100%;
 		background-color: transparent;
 	}
 	/* Section */

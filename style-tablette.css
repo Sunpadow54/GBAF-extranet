@@ -1,55 +1,58 @@
-/* ------------------------------ Global ------------------------------*/
-:root {
-	--gutter: 80px;
-}
-
-/* annule les :hover*/
-.header-profil:hover .header-profil_overlay,
-.header-profil > label + a:hover,
-.header-profil_overlay:hover,
-.acteurs_list ul li a:hover,
-.commentaires-new label:hover,
-.inscription-connexion > fieldset > a:hover {
-	display: none;
-}
-
-/* ----------------------- HEADER */
-
-/* Profil*/
-/*  bouton modifier son profil*/
-.header-profil > li:last-child {
-	opacity: 1;
-}
-
-/* ----------------------- MAIN $ textes */
-
-main {
-	min-width: 500px;
-}
-
-.text {
-	margin-right: var(--gutter_text);
-	margin-left: var(--gutter_text);
-}
-
-/* ------------------------------ Accueil Connecté------------------------------*/
-
-/* ------------------------------ Index / Inscription / Modifier son Profil / MP ------------------------------*/
-
-/* Section */
-.form_container {
-	max-width: 500px;
-}
-.form_container fieldset {
-	border: none;
-	font-size: 0.9em;
-}
-@media all and (orientation: portrait) {
-	.form_container fieldset {
-		font-size: 1.2em;
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (-webkit-min-device-pixel-ratio: 1) {
+    
+	/* ------------------------------ Global ------------------------------*/
+	:root {
+		--gutter: 50px;
+		--gutter_text: 60px;
 	}
-}
-/* liens vers index ou accueil .. */
-.form_container > fieldset > a {
-	text-decoration: underline;
+
+	/* ----------------------- HEADER */
+
+	/* Profil*/
+	/*  bouton modifier son profil*/
+	.header-profil > li:last-child {
+		opacity: 1;
+	}
+
+	/* ----------------------- MAIN & textes */
+
+	.text {
+		margin-right: var(--gutter_text);
+		margin-left: var(--gutter_text);
+	}
+
+	/* ------------------------------ Accueil Connecté------------------------------*/
+	/* Section Présentation GBAF */
+	.GBAF-illustration {
+		height: 300px;
+	}
+	/* Article Liste des acteurs + navigation */
+	.acteur_seul {
+		display: grid;
+		grid-template-columns: 260px 2fr 150px;
+		grid-template-rows: 1fr 2em 1fr;
+		grid-template-areas:
+			"logo nom nom"
+			"logo infos infos"
+			"logo . button";
+	}
+	.partenaire > a {
+		margin-left: var(--gutter_text);
+		margin-bottom: 1em;
+	}
+	/* ------------------------------ Partenaire / Connecté------------------------------*/
+
+	/* ------------------------------ Index / Inscription / Modifier son Profil / MP ------------------------------*/
+
+	/* Section */
+	.form_container {
+		max-width: 500px;
+	}
+	.form_container fieldset {
+		border: none;
+		font-size: 0.9em;
+	}
 }

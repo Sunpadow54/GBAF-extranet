@@ -24,15 +24,17 @@ try {
 
 		<title>GBAF extranet</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<link rel="stylesheet" href="style.css" />
 		<link
 			rel="stylesheet"
-			media="all and (min-device-width : 320px) and (max-device-width : 480px)"
+			media="screen"
 			href="style-mobile.css"
 		/>
 		<link
 			rel="stylesheet"
-			media="all and (max-device-width: 1280px ) and (min-device-width: 481px)"
+			media="screen"
 			href="style-tablette.css"
 		/>
 
@@ -46,7 +48,7 @@ try {
 		<header>
 			<div class="header-contain">
 				<!-- Logo GBAF -->
-				<a class="header-logo" href="accueil.php">
+				<a class="header-logo" href="../accueil.php">
 					<img src="../images/GBAF.png" alt="Logo GBAF" />
 				</a>
 
@@ -64,12 +66,12 @@ try {
 
                     <!-- bouton Déconnexion -->
                     <li>
-                        <a href="deconnexion.php">Se déconnecter</a>
+                        <a href="../deconnexion.php">Se déconnecter</a>
                     </li>
 
                     <!-- bouton Modifier son Profil -->
                     <li>
-                        <a href="parametres-compte.php">Paramètres du compte</a>
+                        <a href="../parametres-compte.php">Paramètres du compte</a>
                     </li>
                 </ul>
                 <?php

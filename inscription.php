@@ -9,7 +9,7 @@ include("account.php");
 // Verifie si les variables ont été crées
 if (isset($_POST['dataSubmit'])) {
 
-    // Cherche si l'utilisateur dans la BDD (voir account.php)
+    // Cherche si l'utilisateur dans la BDD (voir account)
     $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'username n'existe pas
@@ -47,7 +47,7 @@ if (isset($_POST['dataSubmit'])) {
                 $_SESSION['username'] = htmlspecialchars($_POST['username']);
                 $_SESSION['message'] = $message;
 
-                header('Location: index.php');
+                header('Location: ../index.php');
             } else {
 
                 $message = 4;
@@ -71,17 +71,17 @@ include("header.php");
 
 
 <main class="inscription-connexion">
-	<section class="form_container">
+	<div class="form_container">
 		<fieldset>
 			<legend>Créer un compte :</legend>
 
 			<!-- message erreur -->
 			<span class="message-erreur">
 				<?php messageError($message); ?>
-			</span>
+            </span>
 
 			<!-- Formulaire avec 'value' préenregistrées -->
-			<form method="post" action="inscription">
+			<form method="post" action="inscription.php">
 				<p>
 					<label for="pseudo">Identifiant : </label>
 					<input
@@ -122,7 +122,7 @@ include("header.php");
 						Votre question secrète : 
 					</label>
 					<input 
-						type="textarea" 
+						type="text" 
 						id="question" 
                         name="question"
                         value="<?php defaultInputValue('question', '');?>"
@@ -132,7 +132,7 @@ include("header.php");
 						La réponse à votre question : 
 					</label>
 					<input 
-						type="textarea" 
+						type="text" 
 						id="reponse" 
                         name="reponse"
                         value="<?php defaultInputValue('reponse', '');?>"
@@ -152,11 +152,11 @@ include("header.php");
                 </p>
             </form>
 
-            <a href="index.php"> se connecter </a>
+            <a href="../index.php"> se connecter </a>
 
-			<a href="mp.php"> mot de passe oublié ? </a>
+			<a href="../mp.php"> mot de passe oublié ? </a>
         </fieldset>
-    </section>
+    </div>
 </main>
 
 <?php include("footer.php"); ?>

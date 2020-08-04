@@ -21,7 +21,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             echo $dataPartenaires['logo'];
             echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
             echo '<div class="acteur-seul_description">' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
-            echo '<a href="partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
+            echo '<a href="../partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
             echo '</li>';
         }
         $req_data_acteur->closeCursor();
@@ -117,6 +117,6 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     include("footer.php");
 } else {
 
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 ?>

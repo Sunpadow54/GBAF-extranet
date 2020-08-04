@@ -7,7 +7,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
     
     $_SESSION['wantMpChange'] = true;
-    // Cherche L'utilisateur dans la BDD (voir account.php)
+    // Cherche L'utilisateur dans la BDD (voir account)
     $dataAccountOld = searchUser($bdd, $_SESSION['username']);
 
     // Si on change ses infos
@@ -49,7 +49,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                     ));
                     $req_update_infos_user->closeCursor();
 
-                    // Récupère les nouvelles valeurs de SESSION (fonction voir account.php)
+                    // Récupère les nouvelles valeurs de SESSION (fonction voir account)
                     $dataAccountNew = searchUser($bdd, $_SESSION['username']);
 
                     $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
@@ -79,7 +79,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 ?>
 
 <main class="inscription-connexion">
-    <section class="form_container">
+    <div class="form_container">
         <fieldset>
             <legend>Modifier son Profil</legend>
 
@@ -123,7 +123,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                         Votre question secrète : 
                     </label>
                     <input
-                        type="textarea"
+                        type="text"
                         id="question"
                         name="question"
                         value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
@@ -134,7 +134,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                         La réponse à votre question : 
                     </label>
                     <input
-                        type="textarea" 
+                        type="text" 
                         id="reponse" 
                         name="reponse"
                         value=""
@@ -163,17 +163,17 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                 </p>
             </form>
 
-            <a href="deconnexion.php"> changer son mot de passe </a>
+            <a href="../deconnexion.php"> changer son mot de passe </a>
 
-            <a href="accueil.php"> Retour à l'accueil </a>
+            <a href="../accueil.php"> Retour à l'accueil </a>
         </fieldset>
-    </section>
+    </div>
 </main>
 
 <?php
 include("footer.php");
 
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 ?>

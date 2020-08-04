@@ -21,7 +21,7 @@ $formType = $formDefault;
 
 if (isset($_POST['username'])) {
 
-    // Cherche si l'utilisateur dans la BDD (voir account.php)
+    // Cherche si l'utilisateur dans la BDD (voir account)
     $dataAccount = searchUser($bdd, $_POST['username']);
 
     if ($dataAccount) {
@@ -90,7 +90,7 @@ if (isset($_POST['password'])) {
         $message = 9;
         $_SESSION['message'] = $message;
 
-        header('Location: index.php');
+        header('Location: ../index.php');
     } else {
 
         // Si le mot de passe n'est pas conforme
@@ -106,7 +106,7 @@ include("header.php");
 ?>
 
 <main class="inscription-connexion">
-    <section class="form_container">
+    <div class="form_container">
         <fieldset>
             <legend> Changer son mot de passe </legend>
 
@@ -136,11 +136,11 @@ include("header.php");
                 </p>
             </form>
 
-            <a href="index.php"> Connexion </a>
+            <a href="../index.php"> Connexion </a>
 
-            <a href="inscription.php"> créer un compte </a>
+            <a href="../inscription.php"> créer un compte </a>
         </fieldset>
-    </section>
+    </div>
 </main>
 
 <?php

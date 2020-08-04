@@ -5,7 +5,7 @@ include("account.php");
 
 if (isset($_POST['dataSubmit'])) {
 
-    // Cherche l'utilisateur dans la BDD (voir account.php)
+    // Cherche l'utilisateur dans la BDD (voir account)
     $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'user existe
@@ -26,7 +26,7 @@ if (isset($_POST['dataSubmit'])) {
                 $_SESSION['id_user'] = $dataAccount['id_user'];
                 $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
 
-                header('Location: accueil.php');
+                header('Location: ../accueil.php');
             } else {
                 $message = 3;
             }
@@ -47,13 +47,13 @@ include("header.php");
 ?>
 
 <main class="inscription-connexion">
-			<section class="form_container">
+			<div class="form_container">
 				<fieldset>
 					<legend>Se connecter :</legend>
 
 					<span class="message">
 						<?php messageError($message); ?>
-					</span>
+                    </span>
 
 					<form method="post" action="index.php">
 						<p>
@@ -92,11 +92,11 @@ include("header.php");
 						</p>
 					</form>
 
-					<a href="mp.php"> mot de passe oublié ? </a>
+					<a href="../mp.php"> mot de passe oublié ? </a>
 
-					<a href="inscription.php"> créer un compte </a>
+					<a href="../inscription.php"> créer un compte </a>
 				</fieldset>
-			</section>
+            </div>
 		</main>
 
 <?php include("footer.php"); ?>

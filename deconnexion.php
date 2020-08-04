@@ -7,10 +7,10 @@ if ($_SESSION['wantMpChange']) {
 
     deleteSession();
 
-    header('Location: mp.php');
+    header('Location: ../mp.php');
 } else {
 
     deleteSession();
 
-    header('Location: index.php');
+    header('Location: ../index.php');
 }

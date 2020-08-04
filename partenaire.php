@@ -18,15 +18,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     $req_data_acteur->closeCursor();
 
 
-    // B. Compte le nombre de commentaire sur l'acteur
-    $req_nbr_comments = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
-    $req_nbr_comments->execute(array($idActeur));
-    $commentsPosted = $req_nbr_comments->fetch();
-    $nbrcommentsPosted = $commentsPosted['nbrComments'];
-    $req_nbr_comments->closeCursor();
-
-
-    // C. Ajoute un nouveau commentaire
+    // B. Ajoute un nouveau commentaire
     if (isset($_POST['newCommentPosted']) and !empty($_POST['post'])) {
 
         $req_insert_comment = $bdd->prepare('INSERT into post (id_user, id_acteur, date_add, post)
@@ -39,6 +31,13 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         ));
         $req_insert_comment->closeCursor();
     }
+
+    // C. Compte le nombre de commentaire sur l'acteur
+    $req_nbr_comments = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
+    $req_nbr_comments->execute(array($idActeur));
+    $commentsPosted = $req_nbr_comments->fetch();
+    $nbrcommentsPosted = $commentsPosted['nbrComments'];
+    $req_nbr_comments->closeCursor();
 
 
     // D. Fonction Compte le nombre de 'like' et 'Dislike' sur l'acteur
@@ -127,7 +126,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         <!-- Section commentaires -->
         <section class="commentaires">
             <div class="commentaires_dynamic">
-                <!-- B. Nombre de commentaires -->
+                <!-- C. Nombre de commentaires -->
                 <p> 
                     <?php echo $nbrcommentsPosted; ?> 
                     commentaires 
@@ -139,7 +138,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                         Nouveau commentaire
                     </label>
                     <input type="checkbox" id="popup_button"/>
-                    <!-- C. fenêtre pop-up du formulaire -->
+                    <!-- B. fenêtre pop-up du formulaire -->
                     <form 
                         class="new_commentaire_formulaire"
                         method="post"
@@ -164,9 +163,9 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                 <!-- Likes / Dislikes -->
                 <div class="commentaires_vote">
-                    <!-- Ajoute un like (vote.php) -->
+                    <!-- Ajoute un like (vote) -->
                     <a class="vote_like"
-                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
+                        href="<?php echo '../vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
                     >
                         <!-- D. Nombre de like -->
                         <p>
@@ -180,9 +179,9 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                         />
                     </a>
 
-                    <!-- Ajoute un dislike (vote.php) -->
+                    <!-- Ajoute un dislike (vote) -->
                     <a class="vote_dislike"
-                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
+                        href="<?php echo '../vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
                     >
                         <!-- E. icone dislike -->
                         <img 
@@ -206,7 +205,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         </section>
 
         <aside class="retour-accueil">
-            <a href="accueil.php">retour à la page d'accueil</a>
+            <a href="../accueil.php">retour à la page d'accueil</a>
         </aside>
     </main>
 
@@ -215,6 +214,6 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     include("footer.php");
 } else {
 
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 ?>

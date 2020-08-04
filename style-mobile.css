@@ -177,7 +177,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 		row-gap: 1em;
 	}
 	/* Nombre de commentaire */
-	.commentaires_dynamic > p {
+	.commentaires_dynamic > h4 {
 		grid-column: 1 / span 2;
 		grid-row: 1/2;
 		margin: 0;

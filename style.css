@@ -54,6 +54,11 @@ h3 {
 	font-size: 1.3em;
 	margin-top: 0;
 }
+h4 {
+	font-size: 1em;
+    margin: 0;
+    font-weight: normal;
+}
 p,
 textarea,
 text,
@@ -62,6 +67,7 @@ input {
 	font-size: 1em;
 	hyphens: auto;
 }
+input:focus{outline:none;}
 
 /* ----------------------- HEADER */
 header {
@@ -202,6 +208,7 @@ article {
 }
 /* Article Liste des acteurs + navigation */
 .acteurs_list {
+    margin-top: var(--space_article);
 	background-color: rgba(0, 0, 0, 0.02);
 	padding: 1.2em;
 	box-shadow: inset 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
@@ -311,7 +318,7 @@ article {
 	margin-bottom: 2em;
 }
 /* Nombre de commentaire */
-.commentaires_dynamic > p {
+.commentaires_dynamic > h4 {
 	font-size: 1.2em;
 }
 /* Nouveau commentaire */
@@ -352,7 +359,6 @@ article {
 	z-index: 3;
 }
 .new_commentaire_formulaire > p {
-	/* position: relative; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

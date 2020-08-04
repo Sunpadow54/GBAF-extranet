@@ -149,10 +149,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         <section class="commentaires">
             <div class="commentaires_dynamic">
                 <!-- C. Nombre de commentaires -->
-                <p> 
+                <h4> 
                     <?php echo $nbrcommentsPosted; ?> 
                     commentaires 
-                </p>
+                </h4>
 
                 <!-- Ajouter un nouveau commentaire -->
                 <div class="new_commentaire">

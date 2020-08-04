@@ -20,7 +20,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             echo '<li class="acteur_seul">';
             echo $dataPartenaires['logo'];
             echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
-            echo '<div class="acteur-seul_description">' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
+            echo '<div class="acteur-seul_description"><p>' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
             echo '<a href="../partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
             echo '</li>';
         }
@@ -101,14 +101,12 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
             <p class="text">texte acteurs et partenaires</p>
 
-            <article class="acteurs_list">
-                <nav>
+            <nav class="acteurs_list">
                     <ul>
                         <!-- <li> acteur_seul-->
                         <?php searchActeurs($bdd); ?>
-                    </ul>
-                </nav>
-            </article>
+                    </ul>  
+            </nav>
         </section>
     </main>
 

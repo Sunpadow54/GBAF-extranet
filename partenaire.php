@@ -11,6 +11,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     $idActeur = htmlspecialchars($_GET['id_acteur']);
 
 
+
     // A. Cherche les infos de l'Acteur
     $req_data_acteur = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
     $req_data_acteur->execute(array($idActeur));
@@ -18,19 +19,37 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     $req_data_acteur->closeCursor();
 
 
-    // B. Ajoute un nouveau commentaire
-    if (isset($_POST['newCommentPosted']) and !empty($_POST['post'])) {
 
-        $req_insert_comment = $bdd->prepare('INSERT into post (id_user, id_acteur, date_add, post)
-                                VALUES (:id_user, :id_acteur, NOW(), :post)
-                                ');
-        $req_insert_comment->execute(array(
-            'id_user' => $_SESSION['id_user'],
-            'id_acteur' => $dataActeur['id_acteur'],
-            'post' => ($_POST['post'])
-        ));
-        $req_insert_comment->closeCursor();
+    // B. Ajoute un nouveau commentaire unique
+
+    // Cherche si l'utilisateur a déjà commenté
+    $req_already_comment = $bdd->prepare('SELECT * FROM post WHERE id_user = ? AND id_acteur = ?');
+    $req_already_comment->execute(array($_SESSION['id_user'], $idActeur));
+    $userHasComment = $req_already_comment->fetch();
+    $req_already_comment->closeCursor();
+
+    // si il n'a pas déjà commenté
+    if (!$userHasComment) {
+
+        $formComment = '';
+
+        if (isset($_POST['newCommentPosted']) and !empty($_POST['post'])) {
+
+            $req_insert_comment = $bdd->prepare('INSERT into post (id_user, id_acteur, date_add, post)
+                                    VALUES (:id_user, :id_acteur, NOW(), :post)
+                                    ');
+            $req_insert_comment->execute(array(
+                'id_user' => $_SESSION['id_user'],
+                'id_acteur' => $dataActeur['id_acteur'],
+                'post' => ($_POST['post'])
+            ));
+            $req_insert_comment->closeCursor();
+        }
+    } else {
+        $formComment = 'Vous avez déjà commenté';
     }
+
+
 
     // C. Compte le nombre de commentaire sur l'acteur
     $req_nbr_comments = $bdd->prepare('SELECT COUNT(*) as nbrComments FROM post WHERE id_acteur = ?');
@@ -38,6 +57,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     $commentsPosted = $req_nbr_comments->fetch();
     $nbrcommentsPosted = $commentsPosted['nbrComments'];
     $req_nbr_comments->closeCursor();
+
 
 
     // D. Fonction Compte le nombre de 'like' et 'Dislike' sur l'acteur
@@ -61,6 +81,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     }
 
 
+
     // E. Cherche si l'user a like ou a dislike
     $req_vote_user = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
     $req_vote_user->execute(array($_GET['id_acteur'], $_SESSION['id_user']));
@@ -79,6 +100,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         $iconeVoteLike = 'icone-like';
         $iconeVoteDislike = 'icone-dislike';
     }
+
 
 
     // F. Fonction qui affiche tous les commentaires sur l'acteur
@@ -112,7 +134,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
     /* 	------------------------------------------------ HTML page Partenaire ------------------------------------------------ */
     ?>
 
-<main>
+    <main>
         <!-- A. Section infos de l'acteur -->
         <section class="partenaire">
             <?php
@@ -151,7 +173,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                                 <em> <?php echo $dataActeur['acteur']; ?> </em>
                                 : 
                             </label>
-                            <textarea id="post" name="post"></textarea>
+                            <textarea id="post" name="post"><?php echo $formComment; ?></textarea>
                             <input 
                                 type="submit" 
                                 value="Envoyer" 

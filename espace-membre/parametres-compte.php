@@ -1,6 +1,6 @@
 <?php
 
-include("account.php");
+require_once('../core/account.php');
 
 // -------------------------entre sur la page Modification Profil
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
@@ -74,7 +74,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 	
 /* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
 
- include("header.php");
+require_once('../layout/header.php');
 
 ?>
 
@@ -163,15 +163,15 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                 </p>
             </form>
 
-            <a href="../deconnexion.php"> changer son mot de passe </a>
+            <a href="deconnexion.php"> changer son mot de passe </a>
 
-            <a href="../accueil.php"> Retour à l'accueil </a>
+            <a href="accueil.php"> Retour à l'accueil </a>
         </fieldset>
     </div>
 </main>
 
 <?php
-include("footer.php");
+    require_once('../layout/footer.php');
 
 } else {
     header('Location: ../index.php');

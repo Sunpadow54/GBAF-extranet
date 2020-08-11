@@ -1,7 +1,6 @@
 <?php
 
-
-include("account.php");
+require_once('core/account.php');
 
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
@@ -91,7 +90,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
             $message = 9;
             $_SESSION['message'] = $message;
 
-            header('Location: ../index.php');
+            header('Location: /index.php');
         } else {
 
             // Si le mot de passe n'est pas conforme
@@ -102,7 +101,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 
     /* ------------------------------------------------HTML Changement de mp---------------------------------------- */
 
-    include("header.php");
+    require_once('layout/header.php');
 
     ?>
 
@@ -146,9 +145,9 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 
 <?php
 
-include("footer.php");
+require_once('layout/footer.php');
 } else {
 
-    header('Location: ../accueil.php');
+    header('Location: /espace-membre/accueil.php');
 }
 ?>

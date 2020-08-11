@@ -6,19 +6,8 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
     if (isset($_GET['vote']) && isset($_GET['id_acteur'])) {
 
-        // Base de donnée connexion : 
-        try {
-            $bdd = new PDO(
-                'mysql:host=localhost;
-                dbname=gbaf-extranet;
-                charset=utf8',
-                'root',
-                '',
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-            );
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        require_once('../core/helper.php');
+
 
         //Cherche le vote de l'utilisateur sur la page acteur
         $req_vote_user = $bdd->prepare('SELECT vote FROM vote WHERE id_acteur = ? AND id_user = ?');
@@ -52,10 +41,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             ));
             $req_update_vote->closeCursor();
 
-            header('Location: ../partenaire.php?id_acteur=' . $_GET['id_acteur']);
+            header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
         } else {
 
-            header('Location: ../partenaire.php?id_acteur=' . $_GET['id_acteur']);
+            header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
         }
     } else {
 

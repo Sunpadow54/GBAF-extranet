@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
-    include("header.php");
+    require_once('../core/helper.php');
 
     $_SESSION['wantMpChange'] = false;
 
@@ -131,6 +131,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         $req_comment->closeCursor();
     }
 
+    require_once('../layout/header.php');
     /* 	------------------------------------------------ HTML page Partenaire ------------------------------------------------ */
     ?>
 
@@ -187,7 +188,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                 <div class="commentaires_vote">
                     <!-- Ajoute un like (vote) -->
                     <a class="vote_like"
-                        href="<?php echo '../vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
+                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=like'; ?>"
                     >
                         <!-- D. Nombre de like -->
                         <p>
@@ -203,7 +204,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                     <!-- Ajoute un dislike (vote) -->
                     <a class="vote_dislike"
-                        href="<?php echo '../vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
+                        href="<?php echo 'vote.php?id_acteur=' . $dataActeur['id_acteur'] . '&vote=dislike'; ?>"
                     >
                         <!-- E. icone dislike -->
                         <img 
@@ -233,9 +234,9 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
     <?php
 
-    include("footer.php");
+    require_once('../layout/footer.php');
 } else {
 
-    header('Location: ../index.php');
+    header('Location: index.php');
 }
 ?>

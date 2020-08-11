@@ -1,6 +1,6 @@
 <?php
 
-include("account.php");
+require_once('core/account.php');
 
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
@@ -27,7 +27,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                     $_SESSION['id_user'] = $dataAccount['id_user'];
                     $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
 
-                    header('Location: ../accueil.php');
+                    header('Location: /espace-membre/accueil.php');
                 } else {
                     $message = 3;
                 }
@@ -41,7 +41,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
         }
     }
 
-    include("header.php");
+    require_once('layout/header.php');
 
     /* ------------------------------------------------HTML index---------------------------------------- */
 
@@ -100,9 +100,11 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                 </div>
             </main>
 
-    <?php include("footer.php"); 
+    <?php 
+
+    require_once('layout/footer.php');
 } else {
 
-    header('Location: ../accueil.php');
+    header('Location: /espace-membre/accueil.php');
 }
 ?>

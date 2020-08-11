@@ -2,9 +2,14 @@
 
 session_start();
 
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
+require_once('../core/helper.php');
 
-    include("header.php");
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+
+    header('Location: /index.php');
+}
+
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     $_SESSION['wantMpChange'] = false;
 
@@ -21,17 +26,19 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             echo $dataPartenaires['logo'];
             echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
             echo '<div class="acteur-seul_description"><p>' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
-            echo '<a href="../partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
+            echo '<a href="/espace-membre/partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
             echo '</li>';
         }
         $req_data_acteur->closeCursor();
     }
 
+    require_once('../layout/header.php');
 
     /* 	------------------------------------------------ HTML ACCUEIL ------------------------------------------------ */
     ?>
 
     <main>
+    
         <!-- Section Présentation GBAF -->
         <section class="GBAF">
             <h1>GBAF (Groupement Banque Assurance Français)</h1>
@@ -91,7 +98,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             </div>
 
             <div class="GBAF-illustration">
-                <img src="../images/GBAF.png" alt="Logo GBAF" />
+                <img src="/images/GBAF.png" alt="Logo GBAF" />
             </div>
         </section>
 
@@ -112,9 +119,6 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
     <?php
 
-    include("footer.php");
-} else {
-
-    header('Location: ../index.php');
+    require_once('../layout/footer.php');
 }
 ?>

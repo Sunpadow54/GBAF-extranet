@@ -1,6 +1,6 @@
 <?php
 
-include("account.php");
+require_once('core/account.php');
 
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
@@ -47,7 +47,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                     $_SESSION['username'] = htmlspecialchars($_POST['username']);
                     $_SESSION['message'] = $message;
 
-                    header('Location: ../index.php');
+                    header('Location: /index.php');
                 } else {
 
                     $message = 4;
@@ -63,7 +63,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     }
 
 
-    include("header.php");
+    require_once('layout/header.php');
 
     /* ------------------------------------------------HTML page d'inscription---------------------------------------- */
 
@@ -159,9 +159,11 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
         </div>
     </main>
 
-    <?php include("footer.php");
+    <?php 
+
+    require_once('layout/footer.php');
 } else {
 
-    header('Location: ../accueil.php');
+    header('Location: /espace-membre/accueil.php');
 }
 ?>

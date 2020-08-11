@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-include("account.php");
+require_once('../core/account.php');
 
 if ($_SESSION['wantMpChange']) {
 
     deleteSession();
 
-    header('Location: ../mp.php');
+    header('Location: /mp.php');
 } else {
 
     deleteSession();
 
-    header('Location: ../index.php');
+    header('Location: /index.php');
 }

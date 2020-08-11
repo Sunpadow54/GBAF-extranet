@@ -1,16 +1,40 @@
 /* ------------------------------ Global ------------------------------*/
 :root {
-	--gutter: 150px;
 	--header_height: 106px;
 	--header_logo_size: 80px;
 	--space_section: 80px;
 	--space_article: 30px;
 	--gutter_text: 80px;
-	--min_width: 650px;
+	--min_width: 500px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    /* 1. Correct the line height in all browsers.
+    2. Prevent adjustments of font size after orientation changes in iOS.
+    */
+    html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    }
+    /**
+    * Render the `main` element consistently in IE.
+    */
+    main {
+        display: block;
+    }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 1 */
+    line-height: 1.15; /* 1 */
+    margin: 0; /* 2 */
 }
-* {
-	box-sizing: border-box;
-}
+
 html,
 body {
 	margin: 0;
@@ -18,20 +42,15 @@ body {
 	width: 100%;
 	height: 100%;
 }
-body {
-	font-size: 16px;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
 body,
-a {
+a{
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
 	list-style: none;
-	box-sizing: border-box;
+    box-sizing: border-box;
+    border:none;
+    outline: none;
 	font-family: "Roboto", sans-serif;
 	color: black;
 }
@@ -69,32 +88,49 @@ input {
 }
 input:focus{outline:none;}
 
+.contain_all {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-rows: var(--header_height) auto 3em;
+    grid-template-areas: 
+        ". header ."
+        ". main ."
+        "footer footer footer";
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
 /* ----------------------- HEADER */
+
 header {
-	position: fixed;
-	top: 0;
-    min-width: 100%;
+    top: 0;
+    grid-area:header;
+    display: flex;
+    justify-content: space-between;
     z-index: 2;
+    width: 100%;
 	background-color: white;
 }
-.header-contain {
-    margin-right: var(--gutter);
-	margin-left: var(--gutter);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	min-height: var(--header_height);
+@media only screen  
+and (min-width: 1025px)  {
+    header{
+        position: sticky;
+    }
+
 }
+
 /* Logo GBAF */
 .header-logo {
 	min-width: var(--header_logo_size);
-	max-width: var(--header_logo_size);
+    max-width: var(--header_logo_size);
 }
 /* Profil*/
 .header-profil {
-	position: relative;
-	margin: 0;
-	text-align: right;
+    position: relative;
+    align-self: center;
+    text-align: right;
+    margin: 0;
 	padding: 0;
 }
 /* Icone profil */
@@ -146,14 +182,12 @@ header {
 
 /* -----------------------  FOOTER */
 footer {
+    grid-area: footer;
     width: 100%;
 	background-color: black;
-	height: 3em;
-    bottom: 0;
     z-index: 3;
 }
 footer p {
-	margin: auto;
 	font-weight: 100;
 	font-size: 13px;
 	color: white;
@@ -163,27 +197,25 @@ footer p {
 
 /* ----------------------- MAIN & SECTIONS & ARTICLES */
 main {
-	max-width: 100%;
-	min-width: var(--min_width);
-	margin-right: var(--gutter);
-	margin-left: var(--gutter);
-	margin-top: var(--header_height);
+    width: 100%;
+    grid-area:main;
+ 	min-width: var(--min_width);
 }
 
 section {
 	width: 100%;
-	margin-top: var(--space_section);
+ 	margin-top: var(--space_section);
 }
 
 article {
-	margin-top: var(--space_article);
+ 	margin-top: var(--space_article);
 }
 
 /* ------------------------------ Accueil / Connecté------------------------------*/
 
 /* Section Présentation GBAF */
 .GBAF-illustration {
-	margin-top: 50px;
+ 	margin-top: 50px;
 	position: relative;
 	width: 100%;
 	height: 400px;
@@ -204,13 +236,13 @@ article {
 	width: 100%;
 	height: 0.2em;
 	background-color: rgba(0, 0, 0, 0.1);
-	margin-bottom: var(--space_section);
+ 	margin-bottom: var(--space_section);
 }
 /* Article Liste des acteurs + navigation */
 .acteurs_list {
     margin-top: var(--space_article);
 	background-color: rgba(0, 0, 0, 0.02);
-	padding: 1.2em;
+ 	padding: 1.2em;
 	box-shadow: inset 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
 }
 .acteurs_list ul {
@@ -224,12 +256,12 @@ article {
 	grid-template-areas:
 		"logo nom nom"
 		"logo infos ."
-		"logo . button";
+		"logo infosSpan button";
 	column-gap: 20px;
 	align-items: center;
 	height: 180px;
 	padding: 0.5em;
-	margin-bottom: 1.25em;
+ 	margin-bottom: 1.25em;
 	background-color: white;
 	box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.12);
 	box-sizing: content-box;
@@ -263,12 +295,13 @@ article {
 }
 /* bouton "Lire la suite" */
 .acteur_seul > a {
-	grid-area: button;
+    grid-area: button;
+    display: block;
 	justify-self: end;
 	align-self: end;
 	border: 0.1em solid rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
-	padding: 0.5em;
+ 	padding: 0.5em;
 	margin: 0.5em;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -282,6 +315,43 @@ article {
 	color: white;
 }
 
+/* Liste acteurs adaptatif */
+@media only screen 
+and (max-width: 1025px) {
+	/* Article Liste des acteurs + navigation */
+	.acteur_seul {
+		height: auto;
+	}
+	.acteur_seul {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: stretch;
+ 		padding: 1em;
+	}
+	/* Logos / Nom / Description Acteurs */
+	.acteur_seul > img,
+	.acteur_seul > h3,
+	.acteur_seul > div {
+        display: block;
+ 		margin-bottom: 1em;
+	}
+	/* Nom Acteurs */
+	.acteur_seul > h3 {
+		align-self: flex-start;
+	}
+	/* première ligne description acteur */
+	.acteur-seul_description > p:first-of-type {
+		overflow: visible;
+		white-space: normal;
+	}
+	/* bouton "Lire la suite" */
+	.acteur_seul :nth-child(4) {
+		margin: 0;
+		align-self: flex-end;
+	}
+}
+
 /* ------------------------------ Partenaire / Connecté------------------------------*/
 
 /* Section infos du partenaire */
@@ -290,14 +360,14 @@ article {
 	width: 30em;
 	display: block;
 	margin: auto;
-	margin-bottom: var(--space_section);
+ 	margin-bottom: var(--space_section);
 }
 /* Site du Partenaire */
 .partenaire > a {
-	display: inline-block;
+	display: block;
 	font-size: 0.85em;
 	text-decoration: underline;
-	margin-bottom: var(--space_article);
+ 	margin-bottom: var(--space_article);
 }
 /* description du Partenaire */
 .partenaire > .text > p {
@@ -308,14 +378,14 @@ article {
 .commentaires {
 	width: auto;
 	background-color: #f1f1f1;
-	padding: 4em;
+ 	padding: 4em;
 }
 .commentaires_dynamic {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
 	column-gap: 2em;
 	align-items: center;
-	margin-bottom: 2em;
+ 	margin-bottom: 2em;
 }
 /* Nombre de commentaire */
 .commentaires_dynamic > h4 {
@@ -323,20 +393,20 @@ article {
 }
 /* Nouveau commentaire */
 /* boutton Nouveau commentaire */
-.new_commentaire > label {
+.new_commentaire{
 	box-shadow: -1px -2px 5px rgba(255, 255, 255, 0.8),
 		2px 2px 5px rgba(0, 0, 0, 0.2);
-	padding: 0.5em;
+ 	padding: 0.5em; 
 	border-radius: 0.7em;
 	background-color: white;
 	cursor: pointer;
 }
-.new_commentaire > label:hover {
+.new_commentaire:hover {
 	box-shadow: inset -1px -2px 5px rgba(255, 255, 255, 0.5),
 		inset 2px 2px 4px rgba(0, 0, 0, 0.25);
 	color: rgba(0, 0, 0, 0.9);
 }
-.new_commentaire > label:active {
+.new_commentaire:active {
 	box-shadow: inset -1px -2px 5px rgba(255, 255, 255, 0.5),
 		inset 2px 2px 4px rgba(0, 0, 0, 0.25);
 	color: rgba(0, 0, 0, 0.8);
@@ -361,11 +431,11 @@ article {
 .new_commentaire_formulaire > p {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-evenly;
 	height: 25em;
 	width: 40em;
 	margin: 0;
-	padding: 2em 4em 2em 4em;
+ 	padding: 2em 4em 2em 4em;
 	margin-bottom: 3em;
 	background-color: white;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -383,6 +453,7 @@ article {
 	height: 1.25em;
 }
 .new_commentaire_formulaire > p > textarea {
+    display: block;
 	padding: 0.8em;
 	font-family: Helvetica, serif;
 	color: rgba(0, 0, 0, 0.6);
@@ -391,12 +462,12 @@ article {
 	background-color: rgba(0, 0, 0, 0.03);
 	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
 	border: none;
-	margin: 1em 0 1em 0;
 }
 /* Boutton envoi formulaire */
 .new_commentaire_formulaire > p > input {
-	align-self: flex-end;
-	padding: 0.2em 1em 0.2em 1em;
+    align-self: flex-end;
+    display: block;
+ 	padding: 0.2em 1em 0.2em 1em;
 	cursor: pointer;
 }
 #popup_button:checked + .new_commentaire_formulaire {
@@ -413,7 +484,7 @@ article {
 	box-shadow: -1px -2px 5px rgba(255, 255, 255, 0.8),
 		2px 2px 5px rgba(0, 0, 0, 0.2);
 	background-color: white;
-	padding: 0.4em 0.3em 0.4em 0.3em;
+ 	padding: 0.4em 0.3em 0.4em 0.3em;
 	cursor: pointer;
 }
 .vote_like:hover,
@@ -429,7 +500,7 @@ article {
 .vote_like {
 	border-top-left-radius: 0.7em;
 	border-bottom-left-radius: 0.7em;
-	margin-right: 0.2em;
+ 	margin-right: 0.2em;
 }
 .vote_dislike {
 	border-top-right-radius: 0.7em;
@@ -464,13 +535,13 @@ article {
 /* Nom */
 .commentaires-list > li :nth-child(1) {
 	color: DimGray;
-	margin-bottom: 0.2em;
+ 	margin-bottom: 0.2em;
 }
 /* Date */
 .commentaires-list > li :nth-child(2) {
 	color: DimGray;
 	font-size: 0.85em;
-	margin-bottom: 1em;
+ 	margin-bottom: 1em;
 	font-family: "Roboto", sans-serif;
 }
 /* commentaire */
@@ -484,7 +555,7 @@ article {
 .retour-accueil a {
 	display: block;
 	width: 100%;
-	margin-top: 3em;
+ 	margin-top: 3em;
 	margin-bottom: 3em;
 	text-align: right;
 	font-size: 0.85em;
@@ -494,41 +565,41 @@ article {
 /* ------------------------------ Index / Inscription / Modifier son Profil / MP ------------------------------*/
 /* Main */
 .inscription-connexion {
+    grid-column: 1/4 ;
 	display: flex;
 	align-items: center;
 	justify-content: center;
     width: 100%;
-	height: calc(100% - (var(--header_height) + 3em));
+ 	height: 100%;
 	margin: 0;
-	margin-top: var(--header_height);
 	background-color: rgba(0, 0, 0, 0.8);
 }
 /* Section */
 .form_container {
 	min-width: 350px;
-	max-width: 400px;
+    max-width: 400px;
 	margin: 0;
 	background-color: #ebebeb;
 	border-radius: 0.2em;
-	padding: 1em;
+ 	padding: 2em;
 }
 .form_container fieldset {
 	display: flex;
-	flex-direction: column;
-	height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+ 	height: 100%;
 	margin: 0;
-	padding: 0;
-	padding: 2em;
-}
-.form_container fieldset > * {
-	margin-bottom: 1em;
+    padding: 0;
+    border:none;
 }
 /* Legende formulaire*/
 .form_container fieldset > legend {
-	margin-bottom: 0;
+	margin-bottom: 1em;
 }
 .message,
 .message-erreur {
+    display: block;
+    margin-bottom: 1em;
 	color: red;
 	font-size: 0.81em;
 	text-align: center;
@@ -536,12 +607,13 @@ article {
 /* Formulaires */
 .form_container form > p {
 	display: flex;
-	flex-direction: column;
+    flex-direction: column;
 	font-size: 0.97em;
 }
 .form_container form > p > input {
+    display: block;
 	line-height: 1em;
-	padding: 0.3em;
+ 	padding: 0.3em;
 	color: rgba(0, 0, 0, 0.75);
 	font-family: Helvetica, serif;
 	border: none;
@@ -554,12 +626,13 @@ article {
 }
 /* Bouton envoyer */
 .form_container form > p > .button-envoyer {
+    display: block;
 	border: none;
 	box-shadow: none;
 	color: black;
 	border-radius: 0.3em;
 	height: 2.5em;
-	margin-bottom: 1em;
+ 	margin-bottom: 1em;
 	margin-top: 0.5em;
 	padding: 0.4em;
 	background-color: #cecece;
@@ -592,22 +665,26 @@ article {
 	vertical-align: top;
 }
 .form_container form > p :nth-child(even) {
-	margin-bottom: 0.7em;
+    display: block;
+ 	margin-bottom: 0.7em;
 	margin-top: 0.2em;
 	font-size: 1em;
 }
 /* * */
 .form_container form > p > span {
+    display: block;
 	align-self: center;
 	color: red;
 	font-size: 0.7em !important;
-	margin: 0.5em 0 0 0 !important;
+ 	margin: 0.5em 0 0 0 !important;
 }
 /* liens vers index ou accueil .. */
 .form_container > fieldset > a {
+    display: block;
 	font-size: 0.8em;
 	font-style: italic;
-	text-align: center;
+    text-align: center;
+    margin-top:1em;
 }
 .form_container > fieldset > a:hover {
 	text-decoration: underline;

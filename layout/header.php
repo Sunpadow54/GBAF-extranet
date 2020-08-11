@@ -1,22 +1,3 @@
-<?php
-
-// Base de donnée connexion : 
-try {
-    $bdd = new PDO(
-        'mysql:host=localhost;
-        dbname=gbaf-extranet;
-        charset=utf8',
-        'root',
-        '',
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -26,16 +7,16 @@ try {
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="/style/style.css" />
 		<link
 			rel="stylesheet"
 			media="screen"
-			href="style-mobile.css"
+			href="/style/style-mobile.css"
 		/>
 		<link
 			rel="stylesheet"
 			media="screen"
-			href="style-tablette.css"
+			href="/style/style-tablette.css"
 		/>
 
 		<link
@@ -45,11 +26,11 @@ try {
 	</head>
 
 	<body>
-		<header>
-			<div class="header-contain">
+        <div class="contain_all">
+            <header>
 				<!-- Logo GBAF -->
-				<a class="header-logo" href="../accueil.php">
-					<img src="../images/GBAF.png" alt="Logo GBAF" />
+				<a class="header-logo" href="espace-membre/accueil.php">
+					<img src="/images/GBAF.png" alt="Logo GBAF" />
 				</a>
 
                 <?php // affiche le profil uniquement si un utilsateur est connecté
@@ -66,16 +47,15 @@ try {
 
                     <!-- bouton Déconnexion -->
                     <li>
-                        <a href="../deconnexion.php">Se déconnecter</a>
+                        <a href="/espace-membre/deconnexion.php">Se déconnecter</a>
                     </li>
 
                     <!-- bouton Modifier son Profil -->
                     <li>
-                        <a href="../parametres-compte.php">Paramètres du compte</a>
+                        <a href="/espace-membre/parametres-compte.php">Paramètres du compte</a>
                     </li>
                 </ul>
                 <?php
                 }
                 ?>
-        </div>
-    </header>
+            </header>

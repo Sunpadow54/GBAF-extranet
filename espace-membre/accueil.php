@@ -8,6 +8,7 @@ require_once('../core/helper.php');
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
     header('Location: /index.php');
+    exit();
 }
 
 $_SESSION['wantMpChange'] = false;

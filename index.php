@@ -6,6 +6,7 @@ require_once('core/account.php');
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     header('Location: /espace-membre/accueil.php');
+    exit();
 }
 
 
@@ -27,6 +28,7 @@ if (isset($_POST['dataSubmit']) && !empty($_POST['username']) && !empty($_POST['
             $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
 
             header('Location: /espace-membre/accueil.php');
+            exit();
         }
         //mot de passe incorrect
         if (!$isPasswordCorrect) {
@@ -41,10 +43,11 @@ if (isset($_POST['dataSubmit']) && !empty($_POST['username']) && !empty($_POST['
     }
 }
 // champs non remplis
-if (!isset($_POST['dataSubmit']) && empty($_POST['username']) && empty($_POST['password'])) {
+if (isset($_POST['dataSubmit']) && empty($_POST['username']) && empty($_POST['password'])) {
 
     $message = EMPTY_FIELD;
 }
+
 
 
 // NON CONNECTÉ - page de connexion
@@ -53,7 +56,6 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     require_once('layout/header.php');
 
     /* ------------------------------------------------HTML index---------------------------------------- */
-
     ?>
 
     <main class="inscription-connexion">

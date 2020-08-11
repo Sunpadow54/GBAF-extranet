@@ -7,6 +7,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     && !isset($_GET['vote']) && !isset($_GET['id_acteur'])) {
 
     header('Location: ../index.php');
+    exit();
 }
 
 
@@ -38,7 +39,8 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
         $req_insert_vote->closeCursor();
 
-        header('Location: ../partenaire.php?id_acteur=' . $_GET['id_acteur']);
+        header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
+        exit();
     } 
 
     if ($userVote && $_GET['vote'] != $userVote['vote']) {
@@ -53,12 +55,14 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         $req_update_vote->closeCursor();
 
         header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
+        exit();
     } 
 
     // REDIRECTION: vote identique
     if ($userVote && $_GET['vote'] == $userVote['vote']) {
 
         header('Location: partenaire.php?id_acteur=' . $_GET['id_acteur']);
+        exit();
     }
 }
 

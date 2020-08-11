@@ -6,6 +6,7 @@ require_once('core/account.php');
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     header('Location: /espace-membre/accueil.php');
+    exit();
 }
 
     // Les Formulaires 
@@ -98,6 +99,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             $_SESSION['message'] = $message;
 
             header('Location: /index.php');
+            exit();
         }
         if (!preg_match($mpValid, $_POST['password'])) {
 

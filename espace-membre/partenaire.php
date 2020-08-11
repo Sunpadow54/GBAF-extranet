@@ -6,6 +6,7 @@ session_start();
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
     header('Location: index.php');
+    exit();
 }
 
 // BDD

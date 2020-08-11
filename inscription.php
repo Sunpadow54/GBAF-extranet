@@ -6,6 +6,7 @@ require_once('core/account.php');
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     header('Location: /espace-membre/accueil.php');
+    exit();
 }
 
 
@@ -46,6 +47,7 @@ if (isset($_POST['dataSubmit'])) {
             $_SESSION['message'] = $message;
 
             header('Location: /index.php');
+            exit();
         } 
         // message : mauvais mp
         if (!preg_match($mpValid, $_POST['password'])) {

@@ -2,44 +2,53 @@
 
 require_once('core/account.php');
 
-if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+// REDIRECTION: CONNECTÉ
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
-    if (isset($_POST['dataSubmit'])) {
+    header('Location: /espace-membre/accueil.php');
+}
 
-        // Cherche l'utilisateur dans la BDD (voir account)
-        $dataAccount = searchUser($bdd, $_POST['username']);
 
-        // Si l'user existe
-        if ($dataAccount) {
+if (isset($_POST['dataSubmit']) && !empty($_POST['username']) && !empty($_POST['password'])) {
 
-            // Verification que tous les champs ne sont pas vides
-            if (!empty($_POST['username']) && !empty($_POST['password']))
-            {
+    // Cherche l'utilisateur dans la BDD (voir account)
+    $dataAccount = searchUser($bdd, $_POST['username']);
+    // Si l'user existe, et que tous les champs sont remplis
+    if ($dataAccount) {
 
-                // Vérification mot de passe (Hashé)
-                $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+        // Vérification mot de passe (Hashé)
+        $isPasswordCorrect = password_verify($_POST['password'], $dataAccount['password']);
+        // Si le mot de passe correspond
+        if ($isPasswordCorrect) {
+            // Connexion
+            $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
+            $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
+            $_SESSION['id_user'] = $dataAccount['id_user'];
+            $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
 
-                // Si le mot de passe correspond
-                if ($isPasswordCorrect) {
-                    // Connexion
-                    $_SESSION['nom'] = htmlspecialchars($dataAccount['nom']);
-                    $_SESSION['prenom'] = htmlspecialchars($dataAccount['prenom']);
-                    $_SESSION['id_user'] = $dataAccount['id_user'];
-                    $_SESSION['username'] = htmlspecialchars($dataAccount['username']);
+            header('Location: /espace-membre/accueil.php');
+        }
+        //mot de passe incorrect
+        if (!$isPasswordCorrect) {
 
-                    header('Location: /espace-membre/accueil.php');
-                } else {
-                    $message = 3;
-                }
-            } else {
-
-                $message = 2;
-            }
-        } else {
-
-            $message = 1;        
+            $message = 3;
         }
     }
+    // identifiant n'existe pas
+    if (!$dataAccount) {
+
+        $message = 1;
+    }
+}
+// champs non remplis
+if (!isset($_POST['dataSubmit']) && empty($_POST['username']) && empty($_POST['password'])) {
+
+    $message = 2;
+}
+
+
+// NON CONNECTÉ - page de connexion
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
     require_once('layout/header.php');
 
@@ -103,8 +112,5 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     <?php 
 
     require_once('layout/footer.php');
-} else {
-
-    header('Location: /espace-membre/accueil.php');
 }
 ?>

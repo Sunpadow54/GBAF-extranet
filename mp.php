@@ -2,7 +2,11 @@
 
 require_once('core/account.php');
 
-if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+// REDIRECTION: CONNECTÉ
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
+
+    header('Location: /espace-membre/accueil.php');
+}
 
     // Les Formulaires 
     $formDefault = '<label for="pseudo">Identifiant : </label>
@@ -14,7 +18,6 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
         <input type="password" id="mp" name="password" size="20">';
 
     $formType = $formDefault;
-
 
 
     /*-----------------------  Si l'utilisateur existe, Affiche la question et son formulaire */
@@ -32,11 +35,14 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
             $formType = $formQuestion;
             $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
             $message = 6;
-        } else {
+        }
+        if (!$dataAccount) {
 
             $message = 1;
         }
-    } 
+    }
+
+
 
     /*----------------------- Si on répond à la question secrète */
 
@@ -55,7 +61,8 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
             // On affiche le formulaire de changement de mot de passe
             $formType = $fomPasswordChange;
             $message = 8;
-        } else {
+        }
+        if (!$isGoodAnswer) {
 
             $questionUser = $dataAccount['question'];
             $message = 7;
@@ -91,14 +98,16 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
             $_SESSION['message'] = $message;
 
             header('Location: /index.php');
-        } else {
+        }
+        if (!preg_match($mpValid, $_POST['password'])) {
 
-            // Si le mot de passe n'est pas conforme
             $message = 4;
         }
     }
 
-
+//  NON CONNECTÉ - page modifier son password
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+    
     /* ------------------------------------------------HTML Changement de mp---------------------------------------- */
 
     require_once('layout/header.php');
@@ -146,8 +155,5 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 <?php
 
 require_once('layout/footer.php');
-} else {
-
-    header('Location: /espace-membre/accueil.php');
 }
 ?>

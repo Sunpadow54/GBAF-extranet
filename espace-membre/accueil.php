@@ -4,33 +4,36 @@ session_start();
 
 require_once('../core/helper.php');
 
+// REDIRECTION: NON CONNECTÉ
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
     header('Location: /index.php');
 }
 
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
+$_SESSION['wantMpChange'] = false;
 
-    $_SESSION['wantMpChange'] = false;
+// fonction recherche les infos des acteurs dans la bdd
+function searchActeurs($bdd)
+{
 
-    // fonction recherche les infos des acteurs dans la bdd
-    function searchActeurs($bdd)
-    {
+    $req_data_acteur = $bdd->prepare('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
+    $req_data_acteur->execute();
 
-        $req_data_acteur = $bdd->prepare('SELECT *, SUBSTR(description, 1, 135) AS firstLineDescription FROM acteur');
-        $req_data_acteur->execute();
+    while ($dataPartenaires = $req_data_acteur->fetch()) {
 
-        while ($dataPartenaires = $req_data_acteur->fetch()) {
-
-            echo '<li class="acteur_seul">';
-            echo $dataPartenaires['logo'];
-            echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
-            echo '<div class="acteur-seul_description"><p>' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
-            echo '<a href="/espace-membre/partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
-            echo '</li>';
-        }
-        $req_data_acteur->closeCursor();
+        echo '<li class="acteur_seul">';
+        echo $dataPartenaires['logo'];
+        echo '<h3>' . $dataPartenaires['acteur'] . '</h3>';
+        echo '<div class="acteur-seul_description"><p>' . $dataPartenaires['firstLineDescription'] . ' (...)</p></div>';
+        echo '<a href="/espace-membre/partenaire.php?id_acteur=' . $dataPartenaires['id_acteur'] . ' ">Lire la suite</a> ';
+        echo '</li>';
     }
+    $req_data_acteur->closeCursor();
+}
+
+
+// CONNECTÉ:
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     require_once('../layout/header.php');
 

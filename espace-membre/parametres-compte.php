@@ -2,178 +2,190 @@
 
 require_once('../core/account.php');
 
-// -------------------------entre sur la page Modification Profil
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
+// REDIRECTION: NON CONNECTÉ
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+
+    header('Location: ../index.php');
+}
 
     
-    $_SESSION['wantMpChange'] = true;
-    // Cherche L'utilisateur dans la BDD (voir account)
-    $dataAccountOld = searchUser($bdd, $_SESSION['username']);
+$_SESSION['wantMpChange'] = true;
+// Cherche L'utilisateur dans la BDD (voir account)
+$dataAccountOld = searchUser($bdd, $_SESSION['username']);
 
-    // Si on change ses infos
-    if (isset($_POST['dataSubmit'])) {
+// si on envoie le formulaire
+if (isset($_POST['dataSubmit'])) {
 
-        //on cherche à savoir si l'username existe déjà
-        $dataAccount = searchUser($bdd, $_POST['username']);
+    //on cherche à savoir si l'username existe déjà
+    $dataAccount = searchUser($bdd, $_POST['username']);
 
-        // Si l'username n'existe pas
-        if (!$dataAccount or $dataAccountOld['username'] == $_POST['username']) {
+    // Si l'username n'existe pas
+    if (!$dataAccount OR $dataAccountOld['username'] == $_POST['username']) {
 
-            // Verification tous les champs ont été remplis
-            if (
-                !empty($_POST['nom']) && !empty($_POST['prenom'])
-                && !empty($_POST['question']) && !empty($_POST['reponse'])
-            ) {
+        // Verification tous les champs ont été remplis
+        if (!empty($_POST['nom']) && !empty($_POST['prenom'])
+            && !empty($_POST['question']) && !empty($_POST['reponse'])
+            && !empty($_POST['password']) && !empty($_POST['username'])) {
 
-                // et que le mot de passe est correct
-                $isPasswordCorrect = password_verify($_POST['password'], $dataAccountOld['password']);
+            // et que le mot de passe est correct
+            $isPasswordCorrect = password_verify($_POST['password'], $dataAccountOld['password']);
 
-                if ($isPasswordCorrect && !empty($_POST['password'])) {
+            if ($isPasswordCorrect) {
 
-                    $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
+                $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
 
-                    // Change les infos de la BDD
-                    $req_update_infos_user = $bdd->prepare('UPDATE account SET 
-                                                nom = :nom, 
-                                                prenom = :prenom,
-                                                question = :question,
-                                                reponse = :reponse
-                                                WHERE id_user = :id_user
-                                                ');
-                    $req_update_infos_user->execute(array(
-                        'nom' => ($_POST['nom']),
-                        'prenom' => ($_POST['prenom']),
-                        'question' => ($_POST['question']),
-                        'reponse' => $reponseHashed,
-                        'id_user' => $dataAccount['id_user']
-                    ));
-                    $req_update_infos_user->closeCursor();
+                // Change les infos de la BDD
+                $req_update_infos_user = $bdd->prepare('UPDATE account SET 
+                                            username = :username,
+                                            nom = :nom, 
+                                            prenom = :prenom,
+                                            question = :question,
+                                            reponse = :reponse
+                                            WHERE id_user = :id_user
+                                            ');
+                $req_update_infos_user->execute(array(
+                    'username' => ($_POST['username']),
+                    'nom' => ($_POST['nom']),
+                    'prenom' => ($_POST['prenom']),
+                    'question' => ($_POST['question']),
+                    'reponse' => $reponseHashed,
+                    'id_user' => $dataAccountOld['id_user']
+                ));
 
-                    // Récupère les nouvelles valeurs de SESSION (fonction voir account)
-                    $dataAccountNew = searchUser($bdd, $_SESSION['username']);
+                $usernameNew = $_POST['username'];
+                $req_update_infos_user->closeCursor();
 
-                    $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
-                    $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
+                // Récupère les nouvelles valeurs de SESSION (fonction voir account)
+                $dataAccountNew = searchUser($bdd, $usernameNew);
 
-                    $message = 5;
+                $_SESSION['nom'] = htmlspecialchars($dataAccountNew['nom']);
+                $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
+                $_SESSION['username'] = htmlspecialchars($dataAccountNew['username']);
 
-                } else {
+                $message = 5;
 
-                    $message = 3;
-                }
-            } else {
-
-                $message = 2;
             }
-        } else {
+            if (!$isPasswordCorrect) {
 
-            $message = 10;
+                $message = 3;
+            }
+        } 
+        if (empty($_POST['nom']) OR empty($_POST['prenom'])
+            OR empty($_POST['question']) OR empty($_POST['reponse'])
+            OR empty($_POST['password']) OR empty($_POST['username'])) {
+            
+            $message = 2;
         }
     }
+    if ($dataAccount AND $dataAccountOld['username'] != $_POST['username']) {
 
-	
-/* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
-
-require_once('../layout/header.php');
-
-?>
-
-<main class="inscription-connexion">
-    <div class="form_container">
-        <fieldset>
-            <legend>Modifier son Profil</legend>
-
-            <!-- message erreur -->
-            <span class="message-erreur">
-                <?php messageError($message); ?>
-            </span>
-            <!-- Formulaire -->
-            <form method="post" action="parametres-compte.php">
-                <p>
-                    <label for="pseudo">Identifiant : </label>
-                    <input 
-                        type="text"
-                        id="pseudo"
-                        name="username"
-                        size="20" 
-                        value="<?php defaultInputValue('username', $dataAccountOld['username']);?>"
-                    />
-
-                    <label for="nom">Nom : </label>
-                    <input
-                        type="text"
-                        id="nom"
-                        name="nom"
-                        size="30"
-                        value="<?php defaultInputValue('nom', $dataAccountOld['nom']);?>"
-                    />
+        $message = 10;
+    }
+}
 
 
-                    <label for="prenom">Prénom : </label>
-                    <input 
-                        type="text"
-                        id="prenom"
-                        name="prenom"
-                        size="30"
-                        value="<?php defaultInputValue('prenom', $dataAccountOld['prenom']);?>"
-                    />
+// CONNECTÉ:
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
+
+    /* ------------------------------------------------ HTML FORMULAIRE INSCRIPTION ---------------------------------------- */
+    require_once('../layout/header.php');
+
+    ?>
+
+    <main class="inscription-connexion">
+        <div class="form_container">
+            <fieldset>
+                <legend>Modifier son Profil</legend>
+
+                <!-- message erreur -->
+                <span class="message-erreur">
+                    <?php messageError($message); ?>
+                </span>
+                <!-- Formulaire -->
+                <form method="post" action="parametres-compte.php">
+                    <p>
+                        <label for="pseudo">Identifiant : </label>
+                        <input 
+                            type="text"
+                            id="pseudo"
+                            name="username"
+                            size="20" 
+                            value="<?php defaultInputValue('username', $dataAccountOld['username']);?>"
+                        />
+
+                        <label for="nom">Nom : </label>
+                        <input
+                            type="text"
+                            id="nom"
+                            name="nom"
+                            size="30"
+                            value="<?php defaultInputValue('nom', $dataAccountOld['nom']);?>"
+                        />
 
 
-                    <label for="question">
-                        Votre question secrète : 
-                    </label>
-                    <input
-                        type="text"
-                        id="question"
-                        name="question"
-                        value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
-                    />
+                        <label for="prenom">Prénom : </label>
+                        <input 
+                            type="text"
+                            id="prenom"
+                            name="prenom"
+                            size="30"
+                            value="<?php defaultInputValue('prenom', $dataAccountOld['prenom']);?>"
+                        />
 
 
-                    <label for="reponse">
-                        La réponse à votre question : 
-                    </label>
-                    <input
-                        type="text" 
-                        id="reponse" 
-                        name="reponse"
-                        value=""
-                    />
+                        <label for="question">
+                            Votre question secrète : 
+                        </label>
+                        <input
+                            type="text"
+                            id="question"
+                            name="question"
+                            value="<?php defaultInputValue('question', $dataAccountOld['question']);?>"
+                        />
 
-                    <label for="mp">Entrez votre mot de passe: </label>
-                    <input
-                        type="password"
-                        id="mp"
-                        name="password"
-                        size="20"
-                    />
 
-                    <input
-                        class="button-envoyer"
-                        type="submit"
-                        name="dataSubmit"
-                        value="Envoyer"
-                        onclick="unsetPreviousSession()"
-                    />
+                        <label for="reponse">
+                            La réponse à votre question : 
+                        </label>
+                        <input
+                            type="text" 
+                            id="reponse" 
+                            name="reponse"
+                            value=""
+                        />
 
-                    <span>
-                        <em>*</em> Tous les champs doivent être remplis
-                    </span>
+                        <label for="mp">Entrez votre mot de passe: </label>
+                        <input
+                            type="password"
+                            id="mp"
+                            name="password"
+                            size="20"
+                        />
 
-                </p>
-            </form>
+                        <input
+                            class="button-envoyer"
+                            type="submit"
+                            name="dataSubmit"
+                            value="Envoyer"
+                            onclick="unsetPreviousSession()"
+                        />
 
-            <a href="deconnexion.php"> changer son mot de passe </a>
+                        <span>
+                            <em>*</em> Tous les champs doivent être remplis
+                        </span>
 
-            <a href="accueil.php"> Retour à l'accueil </a>
-        </fieldset>
-    </div>
-</main>
+                    </p>
+                </form>
 
-<?php
+                <a href="deconnexion.php"> changer son mot de passe </a>
+
+                <a href="accueil.php"> Retour à l'accueil </a>
+            </fieldset>
+        </div>
+    </main>
+
+    <?php
+
     require_once('../layout/footer.php');
-
-} else {
-    header('Location: ../index.php');
 }
 ?>

@@ -2,66 +2,76 @@
 
 require_once('core/account.php');
 
-if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
+// REDIRECTION: CONNECTÉ
+if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
-    //------------VERIFICATION & AJOUT NOUVEL UTILISATEUR
+    header('Location: /espace-membre/accueil.php');
+}
 
-    // Verifie si les variables ont été crées
-    if (isset($_POST['dataSubmit'])) {
 
-        // Cherche si l'utilisateur dans la BDD (voir account)
-        $dataAccount = searchUser($bdd, $_POST['username']);
+// Si on envoi le formulaire
+if (isset($_POST['dataSubmit'])) {
 
-        // Si l'username n'existe pas
-        if (!$dataAccount) {
+    // Cherche si l'utilisateur dans la BDD (voir account)
+    $dataAccount = searchUser($bdd, $_POST['username']);
 
-            // Verification que tous les champs ne sont pas vide
-            if (
-                !empty($_POST['nom']) && !empty($_POST['prenom'])
-                && !empty($_POST['username']) && !empty($_POST['password'])
-                && !empty($_POST['question']) && !empty($_POST['reponse'])
-            ) {
+    if (!$dataAccount 
+        && !empty($_POST['nom']) && !empty($_POST['prenom'])
+        && !empty($_POST['username']) && !empty($_POST['password'])
+        && !empty($_POST['question']) && !empty($_POST['reponse'])) {
+    
+        // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
+        if (preg_match($mpValid, $_POST['password'])) {
 
-                // Verification que le mot de passe contient minimum 1 lettre 1 maj et 1 chiffre
-                if (preg_match($mpValid, $_POST['password'])) {
+            // Hashage du mot de passe
+            $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
+            // Insère le nouvel Utilisateur dans la BDD
+            $req_add_user = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) 
+                                    VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
+            $req_add_user->execute(array(
+                'nom' => ($_POST['nom']),
+                'prenom' => ($_POST['prenom']),
+                'username' => ($_POST['username']),
+                'password' => $passwordHashed,
+                'question' => ($_POST['question']),
+                'reponse' => $reponseHashed
+            ));
 
-                    // Hashage du mot de passe
-                    $passwordHashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $reponseHashed = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
-                    // Insère le nouvel Utilisateur dans la BDD
-                    $req_add_user = $bdd->prepare('INSERT INTO account (nom, prenom, username, password, question, reponse) 
-                                            VALUES (:nom, :prenom, :username, :password, :question, :reponse)');
-                    $req_add_user->execute(array(
-                        'nom' => ($_POST['nom']),
-                        'prenom' => ($_POST['prenom']),
-                        'username' => ($_POST['username']),
-                        'password' => $passwordHashed,
-                        'question' => ($_POST['question']),
-                        'reponse' => $reponseHashed
-                    ));
+            $req_add_user->closeCursor();
 
-                    $req_add_user->closeCursor();
+            $message = 11;
 
-                    $message = 11;
+            $_SESSION['username'] = htmlspecialchars($_POST['username']);
+            $_SESSION['message'] = $message;
 
-                    $_SESSION['username'] = htmlspecialchars($_POST['username']);
-                    $_SESSION['message'] = $message;
+            header('Location: /index.php');
+        } 
+        // message : mauvais mp
+        if (!preg_match($mpValid, $_POST['password'])) {
 
-                    header('Location: /index.php');
-                } else {
-
-                    $message = 4;
-                }
-            } else {
-
-                $message = 2;
-            }
-        } else {
-            // Username existe déjà
-            $message = 10;
+            $message = 4;
         }
     }
 
+    // message : un des champs est vide
+    if (empty($_POST['nom']) OR empty($_POST['prenom'])
+        OR empty($_POST['username']) OR empty($_POST['password'])
+        OR empty($_POST['question']) OR empty($_POST['reponse'])
+    ) {
+
+        $message = 2;
+    }
+
+    // message : l'username existe déja
+    if ($dataAccount) {
+
+        $message = 10;
+    }
+}
+
+// NON CONNECTÉ - page inscription
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
 
     require_once('layout/header.php');
 
@@ -162,8 +172,5 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     <?php 
 
     require_once('layout/footer.php');
-} else {
-
-    header('Location: /espace-membre/accueil.php');
 }
 ?>

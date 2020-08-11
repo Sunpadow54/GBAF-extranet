@@ -31,19 +31,19 @@ if (isset($_POST['dataSubmit']) && !empty($_POST['username']) && !empty($_POST['
         //mot de passe incorrect
         if (!$isPasswordCorrect) {
 
-            $message = 3;
+            $message = PASSWORD_WRONG;
         }
     }
     // identifiant n'existe pas
     if (!$dataAccount) {
 
-        $message = 1;
+        $message = USERNAME_UNKNOWN;
     }
 }
 // champs non remplis
 if (!isset($_POST['dataSubmit']) && empty($_POST['username']) && empty($_POST['password'])) {
 
-    $message = 2;
+    $message = EMPTY_FIELD;
 }
 
 

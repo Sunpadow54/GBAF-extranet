@@ -50,7 +50,20 @@ if (!isset($_POST['connexionSubmit'])) {
     unset($_SESSION['message']);
 }
 
+
 //  Fonction message / erreur
+define("USERNAME_UNKNOWN",      "1");
+define("EMPTY_FIELD",           "2");
+define("PASSWORD_WRONG",        "3");
+define("PASSWORD_INVALID",      "4");
+define("ACCOUNT_UPDATE",        "5");
+define("QUESTION",              "6");
+define("ANSWER_WRONG",          "7");
+define("PASSWORD_CAN_CHANGE",   "8");
+define("PASSWORD_UPDATE",       "9");
+define("USERNAME_EXIST",        "10");
+define("WELCOME",               "11");
+
 function messageError($message)
 {
 
@@ -72,12 +85,10 @@ function messageError($message)
             echo "Le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
             break;
 
-            // Paramètre-compte modification
         case 5:
             echo "Vos changements ont bien été pris en compte";
             break;
 
-            // Modification MP
         case 6:
             echo "répondez à votre question secrète : ";
             break;
@@ -94,12 +105,10 @@ function messageError($message)
             echo "Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter";
             break;
 
-            // inscription
         case 10:
             echo "Cet identifiant existe déjà ";
             break;
 
-            // après inscription
         case 11:
             echo "Bienvenue ! Vous pouvez vous connecter";
             break;

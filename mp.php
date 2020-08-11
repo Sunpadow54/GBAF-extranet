@@ -34,11 +34,11 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             // On donne la question
             $formType = $formQuestion;
             $questionUser = '<label for="reponse">' . $dataAccount['question'] . ' </label>';
-            $message = 6;
+            $message = QUESTION;
         }
         if (!$dataAccount) {
 
-            $message = 1;
+            $message = USERNAME_UNKNOWN;
         }
     }
 
@@ -51,7 +51,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
         $formType = $formQuestion;
         $dataAccount = searchUser($bdd, $_SESSION['username']);
         $questionUser = $dataAccount['question'];
-        $message = 6;
+        $message = QUESTION;
         $isGoodAnswer = password_verify($_POST['reponse'], $dataAccount['reponse']);
 
         // Si la réponse correspond
@@ -60,12 +60,12 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             unset($questionUser);
             // On affiche le formulaire de changement de mot de passe
             $formType = $fomPasswordChange;
-            $message = 8;
+            $message = PASSWORD_CAN_CHANGE;
         }
         if (!$isGoodAnswer) {
 
             $questionUser = $dataAccount['question'];
-            $message = 7;
+            $message = ANSWER_WRONG;
         }
     }
 
@@ -94,20 +94,20 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
             ));
             $req_update_password->closeCursor();
 
-            $message = 9;
+            $message = PASSWORD_UPDATE;
             $_SESSION['message'] = $message;
 
             header('Location: /index.php');
         }
         if (!preg_match($mpValid, $_POST['password'])) {
 
-            $message = 4;
+            $message = PASSWORD_INVALID;
         }
     }
 
 //  NON CONNECTÉ - page modifier son password
 if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) {
-    
+
     /* ------------------------------------------------HTML Changement de mp---------------------------------------- */
 
     require_once('layout/header.php');

@@ -40,7 +40,7 @@ if (isset($_POST['dataSubmit'])) {
 
             $req_add_user->closeCursor();
 
-            $message = 11;
+            $message = WELCOME;
 
             $_SESSION['username'] = htmlspecialchars($_POST['username']);
             $_SESSION['message'] = $message;
@@ -50,7 +50,7 @@ if (isset($_POST['dataSubmit'])) {
         // message : mauvais mp
         if (!preg_match($mpValid, $_POST['password'])) {
 
-            $message = 4;
+            $message = PASSWORD_INVALID;
         }
     }
 
@@ -60,13 +60,13 @@ if (isset($_POST['dataSubmit'])) {
         OR empty($_POST['question']) OR empty($_POST['reponse'])
     ) {
 
-        $message = 2;
+        $message = EMPTY_FIELD;
     }
 
     // message : l'username existe déja
     if ($dataAccount) {
 
-        $message = 10;
+        $message = USERNAME_EXIST;
     }
 }
 

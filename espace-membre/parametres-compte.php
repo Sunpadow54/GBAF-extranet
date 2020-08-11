@@ -62,24 +62,24 @@ if (isset($_POST['dataSubmit'])) {
                 $_SESSION['prenom'] = htmlspecialchars($dataAccountNew['prenom']);
                 $_SESSION['username'] = htmlspecialchars($dataAccountNew['username']);
 
-                $message = 5;
+                $message = ACCOUNT_UPDATE;
 
             }
             if (!$isPasswordCorrect) {
 
-                $message = 3;
+                $message = PASSWORD_WRONG;
             }
         } 
         if (empty($_POST['nom']) OR empty($_POST['prenom'])
             OR empty($_POST['question']) OR empty($_POST['reponse'])
             OR empty($_POST['password']) OR empty($_POST['username'])) {
             
-            $message = 2;
+            $message = EMPTY_FIELD;
         }
     }
     if ($dataAccount AND $dataAccountOld['username'] != $_POST['username']) {
 
-        $message = 10;
+        $message = USERNAME_EXIST;
     }
 }
 

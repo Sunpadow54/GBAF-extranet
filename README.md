@@ -39,3 +39,7 @@ _https://www.sunpadown.fr/_
 ## License
 
 copyleft
+
+### ameliorations possibles
+
+utilisation de constantes (ou voir $_SERVER['DOCUMENT_ROOT'];) pour chemins

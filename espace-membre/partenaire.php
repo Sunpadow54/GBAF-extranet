@@ -207,7 +207,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                         <!-- E. icone like -->
                         <img 
-                            src="<?php echo '../images/' . $iconeVoteLike . '.png'; ?>" 
+                            src="<?php echo '/images/' . $iconeVoteLike . '.png'; ?>" 
                             alt="like"
                         />
                     </a>
@@ -218,7 +218,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                     >
                         <!-- E. icone dislike -->
                         <img 
-                            src="<?php echo '../images/' . $iconeVoteDislike . '.png'; ?>" 
+                            src="<?php echo '/images/' . $iconeVoteDislike . '.png'; ?>" 
                             alt="dislike"
                         />
 

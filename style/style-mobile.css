@@ -87,7 +87,7 @@ and (max-width: 480px) {
 		top: 0;
 		right: 0;
 		display: block;
-		background: url(../images/icone-deconnexion.png) center / cover
+		background: url(/images/icone-deconnexion.png) center / cover
 			no-repeat;
 		width: 2.3em;
 		height: 2.3em;

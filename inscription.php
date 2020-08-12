@@ -164,9 +164,9 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                     </p>
                 </form>
 
-                <a href="../index.php"> se connecter </a>
+                <a href="/index.php"> se connecter </a>
 
-                <a href="../mp.php"> mot de passe oublié ? </a>
+                <a href="/mp.php"> mot de passe oublié ? </a>
             </fieldset>
         </div>
     </main>

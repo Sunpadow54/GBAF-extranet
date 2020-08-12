@@ -36,6 +36,7 @@ function searchActeurs($bdd)
 if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id_user'])) {
 
     require_once('../layout/header.php');
+    
 
     /* 	------------------------------------------------ HTML ACCUEIL ------------------------------------------------ */
     ?>

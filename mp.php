@@ -147,9 +147,9 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                     </p>
                 </form>
 
-                <a href="../index.php"> Connexion </a>
+                <a href="/index.php"> Connexion </a>
 
-                <a href="../inscription.php"> créer un compte </a>
+                <a href="/inscription.php"> créer un compte </a>
             </fieldset>
         </div>
     </main>

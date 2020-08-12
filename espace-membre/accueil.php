@@ -11,7 +11,6 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
     exit();
 }
 
-$_SESSION['wantMpChange'] = false;
 
 // fonction recherche les infos des acteurs dans la bdd
 function searchActeurs($bdd)

@@ -10,14 +10,12 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 }
 
     
-$_SESSION['wantMpChange'] = true;
 // Cherche L'utilisateur dans la BDD (voir account)
 $dataAccountOld = searchUser($bdd, $_SESSION['username']);
 
 // si on envoie le formulaire
 if (isset($_POST['dataSubmit'])) {
 
-    //on cherche à savoir si l'username existe déjà
     $dataAccount = searchUser($bdd, $_POST['username']);
 
     // Si l'username n'existe pas
@@ -178,7 +176,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
                     </p>
                 </form>
 
-                <a href="deconnexion.php"> changer son mot de passe </a>
+                <a href="deconnexion.php?redirection=mp"> changer son mot de passe </a>
 
                 <a href="accueil.php"> Retour à l'accueil </a>
             </fieldset>

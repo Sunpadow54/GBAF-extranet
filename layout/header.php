@@ -29,7 +29,7 @@
         <div class="contain_all">
             <header>
 				<!-- Logo GBAF -->
-				<a class="header-logo" href="espace-membre/accueil.php">
+				<a class="header-logo" href="/espace-membre/accueil.php">
 					<img src="/images/GBAF.png" alt="Logo GBAF" />
 				</a>
 
@@ -47,7 +47,7 @@
 
                     <!-- bouton Déconnexion -->
                     <li>
-                        <a href="/espace-membre/deconnexion.php">Se déconnecter</a>
+                        <a href="/espace-membre/deconnexion.php?redirection=exit">Se déconnecter</a>
                     </li>
 
                     <!-- bouton Modifier son Profil -->

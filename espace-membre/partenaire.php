@@ -12,7 +12,6 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 // BDD
 require_once('../core/helper.php');
 
-$_SESSION['wantMpChange'] = false;
 $idActeur = htmlspecialchars($_GET['id_acteur']);
 
 

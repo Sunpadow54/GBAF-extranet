@@ -64,7 +64,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                         <legend>Se connecter :</legend>
 
                         <span class="message">
-                            <?php messageError($message); ?>
+                            <?php echo $message; ?>
                         </span>
 
                         <form method="post" action="index.php">

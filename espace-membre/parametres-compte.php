@@ -98,7 +98,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id
 
                 <!-- message erreur -->
                 <span class="message-erreur">
-                    <?php messageError($message); ?>
+                    <?php $message; ?>
                 </span>
                 <!-- Formulaire -->
                 <form method="post" action="parametres-compte.php">

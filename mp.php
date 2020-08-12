@@ -123,7 +123,7 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
 
                 <!-- message erreur -->
                 <span class="message-erreur"> 
-                    <?php messageError($message); ?> 
+                    <?php echo $message; ?> 
                 </span>
 
                 <form method="post" action="mp.php">

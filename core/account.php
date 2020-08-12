@@ -50,70 +50,17 @@ if (!isset($_POST['connexionSubmit'])) {
     unset($_SESSION['message']);
 }
 
-
-//  Fonction message / erreur
-define("USERNAME_UNKNOWN",      "1");
-define("EMPTY_FIELD",           "2");
-define("PASSWORD_WRONG",        "3");
-define("PASSWORD_INVALID",      "4");
-define("ACCOUNT_UPDATE",        "5");
-define("QUESTION",              "6");
-define("ANSWER_WRONG",          "7");
-define("PASSWORD_CAN_CHANGE",   "8");
-define("PASSWORD_UPDATE",       "9");
-define("USERNAME_EXIST",        "10");
-define("WELCOME",               "11");
-
-function messageError($message)
-{
-
-    switch ($message) {
-
-        case 1:
-            echo "Cet identifiant n'existe pas";
-            break;
-
-        case 2:
-            echo "Veuillez remplir tous les champs";
-            break;
-
-        case 3:
-            echo "Ce n'est pas le bon mot de passe";
-            break;
-
-        case 4:
-            echo "Le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre";
-            break;
-
-        case 5:
-            echo "Vos changements ont bien été pris en compte";
-            break;
-
-        case 6:
-            echo "répondez à votre question secrète : ";
-            break;
-
-        case 7:
-            echo "Ce n'est pas la réponse attendue";
-            break;
-
-        case 8:
-            echo "Vous pouvez changer votre mot de passe : ";
-            break;
-
-        case 9:
-            echo "Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter";
-            break;
-
-        case 10:
-            echo "Cet identifiant existe déjà ";
-            break;
-
-        case 11:
-            echo "Bienvenue ! Vous pouvez vous connecter";
-            break;
-    }
-}
+define("USERNAME_UNKNOWN",      "Cet identifiant n'existe pas");
+define("EMPTY_FIELD",           "Veuillez remplir tous les champs");
+define("PASSWORD_WRONG",        "Ce n'est pas le bon mot de passe");
+define("PASSWORD_INVALID",      "Le mot de passe doit contenir au moins 4 caractères, dont une minuscule, une majuscule et un chiffre");
+define("ACCOUNT_UPDATE",        "Vos changements ont bien été pris en compte");
+define("QUESTION",              "répondez à votre question secrète : ");
+define("ANSWER_WRONG",          "Ce n'est pas la réponse attendue");
+define("PASSWORD_CAN_CHANGE",   "Vous pouvez changer votre mot de passe : ");
+define("PASSWORD_UPDATE",       "Votre mot de passe à bien été changé . <br> Vous pouvez vous connecter");
+define("USERNAME_EXIST",        "Cet identifiant existe déjà");
+define("WELCOME",               "Bienvenue ! Vous pouvez vous connecter");
 
 
 

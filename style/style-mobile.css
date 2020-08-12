@@ -24,17 +24,24 @@ and (max-width: 480px) {
 	h2 {
 		font-size: 1.3em;
     }
-    
+    h4{
+        font-size: 0.89em;
+
+    }
+    html { min-height: 100vh;}
     body {
-        font-size: 14px;
+        font-size: 13px;
         min-height: 100vh;
     }
     
     .contain_all {
-        display: flex;
-        flex-direction: column;
         min-height: 100vh;
-        justify-content: space-between;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 2fr auto;
+        grid-template-areas: 
+            "header"
+            "main"
+            "footer"
     }
 
 	/* ----------------------- HEADER */
@@ -198,7 +205,13 @@ and (max-width: 480px) {
 		margin: 0;
 		width: 92%;
 		padding: 1em 2em 1em 2em;
-	}
+    }
+    /* Bouton open */
+    .open_popup{
+        font-size: 0.86em;
+        display: block;
+        text-align: center;
+    }
 	/* Boutton close */
 	.new_commentaire_formulaire > p > .close_popup {
 		right: -1em;
@@ -229,11 +242,12 @@ and (max-width: 480px) {
         background-color: white;
         font-size: 1em;
         padding:0;
-/*         height:auto;
- */        flex: 1;
+        flex: 1;
 	}
 	/* Section */
 	.form_container {
+        min-width: auto;
+        max-width: auto;
         background-color: white;
 	}
 	/* Legende formulaire*/

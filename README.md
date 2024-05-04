@@ -33,8 +33,7 @@ Version de PHP : 7.3.14
 * phpMyAdmin - gestionnaire de base de donnée
 
 ## Auteur
-Sunpadown / elsa dessarps
-_https://www.sunpadown.fr/_
+Sunpadown
 
 ## License
 
